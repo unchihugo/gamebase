@@ -11,8 +11,9 @@ const Home = () => {
   }, []);
 
   const fetchGames = async () => {
-    const response = await axios.get('../apis/gamesApi.php');
+    const response = await axios.get('http://localhost/gamesApi.php');
     setGames(response.data);
+    console.log(response);
   };
 
   const handleSearch = (event) => {
@@ -23,9 +24,11 @@ const Home = () => {
     setSortOrder(event.target.value);
   };
 
-  const filteredGames = games.filter((game) =>
-    game.Naam.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredGames = Array.isArray(games)
+  ? games.filter((game) =>
+      game.Naam.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  : [];
 
   const sortedGames = filteredGames.sort((a, b) => {
     if (sortOrder === 'asc') {
