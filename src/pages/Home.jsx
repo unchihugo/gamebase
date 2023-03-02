@@ -11,7 +11,7 @@ const Home = () => {
   }, []);
 
   const fetchGames = async () => {
-    const response = await axios.get('../gamebaseApis/gamesApi.php');
+    const response = await axios.get('../apis/gamesApi.php');
     setGames(response.data);
   };
 
