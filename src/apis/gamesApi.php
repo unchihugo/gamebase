@@ -1,13 +1,15 @@
 <?php
-$db_host = 'localhost';
-$db_user = 'root';
-$db_pass = '1234';
-$db_name = 'gamebase_db';
+$host="localhost";
+$port=3306;
+$socket="";
+$user="root";
+$password="1234";
+$dbname="gamebase_db";
 
-$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+$con = new mysqli($host, $user, $password, $dbname, $port, $socket)
+	or die ('Could not connect to the database server' . mysqli_connect_error());
+
+//$con->close();
 
 $sql = "SELECT * FROM game;";
 $result = mysqli_query($conn, $sql);
