@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
 import '../index.css';
+import GameItem from '../templates/GameItem';
 
 const Home = () => {
   const [games, setGames] = useState([]);
@@ -172,14 +173,13 @@ const Home = () => {
           <option value="desc">Z-A</option>
         </select>
       </div>
-      <ul>
-        {sortedGames.map((game) => (
-          <li key={game.idGame}>
-            <h2>{game.Naam}</h2>
-            <p>{game.Prijs}</p>
-          </li>
-        ))}
-      </ul>
+      <div>
+        {sortedGames.map((game) => 
+          <GameItem
+            game = {game}
+          />
+        )}
+      </div>
     </div>
   );
 }
