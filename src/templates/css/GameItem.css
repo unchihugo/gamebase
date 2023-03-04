@@ -1,0 +1,33 @@
+.gameitem-card{
+    height: 20rem;
+    width: 15rem;
+    margin: 1.5rem 0rem;
+    position: relative;
+    border-radius: 12px;
+    outline: solid 1px #495a74;
+    transition: all 0.8s cubic-bezier(0,.7,0.5,1);
+    z-index: 1;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 4px 16px;
+}
+
+.gameitem-card:hover{
+    transform: scale(1.03);
+    z-index: 2;
+    box-shadow: rgba(0, 0, 0, 1) 0px 8px 36px;
+}
+
+.gameitem-image{
+    height: 20rem;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.gameitem-content{
+    padding: 0.5rem 1rem;
+    width: inherit;
+    position: absolute;
+    bottom: 0;
+    background-color: #334155d5;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}

@@ -3,6 +3,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import '../index.css';
 import GameItem from '../templates/GameItem';
+import Navbar from '../templates/Navbar';
 
 const Home = () => {
   const [games, setGames] = useState([]);
@@ -164,8 +165,10 @@ const Home = () => {
 
   
   return (
-    <div className='flex flex-col bg-gray-100 h-screen'>
-      <h1 className='text-3xl font-bold text-gray-800'>Gamebase Library</h1>
+    <div className='flex flex-col h-screen'>
+      <Navbar/>
+    <div className='md:container md:mx-auto'>
+      <p className='text-3xl font-bold'>Gamebase Library</p>
       <div>
         <input type="text" placeholder="Search" onChange={handleSearch} />
         <select onChange={handleSort}>
@@ -173,13 +176,14 @@ const Home = () => {
           <option value="desc">Z-A</option>
         </select>
       </div>
-      <div>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 justify-items-center'>
         {sortedGames.map((game) => 
-          <GameItem
+          <GameItem className='items-center justify-center'
             game = {game}
           />
         )}
       </div>
+    </div>
     </div>
   );
 }
