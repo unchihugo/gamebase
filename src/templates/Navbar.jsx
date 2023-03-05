@@ -8,33 +8,13 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-slate-800">
-      <div className="mx-auto px-4">
+    <nav className="bg-slate-800 fixed top-0 left-0 right-0 z-10">
+      <div className="mx-auto px-4 py-2">
         <div className="flex justify-between align-middle">
           <div className="flex items-center">
             <a href="/" className="text-white font-bold text-xl">
               Gamebase
             </a>
-            <div className="lg:flex lg:items-center hidden ml-10">
-              <a
-                href="/"
-                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-slate-300 mr-4"
-              >
-                Home
-              </a>
-              <a
-                href="/about"
-                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-slate-300 mr-4"
-              >
-                About
-              </a>
-              <a
-                href="/contact"
-                className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-slate-300"
-              >
-                Contact
-              </a>
-            </div>
           </div>
           <div className="lg:hidden">
             <button
@@ -64,10 +44,10 @@ const Navbar = () => {
           </div>
           <div className="hidden lg:flex lg:items-center lg:w-auto">
             <div className="flex items-center">
-              <button className="bg-slate-700 text-white px-4 py-2 rounded-lg focus:outline-none mr-2">
+              <button className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2">
                 Login
                 </button>
-              <button className="bg-red-500 text-white px-4 py-2 rounded-lg focus:outline-none">
+              <button className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none">
                 Sign up
                 </button>
             </div>
@@ -75,7 +55,7 @@ const Navbar = () => {
     </div>
 </div>
 {isOpen && (
-    <div className="lg:hidden">
+    <div className="lg:show">
       <div className="px-2 pt-2 pb-3">
         <a
           href="/"
@@ -87,13 +67,13 @@ const Navbar = () => {
           href="/about"
           className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-slate-300 mr-4"
         >
-          About
+          Library
         </a>
         <a
           href="/contact"
           className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-slate-300"
         >
-          Contact
+          Charts
         </a>
       </div>
     </div>

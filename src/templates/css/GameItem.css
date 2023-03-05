@@ -5,29 +5,77 @@
     position: relative;
     border-radius: 12px;
     outline: solid 1px #495a74;
-    transition: all 0.8s cubic-bezier(0,.7,0.5,1);
+    transition: all 0.6s cubic-bezier(0,.7,0.5,1);
     z-index: 1;
     box-shadow: rgba(0, 0, 0, 0.8) 0px 4px 16px;
+    overflow: hidden;
 }
 
 .gameitem-card:hover{
-    transform: scale(1.03);
+    transform: scale(1.025);
     z-index: 2;
     box-shadow: rgba(0, 0, 0, 1) 0px 8px 36px;
+    cursor: pointer;
 }
+
+.gameitem-card:hover .gameitem-content > p:last-child {
+    opacity: 1;
+  }
+  .gameitem-content > p:last-child {
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0,.7,0.5,1);
+  }
 
 .gameitem-image{
     height: 20rem;
     object-fit: cover;
     border-radius: 12px;
+    
 }
 
 .gameitem-content{
     padding: 0.5rem 1rem;
     width: inherit;
     position: absolute;
-    bottom: 0;
+    bottom: -1.5rem;
     background-color: #334155d5;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
+    transition: all 0.4s cubic-bezier(0,.7,0.5,1);
 }
+
+.gameitem-card:hover > .gameitem-content{
+    bottom: 0rem;
+}
+
+.gameitem-modal {
+    position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 1280px; 
+  z-index: 60;
+  box-shadow: rgba(0, 0, 0, 0.8) 0px 8px 24px;
+  border-radius: 20px;
+  padding: 2rem;
+  height: 90%;
+  }
+
+  .gameitem-modal-backdrop {
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px); 
+    position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 50;
+  transition: background-color 0.4s cubic-bezier(0,.7,0.5,1);
+  }
+
+  .gameitem-modal-backdrop.backdrop-visible {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); 
+  }

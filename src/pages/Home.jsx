@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
 import '../index.css';
-import GameItem from '../templates/GameItem';
-import Navbar from '../templates/Navbar';
+import NavBar from '../templates/NavBar';
+import SideBar from '../templates/SideBar';
+import GameGrid from '../templates/GameGrid';
 
 const Home = () => {
   const [games, setGames] = useState([]);
@@ -165,9 +166,13 @@ const Home = () => {
 
   
   return (
-    <div className='flex flex-col h-screen'>
-      <Navbar/>
-    <div className='md:container md:mx-auto'>
+    <div className='flex flex-col relative'>
+      <NavBar/>
+    <div className='flex min-h-screen'>
+      <div className='fixed h-screen'>
+        <SideBar/>
+      </div>
+      <div className='md:container md:mx-auto pt-16 lg:pl-60'>
       <p className='text-3xl font-bold'>Gamebase Library</p>
       <div>
         <input type="text" placeholder="Search" onChange={handleSearch} />
@@ -176,12 +181,7 @@ const Home = () => {
           <option value="desc">Z-A</option>
         </select>
       </div>
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 justify-items-center'>
-        {sortedGames.map((game) => 
-          <GameItem className='items-center justify-center'
-            game = {game}
-          />
-        )}
+      <GameGrid games={sortedGames}/>
       </div>
     </div>
     </div>
