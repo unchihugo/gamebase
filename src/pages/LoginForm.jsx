@@ -1,36 +1,40 @@
-import { useState, useEffect } from 'react';
-import { register, login, logout, getUser } from './Auth.jsx';
+import axios from "axios";
+
+import NavBar from '../templates/NavBar';
+import SideBar from '../templates/SideBar';
 
 const LoginForm = () => {
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-      const fetchUser = async () => {
-        const userData = await getUser();
-        setUser(userData);
-      };
-  
-      fetchUser();
-    }, []);
 
   const handleLogin = async (event) => {
     event.preventDefault();
 
     const username = event.target.username.value;
     const password = event.target.password.value;
+  
+    const response = await axios.get('http://localhost/gamebase/authApi.php');
 
-    const success = await login(username, password);
-    
-    if (success) {
-        const userData = await getUser();
-        setUser(userData);
-        window.location.href = './Home';
+    for (let i=0; i<response.data.length; i++) {
+      if (response.data[i].Gebruikersnaam === username && response.data[i].Wachtwoord === password) {
+        localStorage.setItem('idGebruiker', JSON.stringify(response.data[i]));
+      }
+    }
+
+    if (localStorage.getItem('idGebruiker') !== null) {
+      window.location.href = './Home';
     } else {
         alert('Login failed');
     }
   }
 
   return (
+    <div className='flex flex-col relative'>
+    <NavBar/>
+  <div className='flex min-h-screen'>
+    <div className='fixed h-screen'>
+      <SideBar/>
+    </div>
+    <div className='md:container md:mx-auto pt-16 lg:pl-60 text-white'>
+
     <form onSubmit={handleLogin}>
       <label>
         Username:
@@ -42,6 +46,9 @@ const LoginForm = () => {
       </label>
       <button type="submit">Log in</button>
     </form>
+    </div>
+    </div>
+    </div>
   );
 }
 

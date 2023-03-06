@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
 import axios from 'axios';
 import _ from 'lodash';
 import '../index.css';
 import NavBar from '../templates/NavBar';
 import SideBar from '../templates/SideBar';
 import GameGrid from '../templates/GameGrid';
+import LoginForm from './LoginForm';
+
 
 const Home = () => {
   const [games, setGames] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
-  const localServer = false;
+  const localServer = true;
 
   useEffect(() => {
     fetchGames();
@@ -172,6 +176,7 @@ const Home = () => {
       <div className='fixed h-screen'>
         <SideBar/>
       </div>
+
       <div className='md:container md:mx-auto pt-16 lg:pl-60'>
       <p className='text-3xl font-bold'>Gamebase Library</p>
       <div>

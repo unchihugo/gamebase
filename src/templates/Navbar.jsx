@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { NavLink } from 'react-router-dom';
+import Home from '../pages/Home';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,7 +10,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-slate-800 fixed top-0 left-0 right-0 z-10">
+    <nav className="bg-slate-800 fixed top-0 left-0 right-0 z-10 opacity-95 border-b border-slate-600">
       <div className="mx-auto px-4 py-2">
         <div className="flex justify-between align-middle">
           <div className="flex items-center">
@@ -44,9 +46,9 @@ const Navbar = () => {
           </div>
           <div className="hidden lg:flex lg:items-center lg:w-auto">
             <div className="flex items-center">
-              <button className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2">
+              <NavLink to="/LoginForm" className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2">
                 Log in
-                </button>
+                </NavLink>
               <button className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none">
                 Sign up
                 </button>

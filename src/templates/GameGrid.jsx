@@ -45,15 +45,15 @@ const GameGrid = ({ games }) => {
             <div className='col-span-1'>
                 <img src={selectedGame.CoverLink} alt={selectedGame.Naam} className='gameitem-image'/>
             </div>
-            <div className='col-span-4'>
-                <div className='text-white text-4xl font-bold'>{selectedGame.Naam}</div>
-                <div className='flex items-center italic'>
+            <div className='col-span-4 border-b border-slate-500 pb-1'>
+                <div className='text-white text-4xl font-bold border-t border-slate-500 pt-1'>{selectedGame.Naam}</div>
+                <div className='flex items-center italic border-b border-slate-500 pb-1'>
                     <div className='text-white font-semibold'>{selectedGame.fkGebruiker === null ? "Added by Gamebase" : "Added by you"}</div>
                     <div className='text-slate-400 ml-2 text-sm mt-0.5'>GameID: {selectedGame.idGame}</div>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-2'>
                     <div>
-                        <p className='mt-3 text-slate-300'>Developer: {selectedGame.Developer}</p>
+                        <p className='mt-2 text-slate-300'>Developer: {selectedGame.Developer}</p>
                         <p className='text-slate-300'>Publisher: {selectedGame.Publisher}</p>
                         <p>Genre: {selectedGame.Genre}</p>
                         <p>Subgenres: {selectedGame.SubGenres}</p>
