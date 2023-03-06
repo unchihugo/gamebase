@@ -45,7 +45,7 @@ const Navbar = () => {
           <div className="hidden lg:flex lg:items-center lg:w-auto">
             <div className="flex items-center">
               <button className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2">
-                Login
+                Log in
                 </button>
               <button className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none">
                 Sign up
@@ -75,6 +75,12 @@ const Navbar = () => {
         >
           Charts
         </a>
+        <button className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2">
+                Log in
+                </button>
+              <button className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none">
+                Sign up
+                </button>
       </div>
     </div>
   )}
