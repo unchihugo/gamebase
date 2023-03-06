@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'register') {
   $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
   // Insert the new user into the database
-  $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+  $stmt = $conn->prepare("INSERT INTO gebruiker (Gebruikersnaam, Wachtwoord) VALUES (?, ?)");
   $stmt->bind_param("ss", $username, $hashedPassword);
   $stmt->execute();
 
@@ -35,14 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'login') {
   $password = $_POST['password'];
 
   // Get the user with the matching username from the database
-  $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+  $stmt = $conn->prepare("SELECT * FROM gebruiker WHERE Gebruikersnaam = ?");
   $stmt->bind_param("s", $username);
   $stmt->execute();
   $result = $stmt->get_result();
   $user = $result->fetch_assoc();
 
   // Check if the user exists and the password is correct
-  if ($user && password_verify($password, $user['password'])) {
+  if ($user && password_verify($password, $user['Wachtwoord'])) {
     // Set the user ID as a session variable
     $_SESSION['userId'] = $user['id'];
 
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'login') {
 // Handle logout requests
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'logout') {
   // Clear the user ID session variable
-  $_SESSION['userId'] = null;
+  $_SESSION['id'] = null;
 
   header('Content-Type: application/json');
   echo json_encode(['success' => true]);
@@ -68,18 +68,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'logout') {
 // Handle user requests
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'user') {
   // Get the user ID from the session variable
-  $userId = $_SESSION['userId'];
+  $userId = $_SESSION['id'];
 
   if ($userId) {
     // Get the user data from the database
-    $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt = $conn->prepare("SELECT * FROM gebruiker WHERE idGebruiker = ?");
     $stmt->bind_param("i", $userId);
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
 
     header('Content-Type: application/json');
-    echo json_encode(['id' => $user['id'], 'username' => $user['username']]);
+    echo json_encode(['idGebruiker' => $user['id'], 'Gebruikersnaam' => $user['username']]);
     exit;
   } else {
     http_response_code(401);
