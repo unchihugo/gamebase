@@ -74,8 +74,11 @@ const GameGrid = ({ games }) => {
                 <p className='text-blue-200'>Link: <a className='italic text-blue-400' href={selectedGame.Link}>{selectedGame.Link}</a></p>
                 <p className='text-sm text-blue-200 opacity-60'>Cover image: <a className='italic text-blue-400' href={selectedGame.CoverLink}>{selectedGame.CoverLink}</a></p>
             </div>
-            <div>
+            <div className='col-span-5'>
                 <p className='font-bold text-xl'>Your stats</p>
+                {localStorage.getItem("idGebruiker") === null ? <p className='text-red-500 italic'>You need to be logged in to Gamebase to see your stats!</p> 
+                :
+                <div/>}
             </div>
             </div>
             <button onClick={handleClose} className='text-white'>Close</button>

@@ -1,14 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from "react-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
+import Layout from './pages/Layout';
 import Home from './pages/Home.jsx';
-import { BrowserRouter } from 'react-router-dom';
 import LoginForm from './pages/LoginForm';
 
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+export default function App() {
+  return (
   <BrowserRouter>
-    <Home />
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="home" element={<Home />} />
+        <Route path="login" element={<LoginForm />} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
+      </Route>
+    </Routes>
   </BrowserRouter>
-);
+ );
+}
+
+ReactDOM.render(<App />, document.getElementById('root'));
