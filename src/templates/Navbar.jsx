@@ -25,7 +25,7 @@ const NavBar = () => {
 
   return (
     <nav className={`bg-slate-800 fixed top-0 left-0 right-0 z-10 border-b border-slate-600
-      ${!top && 'bg-opacity-60 bg-slate-800 backdrop-blur-md'}`}>
+      ${!top && 'bg-opacity-60 bg-slate-800 backdrop-blur-lg'}`}>
       <div className="mx-auto px-4 py-2">
         <div className="flex justify-between align-middle">
           <div className="flex items-center">
