@@ -168,16 +168,28 @@ const Home = () => {
   
   return (
     <div className='flex flex-col relative'>
-      <div>
-        <input type="text" placeholder="Search" onChange={handleSearch} />
+      <div className='grid grid-cols-1 md:grid-cols-3 items-center'>
+        <div className='flex justify-end m-2'>
+          <p className='hidden md:block font-semibold font-display'>Search:</p>
+        </div>
+        <input className='bg-slate-800 text-white rounded-lg h-8 p-2 border border-slate-600 drop-shadow-lg' type="text" placeholder='\games\...' onChange={handleSearch} />
+        <div className='m-2'>
         <select onChange={handleSort}>
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
         </select>
+        </div>
       </div>
-      <p className='text-3xl font-bold border-b-2 border-slate-600 py-2'>Popular on Gamebase</p>
+      {searchTerm === '' ? 
+      <div>
+      <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display'>Popular on Gamebase</p>
         <PopularGrid games={games}/>
-      <p className='text-3xl font-bold border-b-2 border-slate-600 py-2'>Gamebase Library</p>
+        <p className='text-3xl font-semibold border-b-2 border-slate-600 py-2 font-display'>Gamebase Library</p>
+      </div>
+        : <div>
+      <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display'>Search results for: <span className='text-slate-400 italic font-normal'>{searchTerm}</span></p>
+        </div>
+      }
         <GameGrid games={sortedGames}/>
     </div>
   );

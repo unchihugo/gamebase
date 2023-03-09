@@ -130,19 +130,19 @@ const PopularGrid = ({ games }) => {
     <div className=' overflow-visible bg-slate-800 mt-4 br-1 rounded-2xl'>
       <div className='grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 justify-items-center'>
         <div>
-          <p className='hidden xl:block text-lg text-yellow-500 font-semibold'>1st Most popular</p>
+          <p className='hidden xl:block text-lg text-yellow-500 font-regular font-display'>1st Most popular</p>
           <PopularItem 
             game={_.filter(games, ["Naam", "GTA V"])}
           />
           </div>
           <div className='hidden scale-95 xl:block'>
-          <p className='text-lg text-gray-200 font-semibold'>2nd</p>
+          <p className='text-lg text-gray-200 font-regular font-display'>2nd</p>
           <PopularItem 
             game={_.filter(games, ["Naam", "GTA V"])}
             />
             </div>
             <div className='hidden scale-90 2xl:block'>
-            <p className='text-lg text-yellow-600 font-semibold'>3rd</p>
+            <p className='text-lg text-yellow-600 font-regular font-display'>3rd</p>
           <PopularItem 
             game={_.filter(games, ["Naam", "GTA V"])}
             />

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css?family=Poppins:regular,medium,semibold,italic&subset=latin,latin-ext');
 
 body {
   margin: 0;
@@ -18,3 +19,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+  .rating {
+    font-size: 20px;
+    background: linear-gradient(
+      90deg,
+      #ffce08 var(--rating),
+      #979797ad var(--rating)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+    display: inline-block;
+  }
+

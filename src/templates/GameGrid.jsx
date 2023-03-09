@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import GameItem from './GameItem';
 import "./css/GameItem.css"
+import RatingComponent from '../components/RatingComponent';
 
 const GameGrid = ({ games }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,9 +47,9 @@ const GameGrid = ({ games }) => {
                 <img src={selectedGame.CoverLink} alt={selectedGame.Naam} className='gameitem-image'/>
             </div>
             <div className='col-span-4 border-b border-slate-500 pb-1'>
-                <div className='text-white text-4xl font-bold border-t border-slate-500 pt-1'>{selectedGame.Naam}</div>
-                <div className='flex items-center italic border-b border-slate-500 pb-1'>
-                    <div className='text-white font-semibold'>{selectedGame.fkGebruiker === null ? "Added by Gamebase" : "Added by you"}</div>
+                <div className='text-white text-4xl font-semibold border-t border-slate-500 pt-1 font-display'>{selectedGame.Naam}</div>
+                <div className='flex items-center italic border-b border-slate-500 py-1 font-display'>
+                    <div className='text-white'>{selectedGame.fkGebruiker === null ? "Added by Gamebase" : "Added by you"}</div>
                     <div className='text-slate-400 ml-2 text-sm mt-0.5'>GameID: {selectedGame.idGame}</div>
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-2'>
@@ -70,12 +71,12 @@ const GameGrid = ({ games }) => {
                     </div>
                 </div>
                 <p className='text-green-500 text-xl font-semibold'>Price: {selectedGame.Prijs === "0" ? "Free" : "$" + selectedGame.Prijs}</p>
-                <p className='text-yellow-500 text-lg font-semibold'>Metacritic rating: {selectedGame.Beoordeling}/100</p>
+                <p className='text-yellow-500 text-lg font-semibold'>Metacritic rating: {selectedGame.Beoordeling}/100 <RatingComponent ratingStarsCount={10} defaultRating={selectedGame.Beoordeling/10} /></p>
                 <p className='text-blue-200'>Link: <a className='italic text-blue-400' href={selectedGame.Link}>{selectedGame.Link}</a></p>
                 <p className='text-sm text-blue-200 opacity-60'>Cover image: <a className='italic text-blue-400' href={selectedGame.CoverLink}>{selectedGame.CoverLink}</a></p>
             </div>
             <div className='col-span-5'>
-                <p className='font-bold text-xl'>Your stats</p>
+                <p className='font-semibold text-xl font-display'>Your stats</p>
                 {localStorage.getItem("idGebruiker") === null ? <p className='text-red-500 italic'>You need to be logged in to Gamebase to see your stats!</p> 
                 :
                 <div/>}
