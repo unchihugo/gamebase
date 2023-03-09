@@ -1,7 +1,7 @@
 local API php files location: C:\xampp\htdocs\gamebase
 
 ### 9/3/2023
-![website image](https://drive.google.com/file/d/1VEtLr86MTaCzoic30UeUHBnTYGBTdgl6/preview)
+![website image](https://drive.google.com/file/d/1VEtLr86MTaCzoic30UeUHBnTYGBTdgl6)
 
 # Getting Started with Create React App
 
