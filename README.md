@@ -1,7 +1,7 @@
 ## Prequisites:
-- XAMPP (webserver stack)
-- Apache (HTTP server)
-- MySQL (database)
+- XAMPP *(webserver stack)*
+- Apache *(HTTP server)*
+- MySQL *(database)*
 
 ## How to run:
 1. Run & configure XAMPP
@@ -13,5 +13,6 @@
    - ```npm install``` and wait for it to finish downloading all packages
    - ```npm start``` to run website locally
 
-### 9/3/2023:
+## Progress images:
+### 9/3/2023
 ![website image](https://drive.google.com/uc?export=view&id=1ZcUmOW10Rnbq16QlV6V7498xWYj7QVVe)
