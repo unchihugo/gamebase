@@ -4,7 +4,7 @@
 - MySQL *(database)*
 
 ## How to run:
-1. Run & configure XAMPP
+1. Run & configure XAMPP and Apache
 2. Add [API .php files](https://github.com/takkuchi/gamebase/tree/main/apis) into: C:\xampp\htdocs\gamebase\
 3. Start Apache server and MySQL connection on XAMPP, make sure there are no errors
 4. Run editor (like VSCode), open Gamebase folder
