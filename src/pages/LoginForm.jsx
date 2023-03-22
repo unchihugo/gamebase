@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const LoginForm = () => {
-
+  // function for handleLogin to work with the database with axios.get from the api
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -12,7 +12,7 @@ const LoginForm = () => {
 
     for (let i=0; i<response.data.length; i++) {
       if (response.data[i].Gebruikersnaam === username && response.data[i].Wachtwoord === password) {
-        localStorage.setItem('idGebruiker', i+1);
+        localStorage.setItem('idGebruiker', response.data[i].idGebruiker);
       }
     }
     
