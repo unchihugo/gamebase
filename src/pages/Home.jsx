@@ -10,9 +10,10 @@ import PopularGrid from '../templates/PopularGrid';
 const Home = () => {
   const [games, setGames] = useState([]);
   const [gamesData, setGamesData] = useState([]);
+  const [userGamesData, setUserGamesData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
-  const devServer = false;
+  const localServer = true;
 
   useEffect(() => {
     fetchGames();
@@ -22,9 +23,9 @@ const Home = () => {
   // Fetch games from API or local server (for development) and set games state
   const fetchGames = async () => {
     let response;
-    if (devServer) {
+    if (localServer) {
       response = await axios.get('http://localhost/gamebase/gamesApi.php');
-      setGames(response.data);   
+      setGames(response.data);  
     }
     else {
       response = [
@@ -154,9 +155,13 @@ const Home = () => {
 
   // Fetch gamesData from API and set gamesData state
   const fetchGamesData = async () => {
-    const idUser = localStorage.getItem('idGebruiker');
-    const response = await axios.get('http://localhost/gamebase/gamesDataApi.php', { params: { fkUser: idUser } });
+    let response = await axios.get('http://localhost/gamebase/gamesDataApi.php');
     setGamesData(response.data);
+
+    const filteredGamesData = _.filter(gamesData, (gameData) =>
+      _.includes(gameData.fkGebruiker, localStorage.getItem('idGebruiker'))  
+    )
+    setUserGamesData(filteredGamesData);
   };
 
 
@@ -208,8 +213,7 @@ const Home = () => {
         </p>
         </div>
       }
-      
-        <GameGrid games={sortedGames} gamesData={gamesData}/>
+        <GameGrid games={sortedGames} gamesData={userGamesData}/>
     </div>
   );
 }
