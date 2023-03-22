@@ -3,7 +3,7 @@ import GameItem from './GameItem';
 import "./css/GameItem.css"
 import RatingComponent from '../components/RatingComponent';
 
-const GameGrid = ({ games }) => {
+const GameGrid = ({ games, gamesData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedGame, setSelectedGame] = useState({});
   const [isBackdropVisible, setIsBackdropVisible] = useState(false);
@@ -20,6 +20,7 @@ const GameGrid = ({ games }) => {
     setIsBackdropVisible(false);
   };
 
+  // Format date to dd/mm/yyyy format and remove time
   function formatDate(dateString) {
     const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, '0');
@@ -27,6 +28,8 @@ const GameGrid = ({ games }) => {
     const year = date.getFullYear().toString();
     return `${day}/${month}/${year}`;
   }
+
+  // UseEffect to get the game data from the API and sto
 
   return (
     <div className='gamegrid overflow-visible'>
@@ -39,6 +42,7 @@ const GameGrid = ({ games }) => {
           />
         ))}
       </div>
+      {/* More information window on game click */}
       {isOpen && (
         <div>
           <div className='gameitem-modal bg-slate-800 overflow-y-scroll break-words border border-slate-600'>
@@ -76,10 +80,40 @@ const GameGrid = ({ games }) => {
                 <p className='text-sm text-blue-200 opacity-60'>Cover image: <a className='italic text-blue-400' href={selectedGame.CoverLink}>{selectedGame.CoverLink}</a></p>
             </div>
             <div className='col-span-5'>
+              {/* stats */}
                 <p className='font-semibold text-xl font-display'>Your stats</p>
                 {localStorage.getItem("idGebruiker") === null ? <p className='text-red-500 italic'>You need to be logged in to Gamebase to see your stats!</p> 
                 :
-                <div/>}
+                // If the user has played the selected game, show the stats using gamesData
+                // gamesData.filter(game => game.idGame === selectedGame.Id && game.idGame === gamesData.fkGame ?
+                // <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
+                //     <div>
+                //         <p className='text-slate-300 font-display'>Added on: {gamesData.fkGame[game.idGame].DatumToegevoegd}</p>
+                //     </div>
+                //     <div>
+                //         <p className='text-slate-300 font-display'>Hours played: {gamesData.fkGame[game.idGame].AantalUren}</p>
+                //         <p className='text-slate-300 font-display'>Achievements: {gamesData.fkGame[game.idGame].AantalPrestaties}</p>
+                //     </div>
+                // </div>
+                // :
+                // <p className='text-red-500 italic'>You have not added this game yet!</p>
+                // )
+                gamesData.filter(game => game.idGame === selectedGame.Id && gamesData.fkGame[game.idGame]).map(game => (
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
+                    <div>
+                      <p className='text-slate-300 font-display'>Added on: {gamesData.fkGame[game.idGame].DatumToegevoegd}</p>
+                    </div>
+                    <div>
+                      <p className='text-slate-300 font-display'>Hours played: {gamesData.fkGame[game.idGame].AantalUren}</p>
+                      <p className='text-slate-300 font-display'>Achievements: {gamesData.fkGame[game.idGame].AantalPrestaties}</p>
+                    </div>
+                  </div>
+                ))}
+                {!gamesData.filter(game => game.idGame === selectedGame.Id && gamesData.fkGame[game.idGame]).length && (
+                  <p className='text-red-500 italic'>You have not added this game yet!</p>
+                )
+              }
+                <div/>
             </div>
             </div>
             <button onClick={handleClose} className='text-white'>Close</button>

@@ -9,17 +9,20 @@ import PopularGrid from '../templates/PopularGrid';
 
 const Home = () => {
   const [games, setGames] = useState([]);
+  const [gamesData, setGamesData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
-  const localServer = false;
+  const devServer = false;
 
   useEffect(() => {
     fetchGames();
+    localStorage.getItem('idGebruiker') !== null ? fetchGamesData() : setGamesData([]);
   }, []);
 
+  // Fetch games from API or local server (for development) and set games state
   const fetchGames = async () => {
     let response;
-    if (localServer) {
+    if (devServer) {
       response = await axios.get('http://localhost/gamebase/gamesApi.php');
       setGames(response.data);   
     }
@@ -149,6 +152,14 @@ const Home = () => {
     }
   };
 
+  // Fetch gamesData from API and set gamesData state
+  const fetchGamesData = async () => {
+    const idUser = localStorage.getItem('idGebruiker');
+    const response = await axios.get('http://localhost/gamebase/gamesDataApi.php', { params: { fkUser: idUser } });
+    setGamesData(response.data);
+  };
+
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -157,12 +168,14 @@ const Home = () => {
     setSortOrder(event.target.value);
   };
 
+  // Filter games based on search term
   const filteredGames = _.isArray(games)
   ? _.filter(games, (game) =>
       _.includes(_.toLower(game.Naam), _.toLower(searchTerm))
     )
   : [];
 
+  // Sort games based on sort order
   const sortedGames = _.orderBy(filteredGames, ['Naam'], [sortOrder]);
 
   
@@ -187,10 +200,16 @@ const Home = () => {
         <p className='text-3xl font-semibold border-b-2 border-slate-600 py-2 font-display'>Gamebase Library</p>
       </div>
         : <div>
-      <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display'>Search results for: <span className='text-slate-400 italic font-normal'>{searchTerm}</span></p>
+        <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display'>Search results for: 
+        {filteredGames.length !== 0 ? 
+          <span className='text-slate-400 italic font-normal border-b border-green-500 ml-2'>{searchTerm}</span>
+          : <span className='text-slate-400 italic font-normal border-b border-red-500 ml-2'>{searchTerm}</span>
+        }
+        </p>
         </div>
       }
-        <GameGrid games={sortedGames}/>
+      
+        <GameGrid games={sortedGames} gamesData={gamesData}/>
     </div>
   );
 }

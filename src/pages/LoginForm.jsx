@@ -1,6 +1,14 @@
+import React, { useEffect } from "react";
 import axios from "axios";
 
 const LoginForm = () => {
+  // useEffect to check if the user is already logged in
+  useEffect(() => {
+    if (localStorage.getItem('idGebruiker') !== null) {
+      window.location.href = './home';
+    }
+  }, []);
+
   // function for handleLogin to work with the database with axios.get from the api
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -13,6 +21,7 @@ const LoginForm = () => {
     for (let i=0; i<response.data.length; i++) {
       if (response.data[i].Gebruikersnaam === username && response.data[i].Wachtwoord === password) {
         localStorage.setItem('idGebruiker', response.data[i].idGebruiker);
+        localStorage.setItem('Naam', response.data[i].Naam);
       }
     }
     
@@ -21,8 +30,6 @@ const LoginForm = () => {
     } else {
         alert('Login failed');
     }
-
-    console.log(localStorage.getItem('idGebruiker'));
   }
 
   return (

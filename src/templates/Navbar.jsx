@@ -10,6 +10,7 @@ const NavBar = () => {
     setIsOpen(!isOpen);
   };
 
+  // Set top to true if page is scrolled to top, otherwise false
   useEffect(() => {
     const scrollHandler = () => {
         setTop(window.pageYOffset <= 20)
@@ -61,12 +62,24 @@ const NavBar = () => {
           </div>
           <div className="hidden lg:flex lg:items-center lg:w-auto">
             <div className="flex items-center">
+            {localStorage.getItem('idGebruiker') === null ? (
+              <div>
               <Link to="/login" className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2">
                 Log in
                 </Link>
               <Link className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none">
                 Sign up
                 </Link>
+              </div>
+            ) : ( <div>
+              <Link to="/profile" className="font-bold font-display text-white pl-6 pr-4 py-1 focus:outline-none mr-2 border-l border-slate-500">
+                {localStorage.getItem('Naam')}
+                </Link>
+                <Link className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none bg-opacity-25" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
+                  Log out
+                  </Link>
+              </div>
+                  )}
             </div>
         </div>
     </div>
@@ -92,12 +105,24 @@ const NavBar = () => {
         >
           Charts
         </Link>
-        <Link to="/login" className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2">
+        {localStorage.getItem('idGebruiker') === null ? (
+              <div>
+              <Link to="/login" className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2">
                 Log in
                 </Link>
               <Link className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none">
                 Sign up
                 </Link>
+              </div>
+            ) : ( <div>
+              <Link to="/profile" className="font-bold font-display text-white px-4 py-1 focus:outline-none mr-2">
+                {localStorage.getItem('Naam')}
+                </Link>
+                <Link className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none bg-opacity-25" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
+                  Log out
+                  </Link>
+              </div>
+                  )}
       </div>
     </div>
   )}
