@@ -4,14 +4,14 @@ import SideBar from "../templates/SideBar";
 
 const Layout = () => {
     return (
-<div className='flex flex-col relative'>
+<div className='flex flex-col relative bg-slate-900'>
     <NavBar/>
 <div className='flex min-h-screen'>
 <div className='fixed h-screen'>
   <SideBar/>
 </div>
 
-<div className='container mx-auto pt-16 lg:pl-60'>
+<div className='container mx-auto pt-16 lg:pl-60 px-4'>
     <Outlet/>
     </div>
     </div>

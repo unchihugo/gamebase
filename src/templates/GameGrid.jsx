@@ -41,14 +41,14 @@ const GameGrid = ({ games }) => {
       </div>
       {isOpen && (
         <div>
-          <div className='gameitem-modal bg-slate-600 overflow-y-scroll break-words'>
+          <div className='gameitem-modal bg-slate-800 overflow-y-scroll break-words border border-slate-600'>
             <div className='grid grid-cols-1 lg:grid-cols-5 gap-2'>
             <div className='col-span-1'>
                 <img src={selectedGame.CoverLink} alt={selectedGame.Naam} className='gameitem-image'/>
             </div>
-            <div className='col-span-4 border-b border-slate-500 pb-1'>
-                <div className='text-white text-4xl font-semibold border-t border-slate-500 pt-1 font-display'>{selectedGame.Naam}</div>
-                <div className='flex items-center italic border-b border-slate-500 py-1 font-display'>
+            <div className='col-span-4 border-b border-slate-600 pb-1'>
+                <div className='text-white text-4xl font-semibold border-t border-slate-600 pt-1 font-display'>{selectedGame.Naam}</div>
+                <div className='flex items-center italic border-b border-slate-600 py-1 font-display'>
                     <div className='text-white'>{selectedGame.fkGebruiker === null ? "Added by Gamebase" : "Added by you"}</div>
                     <div className='text-slate-400 ml-2 text-sm mt-0.5'>GameID: {selectedGame.idGame}</div>
                 </div>

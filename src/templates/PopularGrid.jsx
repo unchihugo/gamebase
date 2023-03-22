@@ -127,7 +127,7 @@ const PopularGrid = ({ games }) => {
     ]
 
   return (
-    <div className=' overflow-visible bg-slate-800 mt-4 br-1 rounded-2xl'>
+    <div className=' overflow-visible bg-slate-800 mt-4 br-1 rounded-2xl border border-slate-600'>
       <div className='grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 justify-items-center'>
         <div>
           <p className='hidden xl:block text-lg text-yellow-500 font-regular font-display'>1st Most popular</p>
