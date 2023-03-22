@@ -21,6 +21,8 @@ const LoginForm = () => {
     } else {
         alert('Login failed');
     }
+
+    console.log(localStorage.getItem('idGebruiker'));
   }
 
   return (
