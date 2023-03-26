@@ -2,6 +2,7 @@
 - XAMPP *(webserver stack)*
 - Apache *(HTTP server)*
 - MySQL *(database)*
+- Node.js *(JS runtime)*
 
 ## How to run:
 1. Run & configure XAMPP and Apache
