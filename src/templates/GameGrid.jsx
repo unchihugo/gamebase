@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GameItem from './GameItem';
 import "./css/GameItem.css"
 import _ from 'lodash';
 import RatingComponent from '../components/RatingComponent';
 
-const GameGrid = ({ games, userGamesData }) => {
+const GameGrid = ({ games, userData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedGame, setSelectedGame] = useState({});
   const [isBackdropVisible, setIsBackdropVisible] = useState(false);
@@ -30,7 +30,6 @@ const GameGrid = ({ games, userGamesData }) => {
     return `${day}/${month}/${year}`;
   }
 
-  // UseEffect to get the game data from the API and sto
 
   return (
     <div className='gamegrid overflow-visible'>
@@ -87,22 +86,22 @@ const GameGrid = ({ games, userGamesData }) => {
   <p className='text-red-500 italic'>You need to be logged in to Gamebase to see your stats!</p>
 ) : (
   (() => {
-    let matchingData = _.find(userGamesData, { idGame: selectedGame.idGame });
-    if (matchingData !== null) {
+    let matchingData = _.find(userData, { fkGame: selectedGame.idGame });
+    if (matchingData !== undefined) {
       return (
         <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
           <div>
-            <p className='text-slate-300 font-display'>Added on: {matchingData.fkGame[selectedGame.idGame].DatumToegevoegd}</p>
+            <p className='text-slate-300 font-display'>Added on: {formatDate(matchingData.DatumToegevoegd)}</p>
           </div>
           <div>
-            <p className='text-slate-300 font-display'>Hours played: {matchingData.fkGame[selectedGame.idGame].AantalUren}</p>
-            <p className='text-slate-300 font-display'>Achievements: {matchingData.fkGame[selectedGame.idGame].AantalPrestaties}</p>
+            <p className='text-slate-300 font-display'>Hours played: {matchingData.AantalUren}</p>
+            <p className='text-slate-300 font-display'>Achievements: {matchingData.AantalPrestaties}</p>
           </div>
         </div>
       );
     } else {
       return (
-        <p className='text-red-500 italic'>You have not added this game yet!</p>
+        <p className='text-red-500 italic'>You haven't added this game yet!</p>
       );
     }
   })()

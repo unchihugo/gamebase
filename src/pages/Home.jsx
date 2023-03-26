@@ -16,10 +16,21 @@ const Home = () => {
   const [sortBy, setSortBy] = useState('Naam');
   const [paidGames, setPaidGames] = useState(true);
   const [freeGames, setFreeGames] = useState(true);
-  const localServer = false;
+  const localServer = true;
 
   useEffect(() => {
     fetchGames();
+  }, []);
+
+  useEffect(() => {
+    let idGebruiker = localStorage.getItem('idGebruiker');
+
+    const filteredGamesData = _.filter(gamesData, (gameData) =>
+      _.includes(gameData.fkGebruiker, idGebruiker));
+    setUserGamesData(filteredGamesData);
+  }, [gamesData]);
+
+  useEffect(() => {
     localStorage.getItem('idGebruiker') !== null ? fetchGamesData() : setGamesData([]);
   }, []);
 
@@ -160,11 +171,6 @@ const Home = () => {
   const fetchGamesData = async () => {
     let response = await axios.get('http://localhost/gamebase/gamesDataApi.php');
     setGamesData(response.data);
-
-    const filteredGamesData = _.filter(gamesData, (gameData) =>
-      _.includes(gameData.fkGebruiker, localStorage.getItem('idGebruiker'))  
-    )
-    setUserGamesData(filteredGamesData);
   };
 
 
@@ -243,7 +249,7 @@ const Home = () => {
         </p>
         </div>
       }
-        <GameGrid games={sortedGames} gamesData={userGamesData}/>
+        <GameGrid games={sortedGames} userData={userGamesData}/>
     </div>
   );
 }
