@@ -33,12 +33,23 @@
     
 }
 
+.gameitem-rating {
+  position: absolute;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  background-color: #33415594;
+}
+
 .gameitem-content{
     padding: 0.5rem 1rem;
     width: inherit;
     position: absolute;
     bottom: -1.5rem;
-    background-color: #334155d5;
+    background-color: #33415594;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
     transition: all 0.4s cubic-bezier(0,.7,0.5,1);

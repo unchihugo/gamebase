@@ -13,7 +13,10 @@ const Home = () => {
   const [userGamesData, setUserGamesData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
-  const localServer = true;
+  const [sortBy, setSortBy] = useState('Naam');
+  const [paidGames, setPaidGames] = useState(true);
+  const [freeGames, setFreeGames] = useState(true);
+  const localServer = false;
 
   useEffect(() => {
     fetchGames();
@@ -173,6 +176,18 @@ const Home = () => {
     setSortOrder(event.target.value);
   };
 
+  const handleSortBy = (event) => {
+    setSortBy(event.target.value);
+  };
+
+  const handlePaidGames = (event) => {
+    setPaidGames(event.target.checked);
+  };
+
+  const handleFreeGames = (event) => {
+    setFreeGames(event.target.checked);
+  };
+
   // Filter games based on search term
   const filteredGames = _.isArray(games)
   ? _.filter(games, (game) =>
@@ -181,7 +196,9 @@ const Home = () => {
   : [];
 
   // Sort games based on sort order
-  const sortedGames = _.orderBy(filteredGames, ['Naam'], [sortOrder]);
+  let sortedGames = _.orderBy(filteredGames, [sortBy], [sortOrder]);
+  sortedGames = paidGames ? sortedGames : _.filter(sortedGames, (game) => game.Prijs === '0');
+  sortedGames = freeGames ? sortedGames : _.filter(sortedGames, (game) => game.Prijs !== '0');
 
   
   return (
@@ -190,12 +207,25 @@ const Home = () => {
         <div className='flex justify-end m-2'>
           <p className='hidden md:block font-semibold font-display'>Search:</p>
         </div>
-        <input className='bg-slate-800 text-white rounded-lg h-8 p-2 border border-slate-600 drop-shadow-lg' type="text" placeholder='\games\...' onChange={handleSearch} />
-        <div className='m-2'>
-        <select onChange={handleSort}>
-          <option value="asc">A-Z</option>
-          <option value="desc">Z-A</option>
-        </select>
+        <input className='bg-slate-800 text-white rounded-3xl h-8 p-3 border border-slate-600 drop-shadow-lg' type="text" placeholder='\games\...' onChange={handleSearch} />
+      </div>
+      <div>
+        <div className='flex items-center mt-2'>
+          <p className='font-medium font-display'>Sort by </p>
+          <select onChange={handleSortBy} className='bg-slate-800 rounded-lg h-7 px-2 ml-2 border border-slate-600 drop-shadow-lg'>
+            <option value="Naam">Title</option>
+            <option value="Beoordeling">Rating</option>
+            <option value="PublicatieDatum">Publishing date</option>
+          </select>
+          <p className='font-medium font-display ml-4'>Order by </p>
+          <select onChange={handleSort} className='bg-slate-800 rounded-lg h-7 px-2 ml-2 border border-slate-600 drop-shadow-lg'>
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+          <p className='font-medium font-display ml-4 text-sm'>Paid games </p>
+          <input type="checkbox" className='ml-2' onChange={handlePaidGames} defaultChecked='true'/>
+          <p className='font-medium font-display ml-4 text-sm'>Free games </p>
+          <input type="checkbox" className='ml-2' onChange={handleFreeGames} defaultChecked='true'/>
         </div>
       </div>
       {searchTerm === '' ? 

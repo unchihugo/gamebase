@@ -132,13 +132,13 @@ const PopularGrid = ({ games }) => {
         <div>
           <p className='hidden xl:block text-lg text-yellow-500 font-regular font-display'>1st Most popular</p>
           <PopularItem 
-            game={_.filter(games, ["Naam", "GTA V"])}
+            game={_.filter(games, ["Naam", "CS:GO"])}
           />
           </div>
           <div className='hidden scale-95 xl:block'>
           <p className='text-lg text-gray-200 font-regular font-display'>2nd</p>
           <PopularItem 
-            game={_.filter(games, ["Naam", "GTA V"])}
+            game={_.filter(games, ["Naam", "Minecraft"])}
             />
             </div>
             <div className='hidden scale-90 2xl:block'>

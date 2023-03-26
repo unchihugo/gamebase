@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import GameItem from './GameItem';
 import "./css/GameItem.css"
+import _ from 'lodash';
 import RatingComponent from '../components/RatingComponent';
 
 const GameGrid = ({ games, userGamesData }) => {
@@ -75,28 +76,37 @@ const GameGrid = ({ games, userGamesData }) => {
                     </div>
                 </div>
                 <p className='text-green-500 text-xl font-semibold'>Price: {selectedGame.Prijs === "0" ? "Free" : "$" + selectedGame.Prijs}</p>
-                <p className='text-yellow-500 text-lg font-semibold'>Metacritic rating: {selectedGame.Beoordeling}/100 <RatingComponent ratingStarsCount={10} defaultRating={selectedGame.Beoordeling/10} /></p>
+                <p className='text-yellow-400 text-lg font-semibold'>Metacritic rating: {selectedGame.Beoordeling/10}/10 <RatingComponent ratingStarsCount={10} defaultRating={selectedGame.Beoordeling/10} /></p>
                 <p className='text-blue-200'>Link: <a className='italic text-blue-400' href={selectedGame.Link}>{selectedGame.Link}</a></p>
                 <p className='text-sm text-blue-200 opacity-60'>Cover image: <a className='italic text-blue-400' href={selectedGame.CoverLink}>{selectedGame.CoverLink}</a></p>
             </div>
             <div className='col-span-5'>
               {/* stats */}
                 <p className='font-semibold text-xl font-display'>Your stats</p>
-                {localStorage.getItem("idGebruiker") === null ? <p className='text-red-500 italic'>You need to be logged in to Gamebase to see your stats!</p> 
-                //:
-                // userGamesData.fkGame[selectedGame.idGame] !== null ?
-                //   <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
-                //     <div>
-                //       <p className='text-slate-300 font-display'>Added on: {userGamesData.fkGame[selectedGame.idGame].DatumToegevoegd}</p>
-                //     </div>
-                //     <div>
-                //       <p className='text-slate-300 font-display'>Hours played: {userGamesData.fkGame[selectedGame.idGame].AantalUren}</p>
-                //       <p className='text-slate-300 font-display'>Achievements: {userGamesData.fkGame[selectedGame.idGame].AantalPrestaties}</p>
-                //     </div>
-                //   </div>
-                :
-                  <p className='text-red-500 italic'>You have not added this game yet!</p>
-              }
+                {localStorage.getItem("idGebruiker") === null ? (
+  <p className='text-red-500 italic'>You need to be logged in to Gamebase to see your stats!</p>
+) : (
+  (() => {
+    let matchingData = _.find(userGamesData, { idGame: selectedGame.idGame });
+    if (matchingData !== null) {
+      return (
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-2'>
+          <div>
+            <p className='text-slate-300 font-display'>Added on: {matchingData.fkGame[selectedGame.idGame].DatumToegevoegd}</p>
+          </div>
+          <div>
+            <p className='text-slate-300 font-display'>Hours played: {matchingData.fkGame[selectedGame.idGame].AantalUren}</p>
+            <p className='text-slate-300 font-display'>Achievements: {matchingData.fkGame[selectedGame.idGame].AantalPrestaties}</p>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <p className='text-red-500 italic'>You have not added this game yet!</p>
+      );
+    }
+  })()
+)}
                 <div/>
             </div>
             </div>
