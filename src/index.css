@@ -30,6 +30,7 @@ code {
   }
 
 .material-symbols-rounded {
+  margin-left: -0.1em;
   font-variation-settings:
   'FILL' 0,
   'wght' 400,

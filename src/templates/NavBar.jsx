@@ -25,19 +25,19 @@ const NavBar = () => {
 }, []);
 
   return (
-    <nav className={`bg-slate-800 fixed top-0 left-0 right-0 z-10 border-b border-slate-600
+    <nav className={`bg-slate-800 fixed top-0 left-0 right-0 z-10 border-b border-slate-600 font-display
       ${!top && 'bg-opacity-60 bg-slate-800 backdrop-blur-lg'}`}>
       <div className="mx-auto px-4 py-2">
         <div className="flex justify-between align-middle">
           <div className="flex items-center">
-            <Link href="/" className="text-white font-bold text-xl">
+            <Link href="/" className=" font-bold text-xl">
               Gamebase
             </Link>
           </div>
           <div className="lg:hidden">
             <button
               onClick={toggleMenu}
-              className="text-white hover:text-slate-300 focus:outline-none focus:text-slate-300"
+              className=" hover:text-slate-300 focus:outline-none focus:text-slate-300"
             >
               <svg
                 className="h-6 w-6 fill-current"
@@ -64,18 +64,18 @@ const NavBar = () => {
             <div className="flex items-center">
             {localStorage.getItem('idGebruiker') === null ? (
               <div>
-              <Link to="/login" className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2">
+              <Link to="/login" className="px-4 py-1 rounded-lg border border-slate-600 focus:outline-none hover:bg-slate-900 mr-2 font-medium">
                 Log in
                 </Link>
-              <Link className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none">
+              <Link className="bg-red-500 px-4 py-1 rounded-lg focus:outline-none font-medium hover:bg-red-600">
                 Sign up
                 </Link>
               </div>
             ) : ( <div>
-              <Link to="/profile" className="font-bold font-display text-white pl-6 pr-4 py-1 focus:outline-none mr-2 border-l border-slate-500">
+              <Link to="/profile" className="font-bold font-display pl-6 pr-4 py-1 focus:outline-none mr-2 border-l border-slate-500">
                 {localStorage.getItem('Naam')}
                 </Link>
-                <Link className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none bg-opacity-25" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
+                <Link className="bg-red-500 px-4 py-1 rounded-lg focus:outline-none bg-opacity-25" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
                   Log out
                   </Link>
               </div>
@@ -107,10 +107,10 @@ const NavBar = () => {
         </Link>
         {localStorage.getItem('idGebruiker') === null ? (
               <div>
-              <Link to="/login" className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2">
+              <Link to="/login" className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2 font-medium">
                 Log in
                 </Link>
-              <Link className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none">
+              <Link className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none font-medium">
                 Sign up
                 </Link>
               </div>

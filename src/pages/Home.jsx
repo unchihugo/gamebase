@@ -16,7 +16,7 @@ const Home = () => {
   const [sortBy, setSortBy] = useState('Naam');
   const [paidGames, setPaidGames] = useState(true);
   const [freeGames, setFreeGames] = useState(true);
-  const localServer = true;
+  const localServer = false;
 
   useEffect(() => {
     fetchGames();

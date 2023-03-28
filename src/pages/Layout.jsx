@@ -11,10 +11,8 @@ const Layout = () => {
   <SideBar/>
 </div>
 
-<div className='container mx-auto pt-16 lg:pl-60'>
-    <div className='px-3'>
+<div className='container mx-auto pt-16 lg:pl-60 px-3'>
     <Outlet/>
-    </div>
     </div>
     </div>
     </div>

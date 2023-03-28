@@ -128,12 +128,18 @@ const PopularGrid = ({ games }) => {
 
   return (
     <div className=' overflow-visible bg-slate-800 mt-4 br-1 rounded-2xl border border-slate-600'>
-      <div className='grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 justify-items-center'>
-        <div>
-          <p className='hidden xl:block text-lg text-yellow-500 font-regular font-display'>1st Most popular</p>
-          <PopularItem 
-            game={_.filter(games, ["Naam", "CS:GO"])}
-          />
+      <div className='grid grid-cols-1 xl:grid-cols-3 2xl:grid-cols-4 justify-items-center'>
+        <div className='col-span-2 flex justify-center items-center m-2 2xl:ml-4 relative'>
+          <img src="https://m.economictimes.com/thumb/msid-98924369,width-1200,height-657,resizemode-4,imgsize-49238/counter-strike-2-release-date-and-all-you-may-want-to-know.jpg" alt="CS2" className='object-cover rounded-xl shadow-lg'/>
+          <div className='backdrop-blur-md rounded-r-xl p-2 pl-6 pr-20 flex absolute bottom-10 left-0 text-center bg-slate-700 bg-opacity-50'>
+            <div className='flex flex-col items-start font-display'>
+              <p className='text-2xl font-bold items-center'> 
+                <span className='material-symbols-rounded gameitem-bigger-icon align-middle'>Workspace_Premium</span> 
+                <span className='align-middle ml-1'>Counter Strike 2</span>
+              </p>
+              <p className='text-slate-300 italic'>Valve</p>
+            </div>
+          </div>
           </div>
           <div className='hidden scale-95 xl:block'>
           <p className='text-lg text-gray-200 font-regular font-display'>2nd</p>
