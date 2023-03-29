@@ -211,9 +211,12 @@ const Home = () => {
     <div className='flex flex-col relative'>
       <div className='grid grid-cols-1 md:grid-cols-3 items-center'>
         <div className='flex justify-end m-2'>
-          <p className='hidden md:block font-semibold font-display'>Search:</p>
+          <p className='hidden md:block font-semibold font-display text-slate-200'>Search:</p>
         </div>
         <input className='bg-slate-800 text-white rounded-3xl h-8 p-3 border border-slate-600 drop-shadow-lg' type="text" placeholder='\games\...' onChange={handleSearch} />
+        <div className='flex m-2'>
+          <span className='material-symbols-rounded hidden md:block text-slate-200'>search</span>
+        </div>
       </div>
       <div>
         <div className='flex items-center mt-2'>
@@ -236,16 +239,26 @@ const Home = () => {
       </div>
       {searchTerm === '' ? 
       <div>
-      <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display'>Popular on Gamebase</p>
+      <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display mt-2'>
+        <span className="material-symbols-rounded text-3xl mr-0.5 align-middle pb-1 text-orange-500">local_fire_department</span>
+        <span className='align-middle'>Popular on Gamebase</span>
+      </p>
         <PopularGrid games={games}/>
-        <p className='text-3xl font-semibold border-b-2 border-slate-600 py-2 font-display'>Gamebase Library</p>
+        <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display mt-3'>
+          <span className="material-symbols-rounded text-3xl mr-1.5 align-middle pb-1 text-slate-400">collections_bookmark</span>
+          <span className='align-middle'>Gamebase Library</span>
+          </p>
       </div>
         : <div>
-        <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display'>Search results for: 
-        {filteredGames.length !== 0 ? 
-          <span className='text-slate-400 italic font-normal border-b border-green-500 ml-2'>{searchTerm}</span>
-          : <span className='text-slate-400 italic font-normal border-b border-red-500 ml-2'>{searchTerm}</span>
-        }
+        <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display mt-2'>
+          <span className="material-symbols-rounded text-3xl mr-1 align-middle pb-1 text-slate-400">manage_search</span>
+          <span className='align-middle'>
+            Search results for: 
+                    {filteredGames.length !== 0 ?
+            <span className='text-slate-400 font-normal border-b border-green-500 ml-2'>{searchTerm}</span>
+            : <span className='text-slate-400 font-normal border-b border-red-500 ml-2'>{searchTerm}</span>
+                    }
+          </span>
         </p>
         </div>
       }

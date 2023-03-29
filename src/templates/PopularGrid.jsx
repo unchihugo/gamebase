@@ -133,10 +133,11 @@ const PopularGrid = ({ games }) => {
           <img src="https://m.economictimes.com/thumb/msid-98924369,width-1200,height-657,resizemode-4,imgsize-49238/counter-strike-2-release-date-and-all-you-may-want-to-know.jpg" alt="CS2" className='object-cover rounded-xl shadow-lg'/>
           <div className='backdrop-blur-md rounded-r-xl p-2 pl-6 pr-20 flex absolute bottom-10 left-0 text-center bg-slate-700 bg-opacity-50'>
             <div className='flex flex-col items-start font-display'>
-              <p className='text-2xl font-bold items-center'> 
-                <span className='material-symbols-rounded gameitem-bigger-icon align-middle'>Workspace_Premium</span> 
-                <span className='align-middle ml-1'>Counter Strike 2</span>
+              <p className='text-yellow-500'> 
+                <span className='material-symbols-rounded align-middle text-xl'>Workspace_Premium</span> 
+                <span className='align-middle ml-0.5 font-medium'>Most popular</span>
               </p>
+              <span className='text-2xl font-bold align-middle'>Counter Strike 2</span>
               <p className='text-slate-300 italic'>Valve</p>
             </div>
           </div>

@@ -90,7 +90,3 @@
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px); 
   }
-
-  .gameitem-bigger-icon {
-    font-size: 2rem;
-  }
