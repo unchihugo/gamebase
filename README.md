@@ -13,6 +13,7 @@
 6. Type in Terminal:
    - ```npm install``` and wait for it to finish downloading all packages
    - ```npm start``` to run website locally
+   - ```node server.js``` to run post/put API locally
 
 ## Progress images:
 ### 9/3/2023

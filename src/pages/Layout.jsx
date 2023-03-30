@@ -11,8 +11,10 @@ const Layout = () => {
         <div className="fixed h-screen">
           <SideBar />
         </div>
-        <div className="container mx-auto py-16 lg:pl-60 px-3">
-          <Outlet />
+        <div className="container py-16 lg:pl-60 m-auto">
+          <div className="mx-3">
+            <Outlet />
+          </div>
         </div>
       </div>
       <Footer />
