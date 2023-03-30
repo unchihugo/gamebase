@@ -142,7 +142,7 @@ const PopularGrid = ({ games }) => {
             </div>
           </div>
           </div>
-          <div className='hidden scale-95 xl:block'>
+          <div className='hidden scale-95 xl:block ml-10'>
           <p className='text-lg text-gray-200 font-regular font-display'>2nd</p>
           <PopularItem 
             game={_.filter(games, ["Naam", "Minecraft"])}

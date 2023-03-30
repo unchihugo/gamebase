@@ -66,8 +66,8 @@ const GameGrid = ({ games, userData }) => {
       {/* More information window on game click */}
       {isOpen && (
         <div>
-          <div className="gameitem-modal bg-slate-800 overflow-y-scroll break-words border border-slate-600">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-2">
+          <div className="gameitem-modal bg-slate-800 break-words border border-slate-600">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
               <div className="col-span-1">
                 <img
                   src={selectedGame.CoverLink}
@@ -75,7 +75,7 @@ const GameGrid = ({ games, userData }) => {
                   className="gameitem-image rounded-lg"
                 />
               </div>
-              <div className="col-span-4 pb-1 pl-1">
+              <div className="col-span-4 pb-1 md:pl-3">
                 <div className="text-white text-4xl font-semibold border-t border-slate-600 pt-1 font-display">
                   {selectedGame.Naam}
                 </div>
@@ -89,9 +89,26 @@ const GameGrid = ({ games, userData }) => {
                     GameID: {selectedGame.idGame}
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2">
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 mb-2">
                   <div>
-                    <p className="mt-1 text-slate-300">
+                  <p className="text-green-500 text-xl mt-2 font-semibold">
+                  <span className="mr-1.5">
+                    Price:{" "}
+                    {selectedGame.Prijs === "0"
+                      ? "Free"
+                      : "$" + selectedGame.Prijs}
+                  </span>
+                  <span className="material-symbols-rounded text-2xl align-middle">sell</span>
+                </p>
+                <p className="text-yellow-400 text-lg font-semibold mb-1.5">
+                  Metacritic rating: {selectedGame.Beoordeling / 10}/10{" "}
+                  <RatingComponent
+                    ratingStarsCount={10}
+                    defaultRating={selectedGame.Beoordeling / 10}
+                  />
+                </p>
+                    <p className="text-slate-300">
                       <span className="material-symbols-rounded text-base mr-1 align-middle">code</span>
                       <span className="align-middle">Developer: {selectedGame.Developer}</span>
                     </p>
@@ -129,28 +146,33 @@ const GameGrid = ({ games, userData }) => {
                       </span>
                     </p>
                     <p>
-                      <span className="material-symbols-rounded text-base mr-1 align-middle">videogame_asset</span>
-                      <span className="align-middle">Platforms: {selectedGame.Platforms}</span>
+                    <div className="bg-slate-700 rounded-xl mt-1 p-2 pt-1 justify-center">
+                      <div className="flex items-center justify-center">
+                        <span className="material-symbols-rounded text-base mr-1">videogame_asset</span>
+                        <span className="font-medium">Available platforms</span>
+                      </div>
+                      <div className="flex items-center mt-1 justify-center">
+                        {selectedGame.Platforms.includes("PC") ? (
+                          <span className="material-symbols-rounded text-4xl p-1">desktop_windows</span>
+                        ) : ("")}
+                        {selectedGame.Platforms.includes("Playstation") ? (
+                          <span className="p-1"> <img src="https://cdn-icons-png.flaticon.com/512/1/1443.png" className="max-h-9 invert" /> </span>
+                        ) : ("")}
+                        {selectedGame.Platforms.includes("Xbox") ? (
+                          <span className="p-1"> <img src="https://cdn.icon-icons.com/icons2/2248/PNG/512/microsoft_xbox_icon_136396.png" className="max-h-9 invert" /> </span>
+                        ) : ("")}
+                        {selectedGame.Platforms.includes("Mobile") ? (
+                          <span className="material-symbols-rounded text-4xl p-1">phone_iphone</span>
+                        ) : ("")}
+                        {selectedGame.Platforms.includes("VR") ? (
+                          <span className="p-1"> <img src="https://static-00.iconduck.com/assets.00/vr-headset-icon-512x377-f1enyn1n.png" className="max-h-7 mt-1 invert" /> </span>
+                        ) : ("")}
+                      </div>
+                      </div>
                     </p>
                   </div>
                 </div>
-                <p className="text-green-500 text-xl font-semibold">
-                  <span className="mr-1.5">
-                    Price:{" "}
-                    {selectedGame.Prijs === "0"
-                      ? "Free"
-                      : "$" + selectedGame.Prijs}
-                  </span>
-                  <span className="material-symbols-rounded text-2xl align-middle">sell</span>
-                </p>
-                <p className="text-yellow-400 text-lg font-semibold mb-1.5">
-                  Metacritic rating: {selectedGame.Beoordeling / 10}/10{" "}
-                  <RatingComponent
-                    ratingStarsCount={10}
-                    defaultRating={selectedGame.Beoordeling / 10}
-                  />
-                </p>
-                <a className="text-blue-200 inline-block px-3 pb-0.5 border border-slate-500 rounded-full text-sm overflow-ellipsis whitespace-nowrap overflow-hidden max-w-full" href={selectedGame.Link} target="_blank">
+                <a className="text-blue-200 inline-block px-3 pb-0.5 mr-1 border border-slate-500 rounded-full text-sm overflow-ellipsis whitespace-nowrap overflow-hidden max-w-full" href={selectedGame.Link} target="_blank">
                   <span class="material-symbols-rounded mr-0.5 text-base align-middle">link</span>
                   <span className="mr-1 align-middle">Link</span>
                   <span className="italic text-blue-400 align-middle">{selectedGame.Link}</span>
