@@ -26,7 +26,7 @@ function Footer() {
             <hr class="my-6 sm:mx-auto border-slate-700 lg:my-8 opacity-50" />
             <span class="block text-sm text-slate-400 sm:text-center">React Website made by Hugo Li (<a href="https://github.com/takkuchi/gamebase" className="hover:underline" target="_blank">GitHub Repository</a>)</span>
             <span class="block text-sm text-slate-400 sm:text-center mb-5">© 2023 Gamebase™. All Rights Reserved.</span>
-            <span className="block text-sm text-slate-400 sm:text-center">Made with love from <span className="ml-0.5 text-base text-center">🇳🇱 🇧🇪 🇨🇳</span></span>
+            <span className="block text-sm text-slate-400 sm:text-center">Made with ❤️ from <span className="ml-0.5 text-base text-center">🇳🇱 🇧🇪 🇨🇳</span></span>
         </div>
     </footer>
     );

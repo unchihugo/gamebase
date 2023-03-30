@@ -8,8 +8,8 @@ const GameItem = ({ game, handleClick }) => {
         <p className="text-yellow-400 mb-1">★</p>
         <p className="ml-1 text-yellow-400 font-display font-medium text-sm">{game.Beoordeling/10}</p>
       </div>
-      <div key={game.idGame} className='gameitem-content backdrop-blur-md'>
-        <p className='font-medium text-lg text-slate-300 font-display'>{game.Naam}</p>
+      <div key={game.idGame} className='gameitem-content sm:backdrop-blur-md'>
+        <p className='font-medium sm:text-lg text-slate-300 font-display'>{game.Naam}</p>
         <p className='italic text-slate-400'>
           {game.Prijs === "0" ? "Free" : "$" + game.Prijs}
         </p>

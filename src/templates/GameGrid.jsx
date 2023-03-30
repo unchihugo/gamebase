@@ -66,21 +66,25 @@ const GameGrid = ({ games, userData }) => {
       {/* More information window on game click */}
       {isOpen && (
         <div>
-          <div className="gameitem-modal bg-slate-800 break-words border border-slate-600">
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+          <div className="gameitem-modal bg-slate-800 overflow-y-scroll break-words border border-slate-600">
+            <div className="md:grid md:grid-cols-3 lg:grid-cols-5">
               <div className="col-span-1">
                 <img
                   src={selectedGame.CoverLink}
                   alt={selectedGame.Naam}
-                  className="gameitem-image rounded-lg"
+                  className="hidden md:block gameitem-image rounded-lg"
                 />
               </div>
               <div className="col-span-4 pb-1 md:pl-3">
-                <div className="text-white text-4xl font-semibold border-t border-slate-600 pt-1 font-display">
-                  {selectedGame.Naam}
+                <div className="border-t border-slate-600 pt-1 flex justify-between">
+                  <span className="text-4xl font-semibold font-display">{selectedGame.Naam}</span>
+                  <button onClick={handleClose} className="flex items-center -m-1 -mt-4">
+                    <span>Close</span>
+                    <span className="material-symbols-rounded pl-1">close</span>
+                  </button>
                 </div>
                 <div className="flex items-center italic border-b border-slate-600 py-1 font-display">
-                  <div className="text-white">
+                  <div className="text-slate-300">
                     {selectedGame.fkGebruiker === null
                       ? "Added by Gamebase"
                       : "Added by you"}
@@ -184,7 +188,7 @@ const GameGrid = ({ games, userData }) => {
                 </a>
               </div>
               {/* stats */}
-              <div className="col-span-5 border py-2 px-4 border-slate-600 rounded-xl">
+              <div className="col-span-5 border mt-2 py-2 px-4 border-slate-600 rounded-xl">
                 <p className="font-semibold text-xl font-display">Your stats</p>
                 {localStorage.getItem("idGebruiker") === null ? (
                   <p className="text-red-500 italic">
@@ -226,9 +230,6 @@ const GameGrid = ({ games, userData }) => {
                 <div />
               </div>
             </div>
-            <button onClick={handleClose} className="text-white">
-              Close
-            </button>
           </div>
           <div
             className={`gameitem-modal-backdrop ${

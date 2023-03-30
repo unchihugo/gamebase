@@ -30,7 +30,7 @@
     height: 20rem;
     object-fit: cover;
     border-radius: 12px;
-    
+    transition: all 0.4s cubic-bezier(0,.7,0.5,1);    
 }
 
 .gameitem-rating {
@@ -57,6 +57,8 @@
 
 .gameitem-card:hover > .gameitem-content{
     bottom: 0rem;
+    backdrop-filter: blur(3px);
+    background-color: #334155b2;
 }
 
 .gameitem-modal {
@@ -90,3 +92,24 @@
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px); 
   }
+
+  
+@media screen and (max-width: 639px) {
+  .gameitem-card {
+    width: 90vw;
+    height: 8rem;
+    margin: 0.5rem 0rem;
+  }
+  .gameitem-image{
+    height: 8rem;
+    border-radius: 0px;
+    border-right: 1px solid #495a74;
+  }
+  .gameitem-content{
+    background-color: transparent;
+    margin-left: 120px;
+    text-align: start;
+    font-size: 1.25rem;
+    top: 0rem;
+}
+}

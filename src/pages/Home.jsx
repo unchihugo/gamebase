@@ -16,7 +16,7 @@ const Home = () => {
   const [sortBy, setSortBy] = useState('Naam');
   const [paidGames, setPaidGames] = useState(true);
   const [freeGames, setFreeGames] = useState(true);
-  const localServer = true;
+  const localServer = false;
 
   useEffect(() => {
     fetchGames();
@@ -219,7 +219,7 @@ const Home = () => {
         </div>
       </div>
       <div>
-        <div className='flex items-center mt-2'>
+        <div className='flex items-center mt-2 flex-wrap'>
           <p className='font-medium font-display'>Sort by </p>
           <select onChange={handleSortBy} className='bg-slate-800 rounded-lg h-7 px-2 ml-2 border border-slate-600 drop-shadow-lg'>
             <option value="Naam">Title</option>
