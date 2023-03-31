@@ -1,6 +1,6 @@
 function SideBar() {
     return (
-      <div className="h-screen w-60 bg-slate-900 hidden lg:block fixed left-0 top-0 overflow-y-auto pt-12 border-r border-slate-600">
+      <div className="h-screen w-60 bg-slate-900 hidden lg:block overflow-y-auto pt-12 border-r border-slate-600">
         <div className="flex flex-col items-center font-display font-medium mt-4">
               <a
                 href="/home"

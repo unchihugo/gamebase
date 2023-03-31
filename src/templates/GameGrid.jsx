@@ -58,7 +58,7 @@ const GameGrid = ({ games, userData }) => {
 
   return (
     <div className="gamegrid overflow-visible">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 justify-items-center">
+      <div className="grid space-x-0 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gamegrid justify-items-center">
         {games.map((game) => (
           <GameItem key={game.Id} game={game} handleClick={handleClick} />
         ))}

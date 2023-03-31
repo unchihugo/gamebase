@@ -27,12 +27,24 @@ const NavBar = () => {
   return (
     <nav className={`bg-slate-800 fixed top-0 left-0 right-0 z-10 border-b border-slate-600 font-display
       ${!top && 'bg-opacity-60 bg-slate-800 backdrop-blur-lg'}`}>
-      <div className="mx-auto px-4 py-2">
+      <div className="container mx-auto px-4 py-2">
         <div className="flex justify-between align-middle">
           <div className="flex items-center">
             <Link href="/" className=" font-bold text-xl">
               Gamebase
             </Link>
+            <a
+                href="/home"
+                className="hover:text-slate-300 mx-2 ml-6"	
+              >Home</a>
+              <a
+                href="/about"
+                className="hover:text-slate-300 mx-2"
+              >Library</a>
+              <a
+                href="/contact"
+                className="hover:text-slate-300 mx-2"
+              >Charts</a>
           </div>
           <div className="lg:hidden">
             <button
