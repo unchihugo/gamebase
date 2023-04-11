@@ -1,10 +1,12 @@
-const express = require('express');
+const express = require('express')
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const app = express();
 const port = 3001;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 const db = mysql.createConnection({
   host: 'localhost',
@@ -20,8 +22,11 @@ db.connect((err) => {
 
 //function to add a new game to user's collection
 app.post('/games', (req, res) => {
-  const { name, genre, subgenres, price, rating, releaseDate, online, story, platforms, developer, publisher, link, coverLink, fkUser } = req.body;
-  const sql = `INSERT INTO game (Naam, Genre, SubGenres, Prijs, Beoordeling, PublicatieDatum, Online, Story, Platforms, Developer, Publisher, Link, CoverLink, fkGebruiker) VALUES ('${name}', '${genre}', '${subgenres}', '${price}', '${rating}', '${releaseDate}', '${online}', '${story}', '${platforms}', '${developer}', '${publisher}', '${link}', '${coverLink}', '${fkUser}')`;
+  const { name, genre, subGenres, price, rating, releaseDate, online, story, platforms, developer, publisher, link, coverLink, fkUser } = req.body;
+  const onlineValue = online === true ? 1 : 0;
+  const storyValue = story === true ? 1 : 0;
+
+  const sql = `INSERT INTO game (Naam, Genre, SubGenres, Prijs, Beoordeling, PublicatieDatum, Online, Story, Platforms, Developer, Publisher, Link, CoverLink, fkGebruiker) VALUES ('${name}', '${genre}', '${subGenres}', '${price}', '${rating}', '${releaseDate}', '${onlineValue}', '${storyValue}', '${platforms}', '${developer}', '${publisher}', '${link}', '${coverLink}', '${fkUser}')`;
   db.query(sql, (err, result) => {
     if (err) throw err;
     res.send('Game added successfully');

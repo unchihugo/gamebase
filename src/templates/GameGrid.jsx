@@ -31,31 +31,6 @@ const GameGrid = ({ games, userData }) => {
     return `${day}/${month}/${year}`;
   }
 
-  function postGame(_name, _genre, _subgenres, _price, _rating, _releaseDate, _online, _story, _platforms, _developer, _publisher, _link, _coverLink, _fkGebruiker){
-    axios.post('/addGame', {
-      name: _name,
-      genre: _genre,
-      subgenres: _subgenres,
-      price: _price,
-      rating: _rating,
-      releaseDate: _releaseDate,
-      online: _online,
-      story: _story,
-      platforms: _platforms,
-      developer: _developer,
-      publisher: _publisher,
-      link: _link,
-      coverLink: _coverLink,
-      fkGebruiker: _fkGebruiker
-    })
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
-
   return (
     <div className="gamegrid overflow-visible">
       <div className="grid space-x-0 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gamegrid justify-items-center">

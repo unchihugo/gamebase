@@ -16,7 +16,7 @@ const Home = () => {
   const [sortBy, setSortBy] = useState('Naam');
   const [paidGames, setPaidGames] = useState(true);
   const [freeGames, setFreeGames] = useState(true);
-  const localServer = false;
+  const localServer = true;
 
   useEffect(() => {
     fetchGames();
@@ -25,23 +25,27 @@ const Home = () => {
   useEffect(() => {
     let idGebruiker = localStorage.getItem('idGebruiker');
 
-    const filteredGamesData = _.filter(gamesData, (gameData) =>
-      _.includes(gameData.fkGebruiker, idGebruiker));
-    setUserGamesData(filteredGamesData);
-  }, [gamesData]);
-
-  useEffect(() => {
-    let idGebruiker = localStorage.getItem('idGebruiker');
-
     //includes idGebruiker in fkGebruiker or fkGebruiker is null
-    const userGames = _.filter(games, (gameData) =>
-      _.includes(gameData.fkGebruiker, idGebruiker) || _.includes(gameData.fkGebruiker, null));
-    setGamesData(userGames);
-  }, [games]);
+    const correctGames = _.filter(games, (game) =>
+    game.fkGebruiker === idGebruiker || game.fkGebruiker === null);
+    setGames(correctGames);
+  }, []);
 
   useEffect(() => {
     localStorage.getItem('idGebruiker') !== null ? fetchGamesData() : setGamesData([]);
   }, []);
+
+  useEffect(() => {
+    let idGebruiker = localStorage.getItem('idGebruiker');
+  
+    if (idGebruiker) {
+      const filteredGamesData = gamesData.filter(
+        gameData => _.includes(gameData.fkGebruiker, idGebruiker)
+      );
+      setUserGamesData(filteredGamesData);
+      console.log(filteredGamesData);
+    }
+  }, [gamesData]);
 
   // Fetch games from API or local server (for development) and set games state
   const fetchGames = async () => {
@@ -271,7 +275,7 @@ const Home = () => {
         </p>
         </div>
       }
-        <GameGrid games={sortedGames} userData={userGamesData}/>
+        <GameGrid games={games} userData={userGamesData}/>
     </div>
   );
 }
