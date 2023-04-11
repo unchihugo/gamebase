@@ -31,6 +31,15 @@ const Home = () => {
   }, [gamesData]);
 
   useEffect(() => {
+    let idGebruiker = localStorage.getItem('idGebruiker');
+
+    //includes idGebruiker in fkGebruiker or fkGebruiker is null
+    const userGames = _.filter(games, (gameData) =>
+      _.includes(gameData.fkGebruiker, idGebruiker) || _.includes(gameData.fkGebruiker, null));
+    setGamesData(userGames);
+  }, [games]);
+
+  useEffect(() => {
     localStorage.getItem('idGebruiker') !== null ? fetchGamesData() : setGamesData([]);
   }, []);
 
