@@ -17,14 +17,13 @@ const Home = () => {
   const [paidGames, setPaidGames] = useState(true);
   const [freeGames, setFreeGames] = useState(true);
   const localServer = true;
+  const idGebruiker = localStorage.getItem('idGebruiker');
 
   useEffect(() => {
     fetchGames();
   }, []);
 
   useEffect(() => {
-    let idGebruiker = localStorage.getItem('idGebruiker');
-
     //includes idGebruiker in fkGebruiker or fkGebruiker is null
     if (idGebruiker !== null) {
     const correctGames = _.filter(games, (game) =>
@@ -38,12 +37,10 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.getItem('idGebruiker') !== null ? fetchGamesData() : setGamesData([]);
+    idGebruiker !== null ? fetchGamesData() : setGamesData([]);
   }, []);
 
   useEffect(() => {
-    let idGebruiker = localStorage.getItem('idGebruiker');
-  
     if (idGebruiker) {
       const filteredGamesData = gamesData.filter(
         gameData => _.includes(gameData.fkGebruiker, idGebruiker)
@@ -52,6 +49,12 @@ const Home = () => {
       console.log(filteredGamesData);
     }
   }, [gamesData]);
+
+  useEffect(() => {
+    if (idGebruiker === null) {
+      setGames([]);
+    }
+  }, [idGebruiker]);
 
   // Fetch games from API or local server (for development) and set games state
   const fetchGames = async () => {
