@@ -26,9 +26,15 @@ const Home = () => {
     let idGebruiker = localStorage.getItem('idGebruiker');
 
     //includes idGebruiker in fkGebruiker or fkGebruiker is null
+    if (idGebruiker !== null) {
     const correctGames = _.filter(games, (game) =>
     game.fkGebruiker === idGebruiker || game.fkGebruiker === null);
     setGames(correctGames);
+    } else {
+      const correctGames = _.filter(games, (game) =>
+      game.fkGebruiker === null);
+      setGames(correctGames);
+    }
   }, []);
 
   useEffect(() => {
