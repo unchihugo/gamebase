@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import axios from 'axios';
 import _ from 'lodash';
 import '../index.css';
@@ -24,16 +23,19 @@ const Home = () => {
 
   useEffect(() => {
     let idGebruiker = localStorage.getItem("idGebruiker");
+    let correctGames;
 
     //includes idGebruiker in fkGebruiker or fkGebruiker is null
     if (idGebruiker !== null) {
-      const correctGames = _.filter(games, (game) =>
+      correctGames = _.filter(games, (game) =>
         game.fkGebruiker === idGebruiker || game.fkGebruiker === null
       );
-      setGames(correctGames);
     } else {
-      const correctGames = _.filter(games, (game) => 
+      correctGames = _.filter(games, (game) => 
         game.fkGebruiker === null);
+    }
+
+    if (!_.isEqual(correctGames, games)) {
       setGames(correctGames);
     }
   }, [games]);
@@ -288,6 +290,14 @@ const Home = () => {
         </p>
         </div>
       }
+        <div className='flex justify-center'>
+          <a href="/addcustomgame">
+            <div className="mt-4 px-4 py-2 bg-slate-700 bg-opacity-50 hover:bg-opacity-80 hover:-translate-y-px transition rounded-xl shadow-sm text-slate-300">
+              <span className="material-symbols-rounded align-middle mr-1.5 text-slate-400">add_circle</span>
+              <span className='align-middle'>Add custom game to Gamebase</span>
+            </div>
+          </a>
+        </div>
         <GameGrid games={games} userData={userGamesData}/>
     </div>
   );

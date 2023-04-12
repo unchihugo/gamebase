@@ -45,16 +45,24 @@ app.post('/gamedata', (req, res) => {
 
 //function to add a new user for sign in
 app.post('/users', (req, res) => {
-  const { username, password, email } = req.body;
-  const sql = `INSERT INTO gebruiker (Gebruikersnaam, Wachtwoord, Email) VALUES ('${username}', '${password}', '${email}')`;
+  const { username, password, name } = req.body;
+  const sql = `INSERT INTO gebruiker (Gebruikersnaam, Wachtwoord, Naam) VALUES ('${username}', '${password}', '${name}')`;
   db.query(sql, (err, result) => {
-    if (err) throw err;
-    res.send('User added successfully');
+    if (err) {
+      if (err.code === 'ER_DUP_ENTRY') {
+        res.status(409).json({ error: 'Username already exists' });
+      } else {
+        res.status(500).json({ error: 'Something went wrong' });
+      }
+    } else {
+      res.send('User added successfully');
+    }
   });
 });
 
+
 //update userdata to a game
-app.put('/gamedata', (req, res) => {
+app.put('/gamedataupdate', (req, res) => {
   const { fkUser, fkGame, status, hours, achievements, rating, dateAdded } = req.body;
   let sql = `UPDATE gebruikergamedata SET `;
   let isFirst = true;

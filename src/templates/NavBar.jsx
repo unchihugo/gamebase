@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import "./css/NavBar.css"
 
 const NavBar = () => {
@@ -30,23 +29,25 @@ const NavBar = () => {
       <div className="container mx-auto px-4 py-2">
         <div className="flex justify-between align-middle">
           <div className="flex items-center">
-            <Link href="/" className=" font-bold text-xl">
+            <a href="/home" className=" font-bold text-xl">
               Gamebase
-            </Link>
-            <a
-                href="/home"
-                className="hover:text-slate-300 mx-2 ml-6"	
-              >Home</a>
+            </a>
+            <div className="hidden md:flex">
               <a
-                href="/about"
-                className="hover:text-slate-300 mx-2"
-              >Library</a>
-              <a
-                href="/contact"
-                className="hover:text-slate-300 mx-2"
-              >Charts</a>
+                  href="/home"
+                  className="hover:text-slate-300 mx-2 ml-6"
+                >Home</a>
+                <a
+                  href="/library"
+                  className="hover:text-slate-300 mx-2"
+                >Library</a>
+                <a
+                  href="/charts"
+                  className="hover:text-slate-300 mx-2"
+                >Charts</a>
+            </div>
           </div>
-          <div className="lg:hidden">
+          <div className="md:hidden">
             <button
               onClick={toggleMenu}
               className=" hover:text-slate-300 focus:outline-none focus:text-slate-300"
@@ -72,24 +73,24 @@ const NavBar = () => {
               </svg>
             </button>
           </div>
-          <div className="hidden lg:flex lg:items-center lg:w-auto">
+          <div className="hidden md:flex md:items-center md:w-auto">
             <div className="flex items-center">
             {localStorage.getItem('idGebruiker') === null ? (
               <div>
-              <Link to="/login" className="px-4 py-1 rounded-lg border border-slate-600 focus:outline-none hover:bg-slate-900 mr-2 font-medium">
+              <a href="/login" className="px-4 py-1 rounded-lg border border-slate-600 focus:outline-none hover:bg-slate-900 mr-2 font-medium">
                 Log in
-                </Link>
-              <Link className="bg-red-500 px-4 py-1 rounded-lg focus:outline-none font-medium hover:bg-red-600">
+                </a>
+              <a href="/signup" className="bg-red-500 px-4 py-1 rounded-lg focus:outline-none font-medium hover:bg-red-600">
                 Sign up
-                </Link>
+                </a>
               </div>
             ) : ( <div>
-              <Link to="/profile" className="font-bold font-display pl-6 pr-4 py-1 focus:outline-none mr-2 border-l border-slate-500">
+              <a href="/profile" className="font-bold font-display pl-6 pr-4 py-1 focus:outline-none mr-2 border-l border-slate-500">
                 {localStorage.getItem('Naam')}
-                </Link>
-                <Link className="bg-red-500 px-4 py-1 rounded-lg focus:outline-none bg-opacity-25" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
+                </a>
+                <a className="bg-red-500 px-4 py-1 rounded-lg focus:outline-none bg-opacity-25" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
                   Log out
-                  </Link>
+                  </a>
               </div>
                   )}
             </div>
@@ -97,42 +98,42 @@ const NavBar = () => {
     </div>
 </div>
 {isOpen && (
-    <div className="lg:show">
+    <div className="md:show">
       <div className="px-2 pt-2 pb-3">
-        <Link
-          href="/"
-          className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-slate-300 mr-4"
+        <a
+          href="/home"
+          className="block mt-4 md:inline-block md:mt-0 text-white hover:text-slate-300 mr-4"
         >
           Home
-        </Link>
-        <Link
-          href="/about"
-          className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-slate-300 mr-4"
+        </a>
+        <a
+          href="/library"
+          className="block mt-4 md:inline-block md:mt-0 text-white hover:text-slate-300 mr-4"
         >
           Library
-        </Link>
-        <Link
-          href="/contact"
-          className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-slate-300"
+        </a>
+        <a
+          href="/charts"
+          className="block mt-4 md:inline-block md:mt-0 text-white hover:text-slate-300"
         >
           Charts
-        </Link>
+        </a>
         {localStorage.getItem('idGebruiker') === null ? (
               <div>
-              <Link to="/login" className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2 font-medium">
+              <a href="/login" className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2 font-medium">
                 Log in
-                </Link>
-              <Link className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none font-medium">
+                </a>
+              <a href="/signup" className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none font-medium">
                 Sign up
-                </Link>
+                </a>
               </div>
             ) : ( <div>
-              <Link to="/profile" className="font-bold font-display text-white px-4 py-1 focus:outline-none mr-2">
+              <a href="/profile" className="font-bold font-display text-white px-4 py-1 focus:outline-none mr-2">
                 {localStorage.getItem('Naam')}
-                </Link>
-                <Link className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none bg-opacity-25" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
+                </a>
+                <a className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none bg-opacity-25" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
                   Log out
-                  </Link>
+                  </a>
               </div>
                   )}
       </div>
