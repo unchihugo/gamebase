@@ -3,12 +3,14 @@ import GameItem from "./GameItem";
 import "./css/GameItem.css";
 import _ from "lodash";
 import RatingComponent from "../components/RatingComponent";
-import axios from "axios";
+import ReactPaginate from "react-paginate";
 
 const GameGrid = ({ games, userData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedGame, setSelectedGame] = useState({});
   const [isBackdropVisible, setIsBackdropVisible] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const gamesPerPage = 10;
 
   const handleClick = (game) => {
     setIsOpen(true);
@@ -31,13 +33,55 @@ const GameGrid = ({ games, userData }) => {
     return `${day}/${month}/${year}`;
   }
 
+    // Get the total number of pages
+    const pageCount = Math.ceil(games.length / gamesPerPage);
+
+    // Calculate the starting index of games for the current page
+    const startIndex = currentPage * gamesPerPage;
+  
+    // Get the games to display on the current page
+    const currentGames = games.slice(startIndex, startIndex + gamesPerPage);
+  
+    // Handle page change event
+    const handlePageClick = (data) => {
+      setCurrentPage(data.selected);
+    };
+
+
   return (
     <div className="gamegrid overflow-visible">
       <div className="grid space-x-0 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gamegrid justify-items-center">
-        {games.map((game) => (
+        {currentGames.map((game) => (
           <GameItem key={game.Id} game={game} handleClick={handleClick} />
         ))}
       </div>
+
+      <ReactPaginate
+        previousLabel={
+          <span className="h-10 w-10 sm:w-16 flex items-center justify-center bg-slate-800 rounded-xl hover:bg-slate-700 mr-2">
+            <span className="material-symbols-rounded text-2xl">chevron_left</span>
+          </span>
+        }
+        nextLabel={
+          <span className="h-10 w-10 sm:w-16 flex items-center justify-center bg-slate-800 rounded-xl hover:bg-slate-700 ml-1">
+            <span className="material-symbols-rounded text-2xl">chevron_right</span>
+          </span>
+        }
+        breakLabel={
+          <span className="h-10 w-10 flex items-center justify-center rounded-xl border border-slate-800 bg-slate-900 hover:bg-slate-800 mr-1">
+            <span className="material-symbols-rounded text-xl">more_horiz</span>
+          </span>
+        }
+        pageCount={pageCount}
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={1}
+        containerClassName="flex items-center justify-center mt-4 select-none"
+        pageLinkClassName="border border-slate-800 bg-slate-900 hover:bg-slate-800 w-10 h-10 rounded-xl flex items-center justify-center mr-1 cursor-pointer"
+        renderOnZeroPageCount={null}
+        activeLinkClassName="bg-[#1e293b] border-none hover:bg-[#334155]"
+      />
+
       {/* More information window on game click */}
       {isOpen && (
         <div>
