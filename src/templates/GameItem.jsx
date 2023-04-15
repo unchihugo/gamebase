@@ -13,7 +13,7 @@ const GameItem = ({ game, handleClick }) => {
         <p className='italic text-slate-400'>
           {game.Prijs === "0" ? "Free" : "$" + game.Prijs}
         </p>
-        <p className='text-red-500'>More info{">"}</p>
+        <p className='text-red-500'>More info {">"}</p>
       </div>
     </div>
     </>

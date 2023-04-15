@@ -44,13 +44,13 @@ const LoginForm = () => {
         backgroundImage: `url(${consoleBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        boxShadow: "0 0 56px 56px #0f172a inset"
+        boxShadow: "0 0 50px 50px #0f172a inset"
       }}
     >
       <div className="max-w-md w-full px-4 py-8 rounded-xl shadow-lg border border-slate-600 bg-slate-900 bg-opacity-80 backdrop-blur-xl">
         <div className="flex flex-col items-center">
           <span className="material-symbols-rounded text-3xl">password</span>
-          <h2 className="text-center text-xl font-display font-semibold mb-8">Log in to Gamebase</h2>
+          <h2 className="text-center text-xl font-display font-semibold mt-1 mb-8">Log in to Gamebase</h2>
         </div>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
@@ -58,7 +58,7 @@ const LoginForm = () => {
               Username
             </label>
             <input
-              className="appearance-none border border-slate-400 rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-transparent"
+              className="border border-slate-400 rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:border-blue-500 transition bg-transparent"
               type="text"
               name="username"
               id="username"
@@ -70,7 +70,7 @@ const LoginForm = () => {
               Password
             </label>
             <input
-              className="appearance-none border border-slate-400 rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-transparent"
+              className="border border-slate-400 rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:border-blue-500 transition bg-transparent"
               type="password"
               name="password"
               id="password"
@@ -79,7 +79,7 @@ const LoginForm = () => {
           </div>
           <div className="flex justify-center">
             <button
-              className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold font-display py-2 px-8 rounded-lg focus:outline-none focus:shadow-outline mt-4"
+              className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold font-display py-2 px-8 rounded-lg focus:outline-none focus:shadow-outline mt-4 transition"
               type="submit"
             >
               Log in

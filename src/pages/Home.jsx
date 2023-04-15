@@ -222,14 +222,14 @@ const Home = () => {
     setFreeGames(event.target.checked);
   };
 
-  // Filter games based on search term
+  // filter unfiltered games based on search term
   const filteredGames = _.isArray(games)
   ? _.filter(games, (game) =>
       _.includes(_.toLower(game.Naam), _.toLower(searchTerm))
     )
   : [];
 
-  // Sort games based on sort order
+  // Sort filtered games based on sort order
   let sortedGames = _.orderBy(filteredGames, [sortBy], [sortOrder]);
   sortedGames = paidGames ? sortedGames : _.filter(sortedGames, (game) => game.Prijs === '0');
   sortedGames = freeGames ? sortedGames : _.filter(sortedGames, (game) => game.Prijs !== '0');
@@ -241,7 +241,7 @@ const Home = () => {
         <div className='flex justify-end m-2'>
           <p className='hidden md:block font-semibold font-display text-slate-200'>Search:</p>
         </div>
-        <input className='bg-slate-800 text-white rounded-3xl h-8 p-3 border border-slate-600 drop-shadow-lg' type="text" placeholder='\games\...' onChange={handleSearch} />
+        <input className='bg-slate-800 text-white rounded-3xl h-8 p-3 border border-slate-600 drop-shadow-lg focus:bg-slate-700 focus:outline-none focus:border-blue-500 transition' type="text" placeholder='\games\...' onChange={handleSearch} />
         <div className='flex m-2'>
           <span className='material-symbols-rounded hidden md:block text-slate-200'>search</span>
         </div>
@@ -268,12 +268,12 @@ const Home = () => {
       {searchTerm === '' ? 
       <div>
       <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display mt-2'>
-        <span className="material-symbols-rounded text-3xl mr-0.5 align-middle pb-1 text-orange-500">local_fire_department</span>
+        <span className="material-symbols-rounded text-3xl mr-0.5 align-middle pb-1 text-red-500">local_fire_department</span>
         <span className='align-middle'>Popular on Gamebase</span>
       </p>
         <PopularGrid games={games}/>
         <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display mt-3'>
-          <span className="material-symbols-rounded text-3xl mr-1.5 align-middle pb-1 text-slate-400">collections_bookmark</span>
+          <span className="material-symbols-rounded text-3xl mr-1.5 align-middle pb-1 text-red-500">collections_bookmark</span>
           <span className='align-middle'>Gamebase Library</span>
           </p>
       </div>
@@ -298,7 +298,7 @@ const Home = () => {
             </div>
           </a>
         </div>
-        <GameGrid games={games} userData={userGamesData}/>
+        <GameGrid games={sortedGames} userData={userGamesData}/>
     </div>
   );
 }

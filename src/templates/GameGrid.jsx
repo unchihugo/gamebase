@@ -58,17 +58,17 @@ const GameGrid = ({ games, userData }) => {
 
       <ReactPaginate
         previousLabel={
-          <span className="h-10 w-10 sm:w-16 flex items-center justify-center bg-slate-800 rounded-xl hover:bg-slate-700 mr-2">
+          <span className="h-10 w-10 sm:w-16 flex items-center justify-center bg-slate-800 rounded-xl hover:bg-slate-700 mr-1 transition">
             <span className="material-symbols-rounded text-2xl">chevron_left</span>
           </span>
         }
         nextLabel={
-          <span className="h-10 w-10 sm:w-16 flex items-center justify-center bg-slate-800 rounded-xl hover:bg-slate-700 ml-1">
+          <span className="h-10 w-10 sm:w-16 flex items-center justify-center bg-slate-800 rounded-xl hover:bg-slate-700 transition">
             <span className="material-symbols-rounded text-2xl">chevron_right</span>
           </span>
         }
         breakLabel={
-          <span className="h-10 w-10 flex items-center justify-center rounded-xl border border-slate-800 bg-slate-900 hover:bg-slate-800 mr-1">
+          <span className="h-10 w-10 flex items-center justify-center rounded-xl border border-slate-800 bg-slate-900 hover:bg-slate-800 mr-1 transition">
             <span className="material-symbols-rounded text-xl">more_horiz</span>
           </span>
         }
@@ -77,9 +77,9 @@ const GameGrid = ({ games, userData }) => {
         pageRangeDisplayed={3}
         marginPagesDisplayed={1}
         containerClassName="flex items-center justify-center mt-4 select-none"
-        pageLinkClassName="border border-slate-800 bg-slate-900 hover:bg-slate-800 w-10 h-10 rounded-xl flex items-center justify-center mr-1 cursor-pointer"
+        pageLinkClassName="border border-slate-800 bg-slate-900 hover:bg-slate-800 w-10 h-10 rounded-xl flex items-center justify-center mr-1 cursor-pointer transition"
         renderOnZeroPageCount={null}
-        activeLinkClassName="bg-[#1e293b] border-none hover:bg-[#334155]"
+        activeLinkClassName="bg-[#ef4444] border-none hover:bg-[#dc2626]"
       />
 
       {/* More information window on game click */}
@@ -105,10 +105,10 @@ const GameGrid = ({ games, userData }) => {
                 <div className="flex items-center italic border-b border-slate-600 py-1 font-display">
                   <div className="text-slate-300">
                     {selectedGame.fkGebruiker === null
-                      ? "Added by Gamebase"
-                      : "Added by you"}
+                      ? "Added by Gamebase /"
+                      : "Added by you /"}
                   </div>
-                  <div className="text-slate-400 ml-2 text-sm mt-0.5">
+                  <div className="text-slate-400 ml-1.5 text-sm mt-0.5">
                     GameID: {selectedGame.idGame}
                   </div>
                 </div>
@@ -179,30 +179,28 @@ const GameGrid = ({ games, userData }) => {
                           <span className="material-symbols-rounded text-4xl p-1">desktop_windows</span>
                         ) : ("")}
                         {selectedGame.Platforms.includes("Playstation") ? (
-                          <span className="p-1"> <img src="https://cdn-icons-png.flaticon.com/512/1/1443.png" className="max-h-9 invert" /> </span>
+                          <span className="p-1"> <img src="https://cdn-icons-png.flaticon.com/512/1/1443.png" className="max-h-9 invert" alt="Playstation icon"/> </span>
                         ) : ("")}
                         {selectedGame.Platforms.includes("Xbox") ? (
-                          <span className="p-1"> <img src="https://cdn.icon-icons.com/icons2/2248/PNG/512/microsoft_xbox_icon_136396.png" className="max-h-9 invert" /> </span>
+                          <span className="p-1"> <img src="https://cdn.icon-icons.com/icons2/2248/PNG/512/microsoft_xbox_icon_136396.png" className="max-h-9 invert" alt="Xbox icon"/> </span>
                         ) : ("")}
                         {selectedGame.Platforms.includes("Mobile") ? (
                           <span className="material-symbols-rounded text-4xl p-1">phone_iphone</span>
                         ) : ("")}
                         {selectedGame.Platforms.includes("VR") ? (
-                          <span className="p-1"> <img src="https://static-00.iconduck.com/assets.00/vr-headset-icon-512x377-f1enyn1n.png" className="max-h-7 mt-1 invert" /> </span>
+                          <span className="p-1"> <img src="https://static-00.iconduck.com/assets.00/vr-headset-icon-512x377-f1enyn1n.png" className="max-h-7 mt-1 invert" alt="VR icon"/> </span>
                         ) : ("")}
                       </div>
                       </div>
                     </p>
                   </div>
                 </div>
-                <a className="text-blue-200 inline-block px-3 pb-0.5 mr-1 border border-slate-500 rounded-full text-sm overflow-ellipsis whitespace-nowrap overflow-hidden max-w-full" href={selectedGame.Link} target="_blank">
-                  <span class="material-symbols-rounded mr-0.5 text-base align-middle">link</span>
-                  <span className="mr-1 align-middle">Link</span>
+                <a className="text-blue-200 inline-block px-3 pb-0.5 mr-1 border border-slate-500 rounded-full text-sm overflow-ellipsis whitespace-nowrap overflow-hidden max-w-full" href={selectedGame.Link} target="_blank" rel="noreferrer">
+                  <span class="material-symbols-rounded text-base align-middle mr-1">link</span>
                   <span className="italic text-blue-400 align-middle">{selectedGame.Link}</span>
                 </a>
-                <a className="text-blue-200 inline-block px-3 pb-0.5 border border-slate-500 rounded-full text-sm overflow-ellipsis whitespace-nowrap overflow-hidden max-w-full" href={selectedGame.CoverLink} target="_blank">
-                  <span class="material-symbols-rounded mr-0.5 text-base align-middle">link</span>
-                  <span className="mr-1 align-middle">Cover image</span>
+                <a className="text-blue-200 inline-block px-3 pb-0.5 border border-slate-500 rounded-full text-sm overflow-ellipsis whitespace-nowrap overflow-hidden max-w-full" href={selectedGame.CoverLink} target="_blank" rel="noreferrer">
+                  <span class="material-symbols-rounded text-base align-middle mr-1">image</span>
                   <span className="italic text-blue-400 align-middle">{selectedGame.CoverLink}</span>
                 </a>
               </div>

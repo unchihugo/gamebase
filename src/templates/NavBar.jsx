@@ -35,15 +35,15 @@ const NavBar = () => {
             <div className="hidden md:flex">
               <a
                   href="/home"
-                  className="hover:text-slate-300 mx-2 ml-6"
+                  className="hover:text-slate-300 mx-2 ml-6 transition"
                 >Home</a>
                 <a
                   href="/library"
-                  className="hover:text-slate-300 mx-2"
+                  className="hover:text-slate-300 mx-2 transition"
                 >Library</a>
                 <a
                   href="/charts"
-                  className="hover:text-slate-300 mx-2"
+                  className="hover:text-slate-300 mx-2 transition"
                 >Charts</a>
             </div>
           </div>
@@ -77,18 +77,18 @@ const NavBar = () => {
             <div className="flex items-center">
             {localStorage.getItem('idGebruiker') === null ? (
               <div>
-              <a href="/login" className="px-4 py-1 rounded-lg border border-slate-600 focus:outline-none hover:bg-slate-900 mr-2 font-medium">
+              <a href="/login" className="px-4 py-1 rounded-lg border border-slate-600 focus:outline-none hover:bg-slate-900 mr-2 font-medium transition">
                 Log in
                 </a>
-              <a href="/signup" className="bg-red-500 px-4 py-1 rounded-lg focus:outline-none font-medium hover:bg-red-600">
+              <a href="/signup" className="bg-red-500 px-4 py-1 rounded-lg focus:outline-none font-medium hover:bg-red-600 transition">
                 Sign up
                 </a>
               </div>
             ) : ( <div>
-              <a href="/profile" className="font-bold font-display pl-6 pr-4 py-1 focus:outline-none mr-2 border-l border-slate-500">
+              <a href="/profile" className="font-bold font-display pl-6 pr-4 py-1 focus:outline-none mr-2 border-l border-slate-500 transition">
                 {localStorage.getItem('Naam')}
                 </a>
-                <a className="bg-red-500 px-4 py-1 rounded-lg focus:outline-none bg-opacity-25" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
+                <a className="bg-red-500 px-4 py-1 rounded-lg focus:outline-none bg-opacity-25 transition" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
                   Log out
                   </a>
               </div>

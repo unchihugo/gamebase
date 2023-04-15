@@ -46,25 +46,25 @@ const SignupForm = () => {
   
     return (
       <div
-        className="flex justify-center items-center h-full bg-cover bg-center my-20"
+        className="flex justify-center items-center h-full bg-cover bg-center"
         style={{
           height: '85vh',
           backgroundImage: `url(${consoleBg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          boxShadow: "0 0 56px 56px #0f172a inset"
+          boxShadow: "0 0 50px 50px #0f172a inset",
         }}
       >
         <div className="max-w-md w-full px-4 py-8 rounded-xl shadow-lg border border-slate-600 bg-slate-900 bg-opacity-80 backdrop-blur-xl">
           <div className="flex flex-col items-center mb-8">
-            <span className="material-symbols-rounded text-3xl">waving_hand</span>
-            <h2 className=" text-xl font-display font-semibold mt-1 mb-2">Welcome to Gamebase</h2>
-            <h2 className=" text-lg text-slate-400">Create an account to:</h2>
-            <h2 className=" text-slate-400">- Get a profile to share with your friends</h2>
-            <h2 className=" text-slate-400">- Add custom games</h2>
-            <h2 className=" text-slate-400">- Save stats to games</h2>
-            <h2 className=" text-slate-400">- Have your own library</h2>
-            <h2 className=" text-slate-400">- Compare yourself to others</h2>
+            <span className="-mt-2 text-3xl">👋</span>
+            <h2 className="text-xl font-display font-semibold mt-1">Welcome to Gamebase</h2>
+            <h2 className="text-lg text-slate-300">Create an account to:</h2>
+            <h2 className="text-slate-400">- Get a profile to share with your friends</h2>
+            <h2 className="text-slate-400">- Add custom games</h2>
+            <h2 className="text-slate-400">- Save stats to games</h2>
+            <h2 className="text-slate-400">- Compare yourself to others</h2>
+            <h2 className="text-slate-400">- And more...</h2>
           </div>
           <form onSubmit={handleSignup}>
             <div className="mb-6">
@@ -72,7 +72,7 @@ const SignupForm = () => {
                 Unique Username
               </label>
               <input
-                className="appearance-none border border-slate-400 rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-transparent"
+                className="border border-slate-400 rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:border-blue-500 transition bg-transparent"
                 type="text"
                 name="username"
                 id="username"
@@ -85,7 +85,7 @@ const SignupForm = () => {
                 Password
               </label>
               <input
-                className="appearance-none border border-slate-400 rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-transparent"
+                className="border border-slate-400 rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:border-blue-500 transition bg-transparent"
                 type="password"
                 name="password"
                 id="password"
@@ -94,11 +94,11 @@ const SignupForm = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-slate-400 text-sm mb-2" htmlFor="password2">
+              <label className="block italic text-slate-300 text-sm mb-2" htmlFor="password2">
                 Confirm password
               </label>
               <input
-                className="appearance-none border border-slate-400 rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-transparent"
+                className="border border-slate-400 rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:border-blue-500 transition bg-transparent"
                 type="password"
                 name="password2"
                 id="password2"
@@ -111,7 +111,7 @@ const SignupForm = () => {
                 What's your name?
               </label>
               <input
-                className="appearance-none border border-slate-400 rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline bg-transparent"
+                className="border border-slate-400 rounded-xl w-full py-2 px-3 leading-tight focus:outline-none focus:border-blue-500 transition bg-transparent"
                 type="text"
                 name="name"
                 id="name"
@@ -121,7 +121,7 @@ const SignupForm = () => {
             </div>
             <div className="flex justify-center">
               <button
-                className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold font-display py-2 px-8 rounded-lg focus:outline-none focus:shadow-outline mt-4"
+                className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold font-display py-2 px-8 rounded-lg focus:outline-none focus:shadow-outline mt-4 transition"
                 type="submit"
               >
                 Create Account
