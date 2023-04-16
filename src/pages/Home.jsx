@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import _ from 'lodash';
 import '../index.css';
@@ -291,12 +292,21 @@ const Home = () => {
         </div>
       }
         <div className='flex justify-center'>
-          <a href="/addcustomgame">
+          {localStorage.getItem('idGebruiker') === null ?
+          <Link to="/login">
+          <div className="mt-4 px-4 py-2 bg-slate-700 bg-opacity-50 hover:bg-opacity-80 hover:-translate-y-px transition rounded-xl shadow-sm text-slate-300">
+            <span className="material-symbols-rounded align-middle mr-1.5 text-slate-400">add_circle</span>
+            <span className='align-middle'>Log in to add games to Gamebase</span>
+          </div>
+        </Link>
+          :
+          <Link to="/addcustomgame">
             <div className="mt-4 px-4 py-2 bg-slate-700 bg-opacity-50 hover:bg-opacity-80 hover:-translate-y-px transition rounded-xl shadow-sm text-slate-300">
               <span className="material-symbols-rounded align-middle mr-1.5 text-slate-400">add_circle</span>
               <span className='align-middle'>Add custom game to Gamebase</span>
             </div>
-          </a>
+          </Link>
+          }
         </div>
         <GameGrid games={sortedGames} userData={userGamesData}/>
     </div>

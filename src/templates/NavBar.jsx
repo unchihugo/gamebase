@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./css/NavBar.css"
 import logo from "../images/logo.png";	
 
@@ -27,25 +28,25 @@ const NavBar = () => {
   return (
     <nav className={`bg-slate-800 fixed top-0 left-0 right-0 z-10 border-b border-slate-600 font-display
       ${!top && 'bg-opacity-60 bg-slate-800 backdrop-blur-lg'}`}>
-      <div className="container mx-auto p-2">
+      <div className="container mx-auto h-12 p-2">
         <div className="flex justify-between align-middle">
           <div className="flex items-center">
-            <a href="/home" className=" font-bold text-xl">
+            <Link to="/home" className=" font-bold text-xl">
               <img src={logo} alt="Gamebase logo" className="max-h-8" />
-            </a>
+            </Link>
             <div className="hidden md:flex">
-              <a
-                  href="/home"
+              <Link
+                  to="/home"
                   className="hover:text-slate-300 mx-2 ml-4 transition"
-                >Home</a>
-                <a
-                  href="/library"
+                >Home</Link>
+                <Link
+                  to="/library"
                   className="hover:text-slate-300 mx-2 transition"
-                >Library</a>
-                <a
-                  href="/charts"
+                >Library</Link>
+                <Link
+                  to="/charts"
                   className="hover:text-slate-300 mx-2 transition"
-                >Charts</a>
+                >Charts</Link>
             </div>
           </div>
           <div className="md:hidden">
@@ -78,17 +79,17 @@ const NavBar = () => {
             <div className="flex items-center">
             {localStorage.getItem('idGebruiker') === null ? (
               <div>
-              <a href="/login" className="px-4 py-1 rounded-lg border border-slate-600 focus:outline-none hover:bg-slate-900 mr-2 font-medium transition">
+              <Link to="/login" className="px-4 py-1 rounded-lg border border-slate-600 focus:outline-none hover:bg-slate-900 mr-2 font-medium transition">
                 Log in
-                </a>
-              <a href="/signup" className="bg-red-500 px-4 py-1 rounded-lg focus:outline-none font-medium hover:bg-red-600 transition">
+                </Link>
+              <Link to="/signup" className="bg-red-500 px-4 py-1 rounded-lg focus:outline-none font-medium hover:bg-red-600 transition">
                 Sign up
-                </a>
+                </Link>
               </div>
             ) : ( <div>
-              <a href="/profile" className="font-bold font-display pl-6 pr-4 py-1 focus:outline-none mr-2 border-l border-slate-500 transition">
+              <Link to="/profile" className="font-bold font-display pl-6 pr-4 py-1 focus:outline-none mr-2 border-l border-slate-500 transition">
                 {localStorage.getItem('Naam')}
-                </a>
+                </Link>
                 <a className="bg-red-500 px-4 py-1 rounded-lg focus:outline-none bg-opacity-25 transition" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
                   Log out
                   </a>
@@ -101,40 +102,40 @@ const NavBar = () => {
 {isOpen && (
     <div className="md:show">
       <div className="px-2 pt-2 pb-3">
-        <a
-          href="/home"
+        <Link
+          to="/home"
           className="block mt-4 md:inline-block md:mt-0 text-white hover:text-slate-300 mr-4"
         >
           Home
-        </a>
-        <a
-          href="/library"
+        </Link>
+        <Link
+          to="/library"
           className="block mt-4 md:inline-block md:mt-0 text-white hover:text-slate-300 mr-4"
         >
           Library
-        </a>
-        <a
-          href="/charts"
+        </Link>
+        <Link
+          to="/charts"
           className="block mt-4 md:inline-block md:mt-0 text-white hover:text-slate-300"
         >
           Charts
-        </a>
+        </Link>
         {localStorage.getItem('idGebruiker') === null ? (
               <div>
-              <a href="/login" className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2 font-medium">
+              <Link to="/login" className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2 font-medium">
                 Log in
-                </a>
-              <a href="/signup" className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none font-medium">
+                </Link>
+              <Link to="/signup" className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none font-medium">
                 Sign up
-                </a>
+                </Link>
               </div>
             ) : ( <div>
-              <a href="/profile" className="font-bold font-display text-white px-4 py-1 focus:outline-none mr-2">
+              <Link to="/profile" className="font-bold font-display text-white px-4 py-1 focus:outline-none mr-2">
                 {localStorage.getItem('Naam')}
-                </a>
-                <a className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none bg-opacity-25" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
+                </Link>
+                <Link className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none bg-opacity-25" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
                   Log out
-                  </a>
+                  </Link>
               </div>
                   )}
       </div>
