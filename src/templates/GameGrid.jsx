@@ -4,6 +4,7 @@ import "./css/GameItem.css";
 import _ from "lodash";
 import RatingComponent from "../components/RatingComponent";
 import ReactPaginate from "react-paginate";
+import icon from "../images/icon256.png";
 
 const GameGrid = ({ games, userData }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,7 +80,7 @@ const GameGrid = ({ games, userData }) => {
         containerClassName="flex items-center justify-center mt-4 select-none"
         pageLinkClassName="border border-slate-800 bg-slate-900 hover:bg-slate-800 w-10 h-10 rounded-xl flex items-center justify-center mr-1 cursor-pointer transition"
         renderOnZeroPageCount={null}
-        activeLinkClassName="bg-[#ef4444] border-none hover:bg-[#dc2626]"
+        activeLinkClassName="activeLink"
       />
 
       {/* More information window on game click */}
@@ -105,7 +106,10 @@ const GameGrid = ({ games, userData }) => {
                 <div className="flex items-center italic border-b border-slate-600 py-1 font-display">
                   <div className="text-slate-300">
                     {selectedGame.fkGebruiker === null
-                      ? "Added by Gamebase /"
+                      ? <div className="flex items-center"> <span>Added by Gamebase</span>
+                          <img src={icon} alt="Gamebase icon" className="max-h-8 -my-1" />
+                          <span>/</span>
+                      </div> 
                       : "Added by you /"}
                   </div>
                   <div className="text-slate-400 ml-1.5 text-sm mt-0.5">

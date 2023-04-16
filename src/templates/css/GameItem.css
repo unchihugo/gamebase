@@ -128,3 +128,11 @@
   }
 }
 
+.activeLink {
+  border: none;
+  background-color: #ef4444;
+}
+
+.activeLink:hover {
+  background-color: #dc2626;
+}

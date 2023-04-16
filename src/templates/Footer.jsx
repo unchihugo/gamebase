@@ -1,11 +1,12 @@
+import logo from "../images/logo.png";	
+
 function Footer() {
     return (
         <footer class="bg-slate-900 z-10 border-t border-slate-600">
         <div class="w-full container mx-auto p-4 md:px-6 md:py-8">
             <div class="sm:flex sm:items-center sm:justify-between">
-                <a href="/home" class="flex items-center mb-4 sm:mb-0">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-2" alt="Flowbite Logo" />
-                    <span class="self-center text-2xl font-display font-semibold whitespace-nowrap">Gamebase</span>
+                <a href="/home" class="flex items-center mt-2 md:mt-0 mb-4 sm:mb-0">
+                    <img src={logo} class="h-11 -my-2" alt="Gamebase logo" />
                 </a>
                 <div></div>
                 <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-slate-400 sm:mb-0">

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./css/NavBar.css"
+import logo from "../images/logo.png";	
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [top, setTop] = useState(true);
-
+    
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -26,16 +27,16 @@ const NavBar = () => {
   return (
     <nav className={`bg-slate-800 fixed top-0 left-0 right-0 z-10 border-b border-slate-600 font-display
       ${!top && 'bg-opacity-60 bg-slate-800 backdrop-blur-lg'}`}>
-      <div className="container mx-auto px-4 py-2">
+      <div className="container mx-auto p-2">
         <div className="flex justify-between align-middle">
           <div className="flex items-center">
             <a href="/home" className=" font-bold text-xl">
-              Gamebase
+              <img src={logo} alt="Gamebase logo" className="max-h-8" />
             </a>
             <div className="hidden md:flex">
               <a
                   href="/home"
-                  className="hover:text-slate-300 mx-2 ml-6 transition"
+                  className="hover:text-slate-300 mx-2 ml-4 transition"
                 >Home</a>
                 <a
                   href="/library"
