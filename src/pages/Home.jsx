@@ -282,7 +282,7 @@ const Home = () => {
       </div>
         : <div>
         <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display mt-2'>
-          <span className="material-symbols-rounded text-3xl mr-1 align-middle pb-1 text-slate-400">manage_search</span>
+          <span className="material-symbols-rounded text-3xl mr-1 align-middle pb-1 text-red-500">manage_search</span>
           <span className='align-middle'>
             Search results for: 
                     {filteredGames.length !== 0 ?
@@ -298,14 +298,14 @@ const Home = () => {
           <Link to="/login">
           <div className="mt-4 px-4 py-2 bg-slate-700 bg-opacity-50 hover:bg-opacity-80 hover:-translate-y-px transition rounded-xl shadow-sm text-slate-300">
             <span className="material-symbols-rounded align-middle mr-1.5 text-slate-400">add_circle</span>
-            <span className='align-middle'>Log in to add games to Gamebase</span>
+            <span className='align-middle'>Log in to add games</span>
           </div>
         </Link>
           :
           <Link to="/addcustomgame">
             <div className="mt-4 px-4 py-2 bg-slate-700 bg-opacity-50 hover:bg-opacity-80 hover:-translate-y-px transition rounded-xl shadow-sm text-slate-300">
               <span className="material-symbols-rounded align-middle mr-1.5 text-slate-400">add_circle</span>
-              <span className='align-middle'>Add custom game to Gamebase</span>
+              <span className='align-middle'>Add custom game</span>
             </div>
           </Link>
           }

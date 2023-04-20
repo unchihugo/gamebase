@@ -10,7 +10,7 @@ const GameItem = ({ game, userData, handleClick }) => {
         <p className="text-yellow-400 mb-1">★</p>
         <p className="ml-1 text-yellow-400 font-display font-medium text-sm">{game.Beoordeling/10}</p>
       </div>
-      <div className="gameitem-status backdrop-blur-md rounded-xl p-0.5 px-1.5 flex m-1">
+      <div className="gameitem-status backdrop-blur-md rounded-b-xl p-0.5 px-1.5 flex m-1 mt-0">
         {localStorage.getItem("idGebruiker") === null ? ( <div></div>
         ) : (
           (() => {
@@ -20,7 +20,7 @@ const GameItem = ({ game, userData, handleClick }) => {
             if (matchingData !== undefined) {
               if (matchingData.Status === "0"){
                 return (  
-                  <span className='material-symbols-rounded hidden md:block text-red-500 text-xl pl-0.5 py-1'>bookmark</span>
+                  <span className='material-symbols-rounded hidden md:block text-red-500 text-2xl pl-0.5 py-1'>bookmark</span>
                 );
               } else if (matchingData.Status === "1") {
                 return (
