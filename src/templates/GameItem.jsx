@@ -1,4 +1,6 @@
-const GameItem = ({ game, handleClick }) => {
+import _ from "lodash";
+
+const GameItem = ({ game, userData, handleClick }) => {
 
   return (
     <>
@@ -7,6 +9,33 @@ const GameItem = ({ game, handleClick }) => {
       <div className="gameitem-rating backdrop-blur-md rounded-xl p-0.5 px-1.5 flex m-1">
         <p className="text-yellow-400 mb-1">★</p>
         <p className="ml-1 text-yellow-400 font-display font-medium text-sm">{game.Beoordeling/10}</p>
+      </div>
+      <div className="gameitem-status backdrop-blur-md rounded-xl p-0.5 px-1.5 flex m-1">
+        {localStorage.getItem("idGebruiker") === null ? ( <div></div>
+        ) : (
+          (() => {
+            let matchingData = _.find(userData, {
+              fkGame: game.idGame,
+            });
+            if (matchingData !== undefined) {
+              if (matchingData.Status === "0"){
+                return (  
+                  <span className='material-symbols-rounded hidden md:block text-red-500 text-xl pl-0.5 py-1'>bookmark</span>
+                );
+              } else if (matchingData.Status === "1") {
+                return (
+                  <span className='material-symbols-rounded hidden md:block text-red-500'>shopping_basket</span>
+                );
+              } else if (matchingData.Status === "2") {
+                return (
+                  <span className='material-symbols-rounded hidden md:block text-red-500'>done</span>
+                );
+              }
+            }
+            })()
+        )
+        
+        }
       </div>
       <div key={game.idGame} className='gameitem-content sm:backdrop-blur-md'>
         <p className='font-medium sm:text-lg text-slate-300 font-display'>{game.Naam}</p>

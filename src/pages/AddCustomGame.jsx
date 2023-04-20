@@ -28,6 +28,7 @@ const AddCustomGame = () => {
         event.preventDefault();
         const fkUser = localStorage.getItem("idGebruiker");
 
+        try{        
         const response = await axios.post("http://localhost:3001/games", {
             name,
             genre,
@@ -47,9 +48,10 @@ const AddCustomGame = () => {
 
         if (response.status === 200) {
             window.location.href = "./home";
-        } else {
-            alert("Something went wrong, ensure that all fields are filled in correctly");
         }
+    } catch (error) {
+         alert("Something went wrong, ensure that all fields are filled in correctly");
+    }
     };
 
     return(

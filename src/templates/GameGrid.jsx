@@ -11,7 +11,7 @@ const GameGrid = ({ games, userData }) => {
   const [selectedGame, setSelectedGame] = useState({});
   const [isBackdropVisible, setIsBackdropVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-  const gamesPerPage = 10;
+  const gamesPerPage = 15;
 
   const handleClick = (game) => {
     setIsOpen(true);
@@ -53,7 +53,7 @@ const GameGrid = ({ games, userData }) => {
     <div className="gamegrid overflow-visible">
       <div className="grid space-x-0 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gamegrid justify-items-center">
         {currentGames.map((game) => (
-          <GameItem key={game.Id} game={game} handleClick={handleClick} />
+          <GameItem key={game.Id} game={game} userData={userData} handleClick={handleClick} />
         ))}
       </div>
 
@@ -215,13 +215,13 @@ const GameGrid = ({ games, userData }) => {
                   <p className="text-red-500 italic">
                     You need to be logged in to Gamebase to see your stats!
                   </p>
-                ) : (
-                  (() => {
-                    let matchingData = _.find(userData, {
-                      fkGame: selectedGame.idGame,
-                    });
-                    if (matchingData !== undefined) {
-                      return (
+                  ) : (
+                    (() => {
+                      let matchingData = _.find(userData, {
+                        fkGame: selectedGame.idGame,
+                      });
+                      if (matchingData !== undefined) {
+                        return (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                           <div>
                             <p className="text-slate-300 font-display">

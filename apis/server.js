@@ -28,7 +28,9 @@ app.post('/games', (req, res) => {
 
   const sql = `INSERT INTO game (Naam, Genre, SubGenres, Prijs, Beoordeling, PublicatieDatum, Online, Story, Platforms, Developer, Publisher, Link, CoverLink, fkGebruiker) VALUES ('${name}', '${genre}', '${subGenres}', '${price}', '${rating}', '${releaseDate}', '${onlineValue}', '${storyValue}', '${platforms}', '${developer}', '${publisher}', '${link}', '${coverLink}', '${fkUser}')`;
   db.query(sql, (err, result) => {
-    if (err) throw err;
+    if (err) {
+      res.status(500).json({ error: 'Something went wrong, ensure that all fields are filled in correctly' });
+    };
     res.send('Game added successfully');
   });
 });
@@ -38,7 +40,9 @@ app.post('/gamedata', (req, res) => {
   const { fkUser, fkGame, status, hours, achievements, rating, dateAdded} = req.body;
   const sql = `INSERT INTO gebruikergamedata (fkGebruiker, fkGame, Status, AantalUren, AantalPrestaties, EigenBeoordeling, DatumToegevoegd) VALUES ('${fkUser}', '${fkGame}', '${status}', '${hours}', '${achievements}', '${rating}', '${dateAdded}')`;
   db.query(sql, (err, result) => {
-    if (err) throw err;
+    if (err) {
+      res.status(500).json({ error: 'Something went wrong, ensure that all fields are filled in correctly' });
+    };
     res.send('Game data added successfully');
   });
 });
@@ -52,7 +56,7 @@ app.post('/users', (req, res) => {
       if (err.code === 'ER_DUP_ENTRY') {
         res.status(409).json({ error: 'Username already exists' });
       } else {
-        res.status(500).json({ error: 'Something went wrong' });
+        res.status(500).json({ error: 'Something went wrong, ensure that all fields are filled in correctly' });
       }
     } else {
       res.send('User added successfully');

@@ -133,7 +133,7 @@ const NavBar = () => {
               <Link to="/profile" className="font-bold font-display text-white px-4 py-1 focus:outline-none mr-2">
                 {localStorage.getItem('Naam')}
                 </Link>
-                <Link className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none bg-opacity-25" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
+                <Link className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none bg-opacity-25 cursor-pointer" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
                   Log out
                   </Link>
               </div>

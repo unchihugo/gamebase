@@ -23,7 +23,7 @@ const SignupForm = () => {
                 const response = await axios.post("http://localhost:3001/users", {
                   username,
                   password,
-                  name,
+                  name
                 });
                 
                 if (response.status === 200) {
@@ -33,7 +33,7 @@ const SignupForm = () => {
                 if (error.response && error.response.status === 409) {
                   alert("Username is already taken");
                 } else {
-                  alert("Something went wrong");
+                  alert("Something went wrong, ensure that all fields are filled in correctly");
                 }
               }
                           
