@@ -19,7 +19,9 @@ const Home = () => {
   const localServer = false;
 
   useEffect(() => {
-    fetchGames();
+    // if (games !== []){
+      fetchGames();
+    // }
   }, []);
 
   useEffect(() => {
