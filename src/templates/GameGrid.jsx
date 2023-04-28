@@ -186,7 +186,7 @@ const GameGrid = ({ games, userData }) => {
                           <span className="p-1"> <img src="https://cdn-icons-png.flaticon.com/512/1/1443.png" className="max-h-9 invert" alt="Playstation icon"/> </span>
                         ) : ("")}
                         {selectedGame.Platforms.includes("Xbox") ? (
-                          <span className="p-1"> <img src="https://cdn.icon-icons.com/icons2/2248/PNG/512/microsoft_xbox_icon_136396.png" className="max-h-9 invert" alt="Xbox icon"/> </span>
+                          <span className="p-1"> <img src="https://cdn-icons-png.flaticon.com/512/1/1321.png" className="max-h-9 invert" alt="Xbox icon"/> </span>
                         ) : ("")}
                         {selectedGame.Platforms.includes("Mobile") ? (
                           <span className="material-symbols-rounded text-4xl p-1">phone_iphone</span>
