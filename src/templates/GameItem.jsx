@@ -8,7 +8,11 @@ const GameItem = ({ game, userData, handleClick }) => {
       <img src={game.CoverLink} alt={game.naam} className="aspect-square gameitem-image"/>
       <div className="gameitem-rating rounded-xl p-0.5 px-1.5 flex m-1">
         <p className="text-yellow-400 mb-1">★</p>
-        <p className="ml-1 text-yellow-400 font-display font-medium text-sm">{game.Beoordeling/10}</p>
+        {game.Beoordeling == 0 ? (          
+          <p className="ml-1 text-yellow-400 font-display font-medium text-sm">N/A</p>
+        ) : (
+          <p className="ml-1 text-yellow-400 font-display font-medium text-sm">{game.Beoordeling/10}</p>
+        )}
       </div>
         {localStorage.getItem("idGebruiker") === null ? ( <div></div>
         ) : (

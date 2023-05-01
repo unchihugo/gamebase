@@ -22,7 +22,7 @@ const Home = () => {
     // if (games !== []){
       fetchGames();
     // }
-  }, [localServer]);
+  }, []);
 
   useEffect(() => {
     let idGebruiker = localStorage.getItem("idGebruiker");
@@ -225,9 +225,9 @@ const Home = () => {
     setFreeGames(event.target.checked);
   };
 
-  const handleLocalServer = (event) => {
-    setLocalServer(event.target.checked);
-  };
+  // const handleLocalServer = (event) => {
+  //   setLocalServer(event.target.checked);
+  // };
 
   // filter unfiltered games based on search term
   const filteredGames = _.isArray(games)
@@ -271,7 +271,7 @@ const Home = () => {
           <p className='font-medium font-display ml-4 text-sm'>Free games </p>
           <input type="checkbox" className='ml-2' onChange={handleFreeGames} defaultChecked='true'/>
           <p className='font-medium font-display ml-4 text-sm opacity-50'>Server-sided </p>
-          <input type="checkbox" className='ml-2' onChange={handleLocalServer} defaultChecked='true'/>
+          {/* <input type="checkbox" className='ml-2' onChange={handleLocalServer} defaultChecked='true'/> */}
         </div>
       </div>
       {searchTerm === '' ? 

@@ -128,6 +128,15 @@ const GameGrid = ({ games, userData }) => {
                   </span>
                   <span className="material-symbols-rounded text-2xl align-middle">sell</span>
                 </p>
+                {selectedGame.Beoordeling == 0 ? (
+                  <p className="text-yellow-400 text-lg font-semibold mb-1.5">
+                  Metacritic rating: N/A{" "}
+                  <RatingComponent
+                    ratingStarsCount={10}
+                    defaultRating={0 / 10}
+                  />
+                </p>
+                ) : (          
                 <p className="text-yellow-400 text-lg font-semibold mb-1.5">
                   Metacritic rating: {selectedGame.Beoordeling / 10}/10{" "}
                   <RatingComponent
@@ -135,6 +144,7 @@ const GameGrid = ({ games, userData }) => {
                     defaultRating={selectedGame.Beoordeling / 10}
                   />
                 </p>
+                )}
                     <p className="text-slate-300">
                       <span className="material-symbols-rounded text-base mr-1 align-middle">code</span>
                       <span className="align-middle">Developer: {selectedGame.Developer}</span>
@@ -193,6 +203,9 @@ const GameGrid = ({ games, userData }) => {
                         ) : ("")}
                         {selectedGame.Platforms.includes("VR") ? (
                           <span className="p-1"> <img src="https://static-00.iconduck.com/assets.00/vr-headset-icon-512x377-f1enyn1n.png" className="max-h-7 mt-1 invert" alt="VR icon"/> </span>
+                        ) : ("")}
+                        {selectedGame.Platforms.includes("Nintendo Switch") ? (
+                          <span className="p-1"> <img src="https://d29fhpw069ctt2.cloudfront.net/icon/image/38677/preview2.png" className="max-h-7 mt-1 invert" alt="VR icon"/> </span>
                         ) : ("")}
                       </div>
                       </div>
