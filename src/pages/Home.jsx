@@ -259,7 +259,7 @@ const Home = () => {
           <select onChange={handleSortBy} className='bg-slate-800 rounded-lg h-7 px-2 ml-2 border border-slate-600 drop-shadow-lg'>
             <option value="Naam">Title</option>
             <option value="Beoordeling">Rating</option>
-            <option value="PublicatieDatum">Publishing date</option>
+            <option value="PublicatieDatum">Release Date</option>
           </select>
           <p className='font-medium font-display ml-4'>Order by </p>
           <select onChange={handleSort} className='bg-slate-800 rounded-lg h-7 px-2 ml-2 border border-slate-600 drop-shadow-lg'>
