@@ -23,11 +23,9 @@ db.connect((err) => {
 //function to add a new game to user's collection
 app.post('/games', (req, res) => {
   const { name, genre, subGenres, price, rating, releaseDate, online, story, platforms, developer, publisher, link, coverLink, fkUser } = req.body;
-  const onlineValue = online === true ? 1 : 0;
-  const storyValue = story === true ? 1 : 0;
 
   const sql = `INSERT INTO game (Naam, Genre, SubGenres, Prijs, Beoordeling, PublicatieDatum, Online, Story, Platforms, Developer, Publisher, Link, CoverLink, fkGebruiker) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-  const values = [name, genre, subGenres, price, rating, releaseDate, onlineValue, storyValue, platforms, developer, publisher, link, coverLink, fkUser];
+  const values = [name, genre, subGenres, price, rating, releaseDate, online, story, platforms, developer, publisher, link, coverLink, fkUser];
   db.query(sql, values, (err, result) => {
     if (err) {
       res.status(500).json({ error: 'Something went wrong, ensure that all fields are filled in correctly' });

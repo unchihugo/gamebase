@@ -130,8 +130,7 @@ const GameGrid = ({ games, userData }) => {
                   </span>
                   <div className="flex mt-5">
                     <div className="mr-4">
-                      {localStorage.getItem("idGebruiker") ===
-                      selectedGame.fkGebruiker ? (
+                      {localStorage.getItem("idGebruiker") === selectedGame.fkGebruiker && localStorage.getItem("idGebruiker") !== null ? (
                         <button
                           onClick={handleDelete}
                           className="flex items-center -m-1 -mt-4 border rounded-md border-red-500 pl-1 pb-0.5"
