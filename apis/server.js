@@ -107,6 +107,22 @@ app.put('/gamedataupdate', (req, res) => {
 });
 
 
+//delete game from user's collection
+app.delete('/games/:idGame', (req, res) => {
+  const idGame = req.params.idGame;
+  const sql = `DELETE FROM game WHERE idGame = ?`;
+  db.query(sql, [idGame], (err, result) => {
+    if (err) {
+      res.status(500).json({ error: 'Something went wrong' });
+    } else if (result.affectedRows === 0) {
+      res.status(404).json({ error: 'Game not found' });
+    } else {
+      res.send('Game deleted successfully');
+    }
+  });
+});
+
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });

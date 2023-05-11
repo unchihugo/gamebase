@@ -48,6 +48,23 @@ const GameGrid = ({ games, userData }) => {
       setCurrentPage(data.selected);
     };
 
+    const handleDelete = () => {
+      const confirmed = window.confirm('Are you sure you want to delete this game?');
+      if (confirmed) {
+        fetch(`/games/${selectedGame.idGame}`, { method: 'DELETE' })
+          .then((res) => {
+            if (res.ok) {
+              window.location.reload();
+            } else {
+              throw new Error('Failed to delete game');
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    };
+
 
   return (
     <div className="gamegrid overflow-visible">
@@ -98,10 +115,15 @@ const GameGrid = ({ games, userData }) => {
               <div className="col-span-4 pb-1 md:pl-3">
                 <div className="border-t border-slate-600 pt-1 flex justify-between">
                   <span className="text-4xl font-semibold font-display">{selectedGame.Naam}</span>
-                  <button onClick={handleClose} className="flex items-center -m-1 -mt-4">
-                    <span>Close</span>
-                    <span className="material-symbols-rounded pl-1">close</span>
+                  <div>
+                  <button onClick={handleDelete} className="flex items-center -m-1 -mt-4 border rounded-md border-red-500">
+                    <span className="material-symbols-rounded pl-1 text-red-500">delete</span>
                   </button>
+                  <button onClick={handleClose} className="flex items-center -m-1 -mt-4 border rounded-md border-slate-400">
+                    <span>Close</span>
+                    <span className="material-symbols-rounded pl-1 text-slate-400">close</span>
+                  </button>
+                  </div> 
                 </div>
                 <div className="flex items-center italic border-b border-slate-600 py-1 font-display">
                   <div className="text-slate-300">

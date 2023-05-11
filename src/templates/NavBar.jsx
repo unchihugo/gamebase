@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./css/NavBar.css"
 import logo from "../images/logo.png";	
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [top, setTop] = useState(true);
+  const [url, setUrl] = useState(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    setUrl(location.pathname);
+  }, [location]);
     
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -37,15 +43,15 @@ const NavBar = () => {
             <div className="hidden md:flex">
               <Link
                   to="/home"
-                  className="hover:text-slate-300 mx-2 ml-4 transition"
+                  className={"hover:text-slate-300 mx-2 ml-4 transition" + (url === "/home" ? " active" : "")}
                 >Home</Link>
                 <Link
                   to="/library"
-                  className="hover:text-slate-300 mx-2 transition"
+                  className={"hover:text-slate-300 mx-2 transition" + (url === "/library" ? " active" : "")}
                 >Library</Link>
                 <Link
                   to="/charts"
-                  className="hover:text-slate-300 mx-2 transition"
+                  className={"hover:text-slate-300 mx-2 transition" + (url === "/charts" ? " active" : "")}
                 >Charts</Link>
             </div>
           </div>
@@ -101,22 +107,22 @@ const NavBar = () => {
 </div>
 {isOpen && (
     <div className="md:show">
-      <div className="px-2 pt-2 pb-3">
+      <div className="px-6 pt-3 pb-5 bg-slate-800 bg-opacity-80 border-t border-slate-600">
         <Link
           to="/home"
-          className="block mt-4 md:inline-block md:mt-0 text-white hover:text-slate-300 mr-4"
+          className="block md:inline-block text-white hover:text-slate-300"
         >
           Home
         </Link>
         <Link
           to="/library"
-          className="block mt-4 md:inline-block md:mt-0 text-white hover:text-slate-300 mr-4"
+          className="block mt-4 md:inline-block md:mt-0 text-white hover:text-slate-300"
         >
           Library
         </Link>
         <Link
           to="/charts"
-          className="block mt-4 md:inline-block md:mt-0 text-white hover:text-slate-300"
+          className="block my-4 md:inline-block md:mt-0 text-white hover:text-slate-300"
         >
           Charts
         </Link>
