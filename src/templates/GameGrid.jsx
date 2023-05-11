@@ -5,6 +5,7 @@ import _ from "lodash";
 import RatingComponent from "../components/RatingComponent";
 import ReactPaginate from "react-paginate";
 import icon from "../images/icon256.png";
+import axios from "axios";
 
 const GameGrid = ({ games, userData }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,55 +35,65 @@ const GameGrid = ({ games, userData }) => {
     return `${day}/${month}/${year}`;
   }
 
-    // Get the total number of pages
-    const pageCount = Math.ceil(games.length / gamesPerPage);
+  // Get the total number of pages
+  const pageCount = Math.ceil(games.length / gamesPerPage);
 
-    // Calculate the starting index of games for the current page
-    const startIndex = currentPage * gamesPerPage;
-  
-    // Get the games to display on the current page
-    const currentGames = games.slice(startIndex, startIndex + gamesPerPage);
-  
-    // Handle page change event
-    const handlePageClick = (data) => {
-      setCurrentPage(data.selected);
-    };
+  // Calculate the starting index of games for the current page
+  const startIndex = currentPage * gamesPerPage;
 
-    const handleDelete = () => {
-      const confirmed = window.confirm('Are you sure you want to delete this game?');
-      if (confirmed) {
-        fetch(`/games/${selectedGame.idGame}`, { method: 'DELETE' })
-          .then((res) => {
-            if (res.ok) {
-              window.location.reload();
-            } else {
-              throw new Error('Failed to delete game');
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+  // Get the games to display on the current page
+  const currentGames = games.slice(startIndex, startIndex + gamesPerPage);
+
+  // Handle page change event
+  const handlePageClick = (data) => {
+    setCurrentPage(data.selected);
+  };
+
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    let idGame = selectedGame.idGame;
+
+    try {
+      const response = await axios.post("http://localhost:3001/deleteGame", {
+        idGame,
+      });
+
+      if (response.status === 200) {
+        window.location.href = "./home";
       }
-    };
-
+    } catch (error) {
+      alert(
+        "Something went wrong, ensure that all fields are filled in correctly"
+      );
+    }
+  };
 
   return (
     <div className="gamegrid overflow-visible">
       <div className="grid space-x-0 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gamegrid justify-items-center">
         {currentGames.map((game) => (
-          <GameItem key={game.Id} game={game} userData={userData} handleClick={handleClick} />
+          <GameItem
+            key={game.Id}
+            game={game}
+            userData={userData}
+            handleClick={handleClick}
+          />
         ))}
       </div>
 
       <ReactPaginate
         previousLabel={
           <span className="h-10 w-10 sm:w-16 flex items-center justify-center bg-slate-800 rounded-xl hover:bg-slate-700 mr-1 transition">
-            <span className="material-symbols-rounded text-2xl">chevron_left</span>
+            <span className="material-symbols-rounded text-2xl">
+              chevron_left
+            </span>
           </span>
         }
         nextLabel={
           <span className="h-10 w-10 sm:w-16 flex items-center justify-center bg-slate-800 rounded-xl hover:bg-slate-700 transition">
-            <span className="material-symbols-rounded text-2xl">chevron_right</span>
+            <span className="material-symbols-rounded text-2xl">
+              chevron_right
+            </span>
           </span>
         }
         breakLabel={
@@ -114,67 +125,105 @@ const GameGrid = ({ games, userData }) => {
               </div>
               <div className="col-span-4 pb-1 md:pl-3">
                 <div className="border-t border-slate-600 pt-1 flex justify-between">
-                  <span className="text-4xl font-semibold font-display">{selectedGame.Naam}</span>
-                  <div>
-                  <button onClick={handleDelete} className="flex items-center -m-1 -mt-4 border rounded-md border-red-500">
-                    <span className="material-symbols-rounded pl-1 text-red-500">delete</span>
-                  </button>
-                  <button onClick={handleClose} className="flex items-center -m-1 -mt-4 border rounded-md border-slate-400">
-                    <span>Close</span>
-                    <span className="material-symbols-rounded pl-1 text-slate-400">close</span>
-                  </button>
-                  </div> 
+                  <span className="text-4xl font-semibold font-display">
+                    {selectedGame.Naam}
+                  </span>
+                  <div className="flex mt-5">
+                    <div className="mr-4">
+                      {localStorage.getItem("idGebruiker") ===
+                      selectedGame.fkGebruiker ? (
+                        <button
+                          onClick={handleDelete}
+                          className="flex items-center -m-1 -mt-4 border rounded-md border-red-500 pl-1 pb-0.5"
+                        >
+                          <span className="text-red-500">Delete</span>
+                          <span className="material-symbols-rounded pl-1 text-red-500">
+                            delete
+                          </span>
+                        </button>
+                      ) : null}
+                    </div>
+                    <div>
+                      <button
+                        onClick={handleClose}
+                        className="flex items-center -m-1 -mt-4 border rounded-md border-slate-400 pl-1 pb-0.5"
+                      >
+                        <span className="text-slate-400">Close</span>
+                        <span className="material-symbols-rounded pl-1 text-slate-400">
+                          close
+                        </span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
                 <div className="flex items-center italic border-b border-slate-600 py-1 font-display">
                   <div className="text-slate-300">
-                    {selectedGame.fkGebruiker === null
-                      ? <div className="flex items-center"> <span>Added by Gamebase</span>
-                          <img src={icon} alt="Gamebase icon" className="max-h-8 -my-1" />
-                          <span>/</span>
-                      </div> 
-                      : "Added by you /"}
+                    {selectedGame.fkGebruiker === null ? (
+                      <div className="flex items-center">
+                        {" "}
+                        <span>Added by Gamebase</span>
+                        <img
+                          src={icon}
+                          alt="Gamebase icon"
+                          className="max-h-8 -my-1"
+                        />
+                        <span>/</span>
+                      </div>
+                    ) : (
+                      "Added by you /"
+                    )}
                   </div>
                   <div className="text-slate-400 ml-1.5 text-sm mt-0.5">
                     GameID: {selectedGame.idGame}
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 mb-2">
                   <div>
-                  <p className="text-green-500 text-xl mt-2 font-semibold">
-                  <span className="mr-1.5">
-                    Price:{" "}
-                    {selectedGame.Prijs === "0"
-                      ? "Free"
-                      : "$" + selectedGame.Prijs}
-                  </span>
-                  <span className="material-symbols-rounded text-2xl align-middle">sell</span>
-                </p>
-                {selectedGame.Beoordeling == 0 ? (
-                  <p className="text-yellow-400 text-lg font-semibold mb-1.5">
-                  Metacritic rating: N/A{" "}
-                  <RatingComponent
-                    ratingStarsCount={10}
-                    defaultRating={0 / 10}
-                  />
-                </p>
-                ) : (          
-                <p className="text-yellow-400 text-lg font-semibold mb-1.5">
-                  Metacritic rating: {selectedGame.Beoordeling / 10}/10{" "}
-                  <RatingComponent
-                    ratingStarsCount={10}
-                    defaultRating={selectedGame.Beoordeling / 10}
-                  />
-                </p>
-                )}
+                    <p className="text-green-500 text-xl mt-2 font-semibold">
+                      <span className="mr-1.5">
+                        Price:{" "}
+                        {selectedGame.Prijs === "0"
+                          ? "Free"
+                          : "$" + selectedGame.Prijs}
+                      </span>
+                      <span className="material-symbols-rounded text-2xl align-middle">
+                        sell
+                      </span>
+                    </p>
+                    {selectedGame.Beoordeling == 0 ? (
+                      <p className="text-yellow-400 text-lg font-semibold mb-1.5">
+                        Metacritic rating: N/A{" "}
+                        <RatingComponent
+                          ratingStarsCount={10}
+                          defaultRating={0 / 10}
+                        />
+                      </p>
+                    ) : (
+                      <p className="text-yellow-400 text-lg font-semibold mb-1.5">
+                        Metacritic rating: {selectedGame.Beoordeling / 10}/10{" "}
+                        <RatingComponent
+                          ratingStarsCount={10}
+                          defaultRating={selectedGame.Beoordeling / 10}
+                        />
+                      </p>
+                    )}
                     <p className="text-slate-300">
-                      <span className="material-symbols-rounded text-base mr-1 align-middle">code</span>
-                      <span className="align-middle">Developer: {selectedGame.Developer}</span>
+                      <span className="material-symbols-rounded text-base mr-1 align-middle">
+                        code
+                      </span>
+                      <span className="align-middle">
+                        Developer: {selectedGame.Developer}
+                      </span>
                     </p>
                     <p className="text-slate-300">
-                      <span className="material-symbols-rounded text-base mr-1 align-middle">apartment</span>
-                      <span className="align-middle">Publisher: {selectedGame.Publisher}</span>
-                    </p>  
+                      <span className="material-symbols-rounded text-base mr-1 align-middle">
+                        apartment
+                      </span>
+                      <span className="align-middle">
+                        Publisher: {selectedGame.Publisher}
+                      </span>
+                    </p>
                     <p>Genre: {selectedGame.Genre}</p>
                     <p>Subgenres: {selectedGame.SubGenres}</p>
                     <p>
@@ -183,7 +232,9 @@ const GameGrid = ({ games, userData }) => {
                   </div>
                   <div>
                     <p className="mt-1">
-                      <span className="material-symbols-rounded text-base mr-1 align-middle">public</span>
+                      <span className="material-symbols-rounded text-base mr-1 align-middle">
+                        public
+                      </span>
                       <span className="align-middle">
                         Multiplayer available:{" "}
                         {selectedGame.Online === "1" ? (
@@ -194,7 +245,9 @@ const GameGrid = ({ games, userData }) => {
                       </span>
                     </p>
                     <p>
-                    <span className="material-symbols-rounded text-base mr-1 align-middle">history_edu</span>
+                      <span className="material-symbols-rounded text-base mr-1 align-middle">
+                        history_edu
+                      </span>
                       <span className="align-middle">
                         Has story:{" "}
                         {selectedGame.Story === "1" ? (
@@ -205,42 +258,110 @@ const GameGrid = ({ games, userData }) => {
                       </span>
                     </p>
                     <p>
-                    <div className="bg-slate-700 rounded-xl mt-1 p-2 pt-1 justify-center">
-                      <div className="flex items-center justify-center">
-                        <span className="material-symbols-rounded text-base mr-1">videogame_asset</span>
-                        <span className="font-medium">Available platforms</span>
-                      </div>
-                      <div className="flex items-center mt-1 justify-center">
-                        {selectedGame.Platforms.includes("PC") ? (
-                          <span className="material-symbols-rounded text-4xl p-1">desktop_windows</span>
-                        ) : ("")}
-                        {selectedGame.Platforms.includes("Playstation") ? (
-                          <span className="p-1"> <img src="https://cdn-icons-png.flaticon.com/512/1/1443.png" className="max-h-9 invert" alt="Playstation icon"/> </span>
-                        ) : ("")}
-                        {selectedGame.Platforms.includes("Xbox") ? (
-                          <span className="p-1"> <img src="https://cdn-icons-png.flaticon.com/512/1/1321.png" className="max-h-9 invert" alt="Xbox icon"/> </span>
-                        ) : ("")}
-                        {selectedGame.Platforms.includes("Mobile") ? (
-                          <span className="material-symbols-rounded text-4xl p-1">phone_iphone</span>
-                        ) : ("")}
-                        {selectedGame.Platforms.includes("VR") ? (
-                          <span className="p-1"> <img src="https://static-00.iconduck.com/assets.00/vr-headset-icon-512x377-f1enyn1n.png" className="max-h-7 mt-1 invert" alt="VR icon"/> </span>
-                        ) : ("")}
-                        {selectedGame.Platforms.includes("Nintendo Switch") ? (
-                          <span className="p-1"> <img src="https://d29fhpw069ctt2.cloudfront.net/icon/image/38677/preview2.png" className="max-h-7 mt-1 invert" alt="VR icon"/> </span>
-                        ) : ("")}
-                      </div>
+                      <div className="bg-slate-700 rounded-xl mt-1 p-2 pt-1 justify-center">
+                        <div className="flex items-center justify-center">
+                          <span className="material-symbols-rounded text-base mr-1">
+                            videogame_asset
+                          </span>
+                          <span className="font-medium">
+                            Available platforms
+                          </span>
+                        </div>
+                        <div className="flex items-center mt-1 justify-center">
+                          {selectedGame.Platforms.includes("PC") ? (
+                            <span className="material-symbols-rounded text-4xl p-1">
+                              desktop_windows
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                          {selectedGame.Platforms.includes("Playstation") ? (
+                            <span className="p-1">
+                              {" "}
+                              <img
+                                src="https://cdn-icons-png.flaticon.com/512/1/1443.png"
+                                className="max-h-9 invert"
+                                alt="Playstation icon"
+                              />{" "}
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                          {selectedGame.Platforms.includes("Xbox") ? (
+                            <span className="p-1">
+                              {" "}
+                              <img
+                                src="https://cdn-icons-png.flaticon.com/512/1/1321.png"
+                                className="max-h-9 invert"
+                                alt="Xbox icon"
+                              />{" "}
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                          {selectedGame.Platforms.includes("Mobile") ? (
+                            <span className="material-symbols-rounded text-4xl p-1">
+                              phone_iphone
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                          {selectedGame.Platforms.includes("VR") ? (
+                            <span className="p-1">
+                              {" "}
+                              <img
+                                src="https://static-00.iconduck.com/assets.00/vr-headset-icon-512x377-f1enyn1n.png"
+                                className="max-h-7 mt-1 invert"
+                                alt="VR icon"
+                              />{" "}
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                          {selectedGame.Platforms.includes(
+                            "Nintendo Switch"
+                          ) ? (
+                            <span className="p-1">
+                              {" "}
+                              <img
+                                src="https://d29fhpw069ctt2.cloudfront.net/icon/image/38677/preview2.png"
+                                className="max-h-7 mt-1 invert"
+                                alt="VR icon"
+                              />{" "}
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </div>
                       </div>
                     </p>
                   </div>
                 </div>
-                <a className="text-blue-200 inline-block px-3 pb-0.5 mr-1 border border-slate-500 rounded-full text-sm overflow-ellipsis whitespace-nowrap overflow-hidden max-w-full" href={selectedGame.Link} target="_blank" rel="noreferrer">
-                  <span class="material-symbols-rounded text-base align-middle mr-1">link</span>
-                  <span className="italic text-blue-400 align-middle">{selectedGame.Link}</span>
+                <a
+                  className="text-blue-200 inline-block px-3 pb-0.5 mr-1 border border-slate-500 rounded-full text-sm overflow-ellipsis whitespace-nowrap overflow-hidden max-w-full"
+                  href={selectedGame.Link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span class="material-symbols-rounded text-base align-middle mr-1">
+                    link
+                  </span>
+                  <span className="italic text-blue-400 align-middle">
+                    {selectedGame.Link}
+                  </span>
                 </a>
-                <a className="text-blue-200 inline-block px-3 pb-0.5 border border-slate-500 rounded-full text-sm overflow-ellipsis whitespace-nowrap overflow-hidden max-w-full" href={selectedGame.CoverLink} target="_blank" rel="noreferrer">
-                  <span class="material-symbols-rounded text-base align-middle mr-1">image</span>
-                  <span className="italic text-blue-400 align-middle">{selectedGame.CoverLink}</span>
+                <a
+                  className="text-blue-200 inline-block px-3 pb-0.5 border border-slate-500 rounded-full text-sm overflow-ellipsis whitespace-nowrap overflow-hidden max-w-full"
+                  href={selectedGame.CoverLink}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <span class="material-symbols-rounded text-base align-middle mr-1">
+                    image
+                  </span>
+                  <span className="italic text-blue-400 align-middle">
+                    {selectedGame.CoverLink}
+                  </span>
                 </a>
               </div>
               {/* stats */}
@@ -250,13 +371,13 @@ const GameGrid = ({ games, userData }) => {
                   <p className="text-red-500 italic">
                     You need to be logged in to Gamebase to see your stats!
                   </p>
-                  ) : (
-                    (() => {
-                      let matchingData = _.find(userData, {
-                        fkGame: selectedGame.idGame,
-                      });
-                      if (matchingData !== undefined) {
-                        return (
+                ) : (
+                  (() => {
+                    let matchingData = _.find(userData, {
+                      fkGame: selectedGame.idGame,
+                    });
+                    if (matchingData !== undefined) {
+                      return (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                           <div>
                             <p className="text-slate-300 font-display">

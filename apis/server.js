@@ -108,9 +108,9 @@ app.put('/gamedataupdate', (req, res) => {
 
 
 //delete game from user's collection
-app.delete('/games/:idGame', (req, res) => {
-  const idGame = req.params.idGame;
-  const sql = `DELETE FROM game WHERE idGame = ?`;
+app.post('/deleteGame', (req, res) => {
+  const idGame = req.body.idGame;
+  const sql = `DELETE FROM game WHERE (idGame = ?)`;
   db.query(sql, [idGame], (err, result) => {
     if (err) {
       res.status(500).json({ error: 'Something went wrong' });

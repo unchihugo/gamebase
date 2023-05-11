@@ -20,7 +20,7 @@ const PopularGrid = () => {
             rank="2nd most popular"
             title="PUBG"
             developer="KRAFTON, Inc."
-            image="https://wdflat.com/wp-content/uploads/All-about-PUBG.jpg"
+            image="https://cdn.techjuice.pk/wp-content/uploads/2019/01/pubg-xbox-one-pc-release.jpg"
           />
         </div>
         <div className="hidden 2xl:col-span-1 2xl:block mr-2 scale-90 my-2 max-h-96">
