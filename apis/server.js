@@ -26,8 +26,9 @@ app.post('/games', (req, res) => {
   const onlineValue = online === true ? 1 : 0;
   const storyValue = story === true ? 1 : 0;
 
-  const sql = `INSERT INTO game (Naam, Genre, SubGenres, Prijs, Beoordeling, PublicatieDatum, Online, Story, Platforms, Developer, Publisher, Link, CoverLink, fkGebruiker) VALUES ('${name}', '${genre}', '${subGenres}', '${price}', '${rating}', '${releaseDate}', '${onlineValue}', '${storyValue}', '${platforms}', '${developer}', '${publisher}', '${link}', '${coverLink}', '${fkUser}')`;
-  db.query(sql, (err, result) => {
+  const sql = `INSERT INTO game (Naam, Genre, SubGenres, Prijs, Beoordeling, PublicatieDatum, Online, Story, Platforms, Developer, Publisher, Link, CoverLink, fkGebruiker) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  const values = [name, genre, subGenres, price, rating, releaseDate, onlineValue, storyValue, platforms, developer, publisher, link, coverLink, fkUser];
+  db.query(sql, values, (err, result) => {
     if (err) {
       res.status(500).json({ error: 'Something went wrong, ensure that all fields are filled in correctly' });
     };
@@ -38,8 +39,8 @@ app.post('/games', (req, res) => {
 //function to add userdata to a game
 app.post('/gamedata', (req, res) => {
   const { fkUser, fkGame, status, hours, achievements, rating, dateAdded} = req.body;
-  const sql = `INSERT INTO gebruikergamedata (fkGebruiker, fkGame, Status, AantalUren, AantalPrestaties, EigenBeoordeling, DatumToegevoegd) VALUES ('${fkUser}', '${fkGame}', '${status}', '${hours}', '${achievements}', '${rating}', '${dateAdded}')`;
-  db.query(sql, (err, result) => {
+  const sql = `INSERT INTO gebruikergamedata (fkGebruiker, fkGame, Status, AantalUren, AantalPrestaties, EigenBeoordeling, DatumToegevoegd) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+  db.query(sql, [fkUser, fkGame, status, hours, achievements, rating, dateAdded], (err, result) => {
     if (err) {
       res.status(500).json({ error: 'Something went wrong, ensure that all fields are filled in correctly' });
     };
@@ -50,8 +51,8 @@ app.post('/gamedata', (req, res) => {
 //function to add a new user for sign in
 app.post('/users', (req, res) => {
   const { username, password, name } = req.body;
-  const sql = `INSERT INTO gebruiker (Gebruikersnaam, Wachtwoord, Naam) VALUES ('${username}', '${password}', '${name}')`;
-  db.query(sql, (err, result) => {
+  const sql = 'INSERT INTO gebruiker (Gebruikersnaam, Wachtwoord, Naam) VALUES (?, ?, ?)';
+  db.query(sql, [username, password, name], (err, result) => {
     if (err) {
       if (err.code === 'ER_DUP_ENTRY') {
         res.status(409).json({ error: 'Username already exists' });
@@ -69,39 +70,42 @@ app.post('/users', (req, res) => {
 app.put('/gamedataupdate', (req, res) => {
   const { fkUser, fkGame, status, hours, achievements, rating, dateAdded } = req.body;
   let sql = `UPDATE gebruikergamedata SET `;
-  let isFirst = true;
+  const values = [];
 
   if (status) {
-    sql += `Status = '${status}'`;
-    isFirst = false;
+    sql += `Status = ?`;
+    values.push(status);
   }
 
   if (hours) {
-    sql += isFirst ? `AantalUren = '${hours}'` : `, AantalUren = '${hours}'`;
-    isFirst = false;
+    sql += values.length === 0 ? `AantalUren = ?` : `, AantalUren = ?`;
+    values.push(hours);
   }
 
   if (achievements) {
-    sql += isFirst ? `AantalPrestaties = '${achievements}'` : `, AantalPrestaties = '${achievements}'`;
-    isFirst = false;
+    sql += values.length === 0 ? `AantalPrestaties = ?` : `, AantalPrestaties = ?`;
+    values.push(achievements);
   }
 
   if (rating) {
-    sql += isFirst ? `EigenBeoordeling = '${rating}'` : `, EigenBeoordeling = '${rating}'`;
-    isFirst = false;
+    sql += values.length === 0 ? `EigenBeoordeling = ?` : `, EigenBeoordeling = ?`;
+    values.push(rating);
   }
 
   if (dateAdded) {
-    sql += isFirst ? `DatumToegevoegd = '${dateAdded}'` : `, DatumToegevoegd = '${dateAdded}'`;
+    sql += values.length === 0 ? `DatumToegevoegd = ?` : `, DatumToegevoegd = ?`;
+    values.push(dateAdded);
   }
 
-  sql += ` WHERE fkGebruiker = '${fkUser}' AND fkGame = '${fkGame}'`;
+  sql += ` WHERE fkGebruiker = ? AND fkGame = ?`;
+  values.push(fkUser, fkGame);
 
-  db.query(sql, (err, result) => {
+  db.query(sql, values, (err, result) => {
     if (err) throw err;
     res.send('Game data updated successfully');
   });
 });
+
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
