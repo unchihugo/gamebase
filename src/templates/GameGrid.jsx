@@ -63,7 +63,7 @@ const GameGrid = ({ games, userData }) => {
       }
     } catch (error) {
       alert(
-        "Something went wrong, ensure that all fields are filled in correctly"
+        "Something went wrong, game not deleted"
       );
     }
   };
@@ -224,7 +224,9 @@ const GameGrid = ({ games, userData }) => {
                       </span>
                     </p>
                     <p>Genre: {selectedGame.Genre}</p>
-                    <p>Subgenres: {selectedGame.SubGenres}</p>
+                    {selectedGame.SubGenres === "" ? null : (                  
+                      <p>Subgenres: {selectedGame.SubGenres}</p>
+                    )}
                     <p>
                       Release date: {formatDate(selectedGame.PublicatieDatum)}
                     </p>

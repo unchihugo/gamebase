@@ -16,6 +16,9 @@ const AddCustomGame = () => {
     const [link, setLink] = useState('');
     const [coverLink, setCoverLink] = useState('');
 
+    const [PC, setPC] = useState(false);
+    const [Playstation, setPlaystation] = useState(false);
+
     // return user to home if not logged in
     useEffect(() => {
         if (localStorage.getItem("idGebruiker") === null) {
@@ -83,16 +86,27 @@ const AddCustomGame = () => {
           </div>
           <div>
               <span className='text-base mr-1 align-middle'>Online features?</span>
-              <input type="checkbox" name="online" id="online" className='align-middle' onChange={(event) => setOnline(event.target.value)} />
+              <input type="checkbox" name="online" id="online" className='align-middle' onChange={(event) => setOnline(event.target.checked)} />
           </div>
           <div>
               <span className='text-base mr-1 align-middle'>Story available?</span>
-              <input type="checkbox" name="story" id="story" className='align-middle' onChange={(event) => setStory(event.target.value)} />
+              <input type="checkbox" name="story" id="story" className='align-middle' onChange={(event) => setStory(event.target.checked)} />
           </div>
           <div>
               <span className='text-base mr-1 align-middle'>Platforms (seperate with spaces) *</span>
               <input type="text" name="platforms" id="platforms" className='align-middle bg-slate-700' onChange={(event) => setPlatforms(event.target.value)} required />
           </div>
+
+          <p>Platforms</p>
+          <div>
+              <span className='text-base mr-1 align-middle'>PC</span>
+              <input type="checkbox" name="story" id="story" className='align-middle' onChange={(event) => setPC(event.target.checked)} />
+          </div>
+          <div>
+              <span className='text-base mr-1 align-middle'>Playstation</span>
+              <input type="checkbox" name="story" id="story" className='align-middle' onChange={(event) => setPlaystation(event.target.checked)} />
+          </div>
+
           <div>
               <span className='text-base mr-1 align-middle'>Developer *</span>
               <input type="text" name="developer" id="developer" className='align-middle bg-slate-700' onChange={(event) => setDeveloper(event.target.value)} required />
