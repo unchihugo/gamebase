@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import consoleBg from "../images/consoles-bg.jpg";
 
@@ -85,6 +86,14 @@ const LoginForm = () => {
               Log in
             </button>
           </div>
+          <Link>
+            <p className="text-center text-sm mt-4">
+              Don't have an account?{" "}
+              <span className="text-blue-500 hover:text-blue-700">
+                <Link to="/signup">Register</Link>
+              </span>
+            </p>
+          </Link>
         </form>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import logo from "../images/logo.png";	
+import { Link } from "react-router-dom";
 
 function Footer() {
     return (
@@ -11,23 +12,20 @@ function Footer() {
                 <div></div>
                 <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-slate-400 sm:mb-0">
                     <li>
-                        <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+                        <Link to={"/landing"} class="mr-4 hover:underline md:mr-6 ">Return to Landing</Link>
                     </li>
                     <li>
-                        <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+                        <Link to={"/about"} class="mr-4 hover:underline md:mr-6 ">About</Link>
                     </li>
                     <li>
-                        <a href="#" class="mr-4 hover:underline md:mr-6 ">Licensing</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:underline">Contact</a>
+                        <Link to={"/contact"} class="hover:underline">Contact</Link>
                     </li>
                 </ul>
             </div>
             <hr class="my-6 sm:mx-auto border-slate-700 lg:my-8 opacity-50" />
-            <span class="block text-sm text-slate-400 sm:text-center">React Website made by Hugo Li (<a href="https://github.com/takkuchi/gamebase" className="hover:underline" target="_blank">GitHub Repository</a>)</span>
+            <span class="block text-sm text-slate-400 sm:text-center">React Website made by Hugo Li (<a href="https://github.com/takkuchi/gamebase" className="underline" target="_blank">GitHub Repository</a>)</span>
             <span class="block text-sm text-slate-400 sm:text-center mb-5">© 2023 Gamebase™. All Rights Reserved.</span>
-            <span className="block text-sm text-slate-400 sm:text-center">Made with ❤️ from <span className="ml-0.5 text-base text-center">🇳🇱 🇧🇪 🇨🇳</span></span>
+            <span className="block text-sm text-slate-400 sm:text-center">Made with ❤️</span>
         </div>
     </footer>
     );

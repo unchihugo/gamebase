@@ -8,6 +8,8 @@ import Home from './pages/Home.jsx';
 import LoginForm from './pages/LoginForm';
 import SignupForm from './pages/SignupForm';
 import AddCustomGame from './pages/AddCustomGame';
+import Library from './pages/Library';
+import Landing from './pages/Landing';
 
 const Wrapper = ({children}) => {
   const location = useLocation();
@@ -23,11 +25,13 @@ const App = () => {
     <Wrapper>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={<Landing />} />
+          <Route path="landing" element={<Landing />} />
           <Route path="home" element={<Home />} />
           <Route path="login" element={<LoginForm />} />
           <Route path="signup" element={<SignupForm />} />
           <Route path="AddCustomGame" element={<AddCustomGame />} />
+          <Route path="library" element={<Library />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Route>
       </Routes>

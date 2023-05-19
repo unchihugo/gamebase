@@ -21,9 +21,9 @@ const AddCustomGame = () => {
 
     // return user to home if not logged in
     useEffect(() => {
-        if (localStorage.getItem("idGebruiker") === null) {
-          window.location.href = "./home";
-        }
+        // if (localStorage.getItem("idGebruiker") === null) {
+        //   window.location.href = "./home";
+        // }
       }, []);
 
     // function to use the server.js file to add a game to the database and using id of the user who added it for fkUser
@@ -58,76 +58,214 @@ const AddCustomGame = () => {
     };
 
     return(
-      <div>
-          <h1>Add custom game</h1>
-          <div>
-              <span className='text-base mr-1 align-middle'>Game name *</span>
-              <input type="text" name="name" id="name" className='align-middle bg-slate-700' onChange={(event) => setName(event.target.value)} required />
-          </div>
-          <div>
-              <span className='text-base mr-1 align-middle'>Genre *</span>
-              <input type="text" name="genre" id="genre" className='align-middle bg-slate-700' onChange={(event) => setGenre(event.target.value)} required />
-          </div>
-          <div>
-              <span className='text-base mr-1 align-middle'>Subgenres (seperate with commas)</span>
-              <input type="text" name="subGenres" id="subGenres" className='align-middle bg-slate-700' onChange={(event) => setSubGenres(event.target.value)} />
-          </div>
-          <div>
-              <span className='text-base mr-1 align-middle'>Price (free = 0) *</span>
-              <input type="number" name="price" id="price" className='align-middle bg-slate-700' onChange={(event) => setPrice(event.target.value)} required />
-          </div>
-          <div>
-              <span className='text-base mr-1 align-middle'>Rating *</span>
-              <input type="number" name="rating" id="rating" className='align-middle bg-slate-700' onChange={(event) => setRating(event.target.value)} required />
-          </div>
-          <div>
-              <span className='text-base mr-1 align-middle'>Release date *</span>
-              <input type="date" name="rating" id="rating" className='align-middle bg-slate-700' onChange={(event) => setReleaseDate(event.target.value)} required />
-          </div>
-          <div>
-              <span className='text-base mr-1 align-middle'>Online features?</span>
-              <input type="checkbox" name="online" id="online" className='align-middle' onChange={(event) => setOnline(event.target.checked)} />
-          </div>
-          <div>
-              <span className='text-base mr-1 align-middle'>Story available?</span>
-              <input type="checkbox" name="story" id="story" className='align-middle' onChange={(event) => setStory(event.target.checked)} />
-          </div>
-          <div>
-              <span className='text-base mr-1 align-middle'>Platforms (seperate with spaces) *</span>
-              <input type="text" name="platforms" id="platforms" className='align-middle bg-slate-700' onChange={(event) => setPlatforms(event.target.value)} required />
-          </div>
-
-          <p>Platforms</p>
-          <div>
-              <span className='text-base mr-1 align-middle'>PC</span>
-              <input type="checkbox" name="story" id="story" className='align-middle' onChange={(event) => setPC(event.target.checked)} />
-          </div>
-          <div>
-              <span className='text-base mr-1 align-middle'>Playstation</span>
-              <input type="checkbox" name="story" id="story" className='align-middle' onChange={(event) => setPlaystation(event.target.checked)} />
-          </div>
-
-          <div>
-              <span className='text-base mr-1 align-middle'>Developer *</span>
-              <input type="text" name="developer" id="developer" className='align-middle bg-slate-700' onChange={(event) => setDeveloper(event.target.value)} required />
-          </div>
-          <div>
-              <span className='text-base mr-1 align-middle'>Publisher *</span>
-              <input type="text" name="publisher" id="publisher" className='align-middle bg-slate-700' onChange={(event) => setPublisher(event.target.value)} required />
-          </div>
-          <div>
-              <span className='text-base mr-1 align-middle'>Link to game's website</span>
-              <input type="text" name="link" id="link" className='align-middle bg-slate-700' onChange={(event) => setLink(event.target.value)} />
-          </div>
-          <div>
-              <span className='text-base mr-1 align-middle'>Link to game's cover image (right click an image and select "Copy Image Link")</span>
-              <input type="text" name="coverLink" id="coverLink" className='align-middle bg-slate-700' onChange={(event) => setCoverLink(event.target.value)} />
-          </div>
-          <div>
-              <span className='text-base mr-1 align-middle'>Add game</span>
-              <button onClick={handleAddGame} className='align-middle'>Add game</button>
-          </div>
-      </div>
+    <div className="flex flex-col items-center justify-center h-full">
+        <h1 className="text-3xl font-bold mt-4 mb-8 font-display">Add custom game</h1>
+        <form className="w-full max-w-lg">
+            <div className="flex flex-wrap mb-2">
+                <div className="w-full">
+                    <label className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2" htmlFor="name">
+                        Game Title *
+                    </label>
+                    <input
+                        className="appearance-none block w-full bg-slate-900 text-slate-400 border border-slate-600 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-slate-800 focus:border-slate-500"
+                        type="text"
+                        name="name"
+                        id="name"
+                        onChange={(event) => setName(event.target.value)}
+                        required
+                    />
+                </div>
+            </div>
+            <div className="flex flex-wrap mb-2">
+                <div className="w-full">
+                    <label className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2" htmlFor="genre">
+                        Genre *
+                    </label>
+                    <input
+                        className="appearance-none block w-full bg-slate-900 text-slate-400 border border-slate-600 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-slate-800 focus:border-slate-500"
+                        type="text"
+                        name="genre"
+                        id="genre"
+                        onChange={(event) => setGenre(event.target.value)}
+                        required
+                    />
+                </div>
+            </div>
+            <div className="flex flex-wrap mb-2">
+                <div className="w-full">
+                    <label className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2" htmlFor="subGenres">
+                        Subgenres (separate with commas)
+                    </label>
+                    <input
+                        className="appearance-none block w-full bg-slate-900 text-slate-400 border border-slate-600 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-slate-800 focus:border-slate-500"
+                        type="text"
+                        name="subGenres"
+                        id="subGenres"
+                        onChange={(event) => setSubGenres(event.target.value)}
+                    />
+                </div>
+            </div>
+            <div className="flex flex-wrap mb-2">
+                <div className="w-full">
+                    <label className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2" htmlFor="price">
+                        Price (free = 0) *
+                    </label>
+                    <input
+                        className="appearance-none block w-full bg-slate-900 text-slate-400 border border-slate-600 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-slate-800 focus:border-slate-500"
+                        type="number"
+                        name="price"
+                        id="price"
+                        onChange={(event) => setPrice(event.target.value)}
+                        required
+                    />
+                </div>
+            </div>
+            <div className="flex flex-wrap mb-2">
+                <div className="w-full">
+                    <label className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2" htmlFor="rating">
+                        Rating out of 100 *
+                    </label>
+                    <input
+                        className="appearance-none block w-full bg-slate-900 text-slate-400 border border-slate-600 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-slate-800 focus:border-slate-500"
+                        type="number"
+                        name="rating"
+                        id="rating"
+                        onChange={(event) => setRating(event.target.value)}
+                        required
+                    />
+                </div>
+            </div>
+            <div className="flex flex-wrap mb-2">
+                <div className="w-full">
+                    <label className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2" htmlFor="releaseDate">
+                        Release date *
+                    </label>
+                    <input
+                        className="appearance-none block w-full bg-slate-900 text-slate-400 border border-slate-600 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-slate-800 focus:border-slate-500"
+                        type="date"
+                        name="releaseDate"
+                        id="releaseDate"
+                        onChange={(event) => setReleaseDate(event.target.value)}
+                        required
+                    />
+                </div>
+            </div>
+            <div className="flex flex-wrap mb-2">
+                <div className="w-full">
+                    <label className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2" htmlFor="online">
+                        Online features?
+                    </label>
+                    <input
+                        className="mr-2 leading-tight"
+                        type="checkbox"
+                        name="online"
+                        id="online"
+                        onChange={(event) => setOnline(event.target.checked)}
+                    />
+                    <span className="text-sm">Yes</span>
+                </div>
+            </div>
+            <div className="flex flex-wrap mb-2">
+                <div className="w-full">
+                    <label className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2" htmlFor="story">
+                        Story available?
+                    </label>
+                    <input
+                        className="mr-2 leading-tight"
+                        type="checkbox"
+                        name="story"
+                        id="story"
+                        onChange={(event) => setStory(event.target.checked)}
+                    />
+                    <span className="text-sm">Yes</span>
+                </div>
+            </div>
+            <div className="flex flex-wrap mb-2">
+                <div className="w-full">
+                    <label className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2" htmlFor="platforms">
+                        Platforms (separate with spaces) *
+                    </label>
+                    <input
+                        className="appearance-none block w-full bg-slate-900 text-slate-400 border border-slate-600 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-slate-800 focus:border-slate-500"
+                        type="text"
+                        name="platforms"
+                        id="platforms"
+                        onChange={(event) => setPlatforms(event.target.value)}
+                        required
+                    />
+                </div>
+            </div>
+            <div className="flex flex-wrap mb-2">
+                <div className="w-full">
+                    <label className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2" htmlFor="developer">
+                        Developer *
+                    </label>
+                    <input
+                        className="appearance-none block w-full bg-slate-900 text-slate-400 border border-slate-600 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-slate-800 focus:border-slate-500"
+                        type="text"
+                        name="developer"
+                        id="developer"
+                        onChange={(event) => setDeveloper(event.target.value)}
+                        required
+                    />
+                </div>
+            </div>
+            <div className="flex flex-wrap mb-2">
+                <div className="w-full">
+                    <label className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2" htmlFor="publisher">
+                        Publisher *
+                    </label>
+                    <input
+                        className="appearance-none block w-full bg-slate-900 text-slate-400 border border-slate-600 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-slate-800 focus:border-slate-500"
+                        type="text"
+                        name="publisher"
+                        id="publisher"
+                        onChange={(event) => setPublisher(event.target.value)}
+                        required
+                    />
+                </div>
+            </div>
+            <div className="flex flex-wrap mb-2">
+                <div className="w-full">
+                    <label className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2" htmlFor="link">
+                        Link to game's website
+                    </label>
+                    <input
+                        className="appearance-none block w-full bg-slate-900 text-slate-400 border border-slate-600 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-slate-800 focus:border-slate-500"
+                        type="text"
+                        name="link"
+                        id="link"
+                        onChange={(event) => setLink(event.target.value)}
+                    />
+                </div>
+            </div>
+            <div className="flex flex-wrap mb-2">
+                <div className="w-full">
+                    <label className="block uppercase tracking-wide text-slate-400 text-xs font-bold mb-2" htmlFor="coverLink">
+                        Link to game's cover image (right click an image and select "Copy Image Link")
+                    </label>
+                    <input
+                        className="appearance-none block w-full bg-slate-900 text-slate-400 border border-slate-600 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-slate-800 focus:border-slate-500"
+                        type="text"
+                        name="coverLink"
+                        id="coverLink"
+                        onChange={(event) => setCoverLink(event.target.value)}
+                    />
+                </div>
+            </div>
+            <div className="flex flex-wrap mb-2">
+                <div className="w-full">
+                    <button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="button"
+                        onClick={handleAddGame}
+                    >
+                        Add game
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
     );
 };
 

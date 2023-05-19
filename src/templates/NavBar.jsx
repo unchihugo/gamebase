@@ -49,10 +49,10 @@ const NavBar = () => {
                   to="/library"
                   className={"hover:text-slate-300 mx-2 transition" + (url === "/library" ? " active" : "")}
                 >Library</Link>
-                <Link
+                {/* <Link
                   to="/charts"
                   className={"hover:text-slate-300 mx-2 transition" + (url === "/charts" ? " active" : "")}
-                >Charts</Link>
+                >Charts</Link> */}
             </div>
           </div>
           <div className="md:hidden">
@@ -120,12 +120,12 @@ const NavBar = () => {
         >
           Library
         </Link>
-        <Link
+        {/* <Link
           to="/charts"
           className="block my-4 md:inline-block md:mt-0 text-white hover:text-slate-300"
         >
           Charts
-        </Link>
+        </Link> */}
         {localStorage.getItem('idGebruiker') === null ? (
               <div>
               <Link to="/login" className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2 font-medium">
