@@ -61,7 +61,7 @@ const NavBar = () => {
               className=" hover:text-slate-300 focus:outline-none focus:text-slate-300"
             >
               <svg
-                className="h-6 w-6 fill-current"
+                className="h-6 w-6 fill-current -mb-3"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -127,7 +127,7 @@ const NavBar = () => {
           Charts
         </Link> */}
         {localStorage.getItem('idGebruiker') === null ? (
-              <div>
+              <div className="mt-4">
               <Link to="/login" className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2 font-medium">
                 Log in
                 </Link>

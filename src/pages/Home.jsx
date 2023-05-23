@@ -16,7 +16,7 @@ const Home = () => {
   const [sortBy, setSortBy] = useState('Naam');
   const [paidGames, setPaidGames] = useState(true);
   const [freeGames, setFreeGames] = useState(true);
-  const [localServer, setLocalServer] = useState(true);
+  const [localServer, setLocalServer] = useState(false);
 
   useEffect(() => {
     // if (games !== []){
@@ -248,28 +248,36 @@ const Home = () => {
         <div className='flex justify-end m-2'>
           <p className='hidden md:block font-semibold font-display text-slate-200'>Search:</p>
         </div>
-        <input className='bg-slate-800 text-white rounded-3xl h-8 p-3 border border-slate-600 drop-shadow-lg focus:bg-slate-700 focus:outline-none focus:border-blue-500 transition' type="text" placeholder='\games\...' onChange={handleSearch} />
+        <input className='bg-slate-800 text-white rounded-3xl h-8 p-3 border border-slate-600 drop-shadow-lg focus:bg-slate-700 focus:outline-none focus:border-blue-500 transition' type="text" placeholder='Game Title...' onChange={handleSearch} />
         <div className='flex m-2'>
           <span className='material-symbols-rounded hidden md:block text-slate-200'>search</span>
         </div>
       </div>
       <div>
-        <div className='flex items-center mt-2 flex-wrap'>
-          <p className='font-medium font-display'>Sort by </p>
-          <select onChange={handleSortBy} className='bg-slate-800 rounded-lg h-7 px-2 ml-2 border border-slate-600 drop-shadow-lg'>
-            <option value="Naam">Title</option>
-            <option value="Beoordeling">Rating</option>
-            <option value="PublicatieDatum">Release Date</option>
-          </select>
-          <p className='font-medium font-display ml-4'>Order by </p>
-          <select onChange={handleSort} className='bg-slate-800 rounded-lg h-7 px-2 ml-2 border border-slate-600 drop-shadow-lg'>
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
-          <p className='font-medium font-display ml-4 text-sm'>Paid games </p>
-          <input type="checkbox" className='ml-2' onChange={handlePaidGames} defaultChecked='true'/>
-          <p className='font-medium font-display ml-4 text-sm'>Free games </p>
-          <input type="checkbox" className='ml-2' onChange={handleFreeGames} defaultChecked='true'/>
+        <div className='flex items-center flex-wrap'>
+          <div className='flex items-center'>
+            <p className='font-medium font-display text-sm mt-2'>Sort by </p>
+            <select onChange={handleSortBy} className='bg-slate-800 rounded-lg h-7 px-2 ml-2 border border-slate-600 drop-shadow-lg mt-2 mr-4'>
+              <option value="Naam">Title</option>
+              <option value="Beoordeling">Rating</option>
+              <option value="PublicatieDatum">Release Date</option>
+            </select>
+          </div>
+          <div className='flex items-center flex-wrap'>
+            <p className='font-medium font-display text-sm mt-2'>Order by </p>
+            <select onChange={handleSort} className='bg-slate-800 rounded-lg h-7 px-2 ml-2 border border-slate-600 drop-shadow-lg mt-2 mr-4'>
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
+          <div className='flex items-center flex-wrap'>
+            <p className='font-medium font-display text-sm mt-2'>Paid games </p>
+            <input type="checkbox" className='ml-2 mt-2 mr-4' onChange={handlePaidGames} defaultChecked='true'/>
+          </div>
+          <div className='flex items-center flex-wrap'>
+            <p className='font-medium font-display text-sm mt-2'>Free games </p>
+            <input type="checkbox" className='ml-2 mt-2 mr-4' onChange={handleFreeGames} defaultChecked='true'/>
+          </div>
           {/* <p className='font-medium font-display ml-4 text-sm opacity-50'>Server-sided </p> */}
           {/* <input type="checkbox" className='ml-2' onChange={handleLocalServer} defaultChecked='true'/> */}
         </div>
@@ -316,6 +324,21 @@ const Home = () => {
           </Link>
           }
         </div>
+        {filteredGames.length === 0 ? 
+                <div className="flex-1 container pt-4 mx-auto">
+                    <div className="mx-4 px-4 py-8 bg-slate-800 rounded-2xl border border-slate-500">
+                        <div className="flex justify-center items-center">
+                            <span className="material-symbols-rounded text-6xl lg:text-7xl pb-2 text-slate-400">search_off</span>
+                        </div>
+                        <h2 className="text-xl lg:text-2xl font-bold text-center mb-2 font-display">
+                            No games found
+                        </h2>
+                        <p className="text-md lg:text-lg text-center text-slate-400 font-display">
+                            Try searching for something else, or add the game to the database yourself!
+                        </p>
+                    </div>
+                </div>
+         : null }
         <GameGrid games={sortedGames} userData={userGamesData}/>
     </div>
   );

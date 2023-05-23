@@ -10,6 +10,7 @@ import SignupForm from './pages/SignupForm';
 import AddCustomGame from './pages/AddCustomGame';
 import Library from './pages/Library';
 import Landing from './pages/Landing';
+import NotFound from './pages/NotFound';
 
 const Wrapper = ({children}) => {
   const location = useLocation();
@@ -32,7 +33,7 @@ const App = () => {
           <Route path="signup" element={<SignupForm />} />
           <Route path="AddCustomGame" element={<AddCustomGame />} />
           <Route path="library" element={<Library />} />
-          <Route path="*" element={<h1>404 Not Found</h1>} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </Wrapper>
