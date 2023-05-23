@@ -16,7 +16,7 @@ const Home = () => {
   const [sortBy, setSortBy] = useState('Naam');
   const [paidGames, setPaidGames] = useState(true);
   const [freeGames, setFreeGames] = useState(true);
-  const [localServer, setLocalServer] = useState(false);
+  const [localServer, setLocalServer] = useState(true);
 
   useEffect(() => {
     // if (games !== []){

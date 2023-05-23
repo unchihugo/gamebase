@@ -1,7 +1,7 @@
 import React from 'react';
 import {useLayoutEffect} from 'react';
 import ReactDOM from "react-dom";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import './index.css';
 import Layout from './pages/Layout';
 import Home from './pages/Home.jsx';
@@ -25,7 +25,7 @@ const App = () => {
     <Wrapper>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Landing />} />
+          <Route index element={<Navigate to ="/landing"/>} />
           <Route path="landing" element={<Landing />} />
           <Route path="home" element={<Home />} />
           <Route path="login" element={<LoginForm />} />
