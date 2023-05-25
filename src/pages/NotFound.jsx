@@ -18,7 +18,7 @@ const NotFound = () => {
                         <h2 className="text-xl lg:text-2xl font-bold text-center mb-5 font-display">
                             Page Not Found
                         </h2>
-                        <p className="text-lg lg:text-xl font-bold text-center text-slate-400 font-display">
+                        <p className="text-lg lg:text-xl font-medium text-center text-slate-400 font-display">
                             The page you are looking for does not exist.
                         </p>
                     </div>

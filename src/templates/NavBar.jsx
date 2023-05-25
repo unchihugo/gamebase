@@ -93,7 +93,7 @@ const NavBar = () => {
                 </Link>
               </div>
             ) : ( <div>
-              <Link to="/profile" className="font-bold font-display pl-6 pr-4 py-1 focus:outline-none mr-2 border-l border-slate-500 transition">
+              <Link to={`/users/${localStorage.getItem('idGebruiker')}`} className="font-medium font-display pl-6 pr-4 py-1 focus:outline-none mr-2 border-l border-slate-500 transition">
                 {localStorage.getItem('Naam')}
                 </Link>
                 <a className="bg-red-500 px-4 py-1 rounded-lg focus:outline-none bg-opacity-25 transition cursor-pointer" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>
