@@ -1,6 +1,6 @@
+import "./css/NavBar.css"
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import "./css/NavBar.css"
 import logo from "../images/logo.png";	
 
 const NavBar = () => {
@@ -49,10 +49,10 @@ const NavBar = () => {
                   to="/library"
                   className={"hover:text-slate-300 mx-2 transition" + (url === "/library" ? " active" : "")}
                 >Library</Link>
-                {/* <Link
-                  to="/charts"
-                  className={"hover:text-slate-300 mx-2 transition" + (url === "/charts" ? " active" : "")}
-                >Charts</Link> */}
+                {<Link
+                  to="/users"
+                  className={"hover:text-slate-300 mx-2 transition" + (url === "/users" ? " active" : "")}
+                >Users</Link>}
             </div>
           </div>
           <div className="md:hidden">
@@ -120,12 +120,12 @@ const NavBar = () => {
         >
           Library
         </Link>
-        {/* <Link
-          to="/charts"
+        {<Link
+          to="/users"
           className="block my-4 md:inline-block md:mt-0 text-white hover:text-slate-300"
         >
-          Charts
-        </Link> */}
+          Users
+        </Link>}
         {localStorage.getItem('idGebruiker') === null ? (
               <div className="mt-4">
               <Link to="/login" className="bg-slate-700 text-white px-4 py-1 rounded-lg focus:outline-none mr-2 font-medium">
@@ -136,7 +136,7 @@ const NavBar = () => {
                 </Link>
               </div>
             ) : ( <div>
-              <Link to="/profile" className="font-bold font-display text-white px-4 py-1 focus:outline-none mr-2">
+              <Link to={`/users/${localStorage.getItem('idGebruiker')}`} className="font-bold font-display text-white px-4 py-1 focus:outline-none mr-2">
                 {localStorage.getItem('Naam')}
                 </Link>
                 <Link className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none bg-opacity-25 cursor-pointer" onClick={() => {localStorage.removeItem('idGebruiker'); localStorage.removeItem('Naam'); window.location.reload();}}>

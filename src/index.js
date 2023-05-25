@@ -11,6 +11,7 @@ import AddCustomGame from './pages/AddCustomGame';
 import Library from './pages/Library';
 import Landing from './pages/Landing';
 import NotFound from './pages/NotFound';
+import Users from './pages/Users';
 import UserPage from './pages/UserPage';
 
 const Wrapper = ({children}) => {
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="AddCustomGame" element={<AddCustomGame />} />
           <Route path="library" element={<Library />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/users" element={<Users />} />
           <Route path="/users/:userId" element={<UserPage />} />
         </Route>
       </Routes>
