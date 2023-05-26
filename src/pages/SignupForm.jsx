@@ -48,14 +48,14 @@ const SignupForm = () => {
       <div
         className="flex justify-center items-center h-full bg-cover bg-center"
         style={{
-          height: '85vh',
+          height: '90vh',
           backgroundImage: `url(${consoleBg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           boxShadow: "0 0 50px 50px #0f172a inset",
         }}
       >
-        <div className="max-w-md w-full px-4 py-8 rounded-xl shadow-lg border border-slate-600 bg-slate-900 bg-opacity-80 backdrop-blur-xl">
+        <div className="max-w-md w-full px-4 py-8 rounded-xl mt-12 shadow-lg border border-slate-600 bg-slate-900 bg-opacity-80 backdrop-blur-xl">
           <div className="flex flex-col items-center mb-8">
             <span className="-mt-2 text-3xl">👋</span>
             <h2 className="text-xl font-display font-semibold mt-1">Welcome to Gamebase</h2>

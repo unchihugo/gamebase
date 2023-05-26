@@ -16,7 +16,7 @@ const Home = () => {
   const [sortBy, setSortBy] = useState('Naam');
   const [paidGames, setPaidGames] = useState(true);
   const [freeGames, setFreeGames] = useState(true);
-  const [localServer, setLocalServer] = useState(false);
+  const [localServer, setLocalServer] = useState(true);
 
   useEffect(() => {
     // if (games !== []){
@@ -232,7 +232,12 @@ const Home = () => {
   // filter unfiltered games based on search term
   const filteredGames = _.isArray(games)
   ? _.filter(games, (game) =>
-      _.includes(_.toLower(game.Naam), _.toLower(searchTerm))
+      _.includes(_.toLower(game.Naam), _.toLower(searchTerm)) ||
+      _.includes(_.toLower(game.Genre), _.toLower(searchTerm)) ||
+      _.includes(_.toLower(game.SubGenres), _.toLower(searchTerm)) ||
+      _.includes(_.toLower(game.Platforms), _.toLower(searchTerm)) ||
+      _.includes(_.toLower(game.Developer), _.toLower(searchTerm)) ||
+      _.includes(_.toLower(game.Publisher), _.toLower(searchTerm))
     )
   : [];
 
@@ -246,7 +251,7 @@ const Home = () => {
     <div className='flex flex-col relative'>
       <div className='grid grid-cols-1 md:grid-cols-3 items-center'>
         <div className='flex justify-end m-2'>
-          <p className='hidden md:block font-semibold font-display text-slate-200'>Search:</p>
+          <p className='hidden md:block font-semibold font-display text-slate-200'>Search games:</p>
         </div>
         <input className='bg-slate-800 text-white rounded-3xl h-8 p-3 border border-slate-600 drop-shadow-lg focus:bg-slate-700 focus:outline-none focus:border-blue-500 transition' type="text" placeholder='Game Title...' onChange={handleSearch} />
         <div className='flex m-2'>

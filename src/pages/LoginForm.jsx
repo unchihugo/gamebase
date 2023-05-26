@@ -41,7 +41,7 @@ const LoginForm = () => {
     <div
       className="flex justify-center items-center h-full bg-cover bg-center"
       style={{
-        height: '85vh',
+        height: '90vh',
         backgroundImage: `url(${consoleBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
