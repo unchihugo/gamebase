@@ -47,6 +47,21 @@ const Users = () => {
                 <span className="material-symbols-rounded text-3xl mr-1.5 align-middle pb-1 text-red-500">group</span>
                 <span className='align-middle'>Newest Users</span>
             </p>
+            {filteredUsers.length === 0 ? 
+                <div className="flex-1 container pt-4 mx-auto">
+                    <div className="mx-4 px-4 py-8 bg-slate-800 rounded-2xl border border-slate-500">
+                        <div className="flex justify-center items-center">
+                            <span className="material-symbols-rounded text-6xl lg:text-7xl pb-2 text-slate-400">search_off</span>
+                        </div>
+                        <h2 className="text-xl lg:text-2xl font-bold text-center mb-2 font-display">
+                            No users found
+                        </h2>
+                        <p className="text-md lg:text-lg text-center text-slate-400 font-display">
+                            Try searching for a different name.
+                        </p>
+                    </div>
+                </div>
+         : null }
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
                 {filteredUsers.map((user) => (
                     <Link to={`/users/${user.idGebruiker}`} key={user.id}>

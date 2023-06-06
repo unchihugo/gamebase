@@ -106,6 +106,16 @@ app.put('/gamedataupdate', (req, res) => {
   });
 });
 
+//update user's description
+app.post('/description', (req, res) => {
+  const { fkUser, description } = req.body;
+  const sql = `UPDATE gebruiker SET Beschrijving = ? WHERE idGebruiker = ?`;
+  db.query(sql, [description, fkUser], (err, result) => {
+    if (err) throw err;
+    res.send('Description updated successfully');
+  });
+});
+
 
 //delete game from user's collection
 app.post('/deleteGame', (req, res) => {
