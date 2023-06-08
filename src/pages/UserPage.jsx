@@ -79,8 +79,8 @@ const UserPage = () => {
                 :
                 (<div>
                     <div className="bg-slate-800 p-4 rounded-2xl">
-                        <p className="font-display font-medium text-3xl">{userData.Naam}</p>
-                        <p className="font-display text-lg text-slate-300">@{userData.Gebruikersnaam}</p>
+                        <p className="font-display font-medium text-3xl">@{userData.Gebruikersnaam}</p>
+                        <p className="font-display text-lg text-slate-300">{userData.Naam}</p>
                         <div className="flex mt-2">
                             {userData.idGebruiker === localStorage.getItem('idGebruiker') &&
                                 <span className='material-symbols-rounded text-xl mr-0.5 align-middle text-slate-400 cursor-pointer'
@@ -105,6 +105,9 @@ const UserPage = () => {
                                 <span className="align-middle text-slate-400">Description: {userData.Beschrijving}</span>
                             )}
                         </div>
+                        {/* <div>
+                            Games added: {userData}
+                        </div> */}
                     </div>
                     <div className="my-3 sm:mx-4 p-3">
                         <a className="flex items-center mt-2 border rounded-lg border-slate-600 cursor-pointer"
@@ -191,6 +194,18 @@ const UserPage = () => {
                                 <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" className="hidden sm:block h-5 mr-2" />
                                 <label className="mr-2 cursor-pointer">
                                     Discord
+                                </label>
+                            </div>
+                            <p
+                                className="underline block w-full text-blue-500 leading-tight py-2.5 px-2 focus:outline-none focus:bg-slate-800 focus:border-slate-500 overflow-hidden text-ellipsis"
+                            > {userData.DiscordId}
+                            </p>
+                        </a>
+                        <a className="flex items-center mt-2 border rounded-lg border-slate-700 cursor-pointer"
+                            href={userData.DiscordId}>
+                            <div className="items-center flex px-3 py-2 pr-2 bg-slate-900 rounded-l-lg border-slate-700 border-r">
+                                <label className="mr-2 cursor-pointer text-slate-400">
+                                    Additional
                                 </label>
                             </div>
                             <p

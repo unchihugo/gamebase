@@ -29,8 +29,18 @@ const Users = () => {
             _.includes(_.toLower(user.Gebruikersnaam), _.toLower(searchTerm))
         )
         : [];
-
+    
     if (!usersData) return <div>loading...</div>;
+
+    const getRandomColor = () => {
+        const saturation = 80;
+        const lightness = 60;
+      
+        const hue = Math.floor(Math.random() * 360);
+        const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+        return color;
+      };
+
 
     return (
         <div>
@@ -65,9 +75,9 @@ const Users = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
                 {filteredUsers.map((user) => (
                     <Link to={`/users/${user.idGebruiker}`} key={user.id}>
-                        <div className="bg-slate-800 p-4 rounded-2xl">
-                            <p className="font-display font-medium text-3xl">{user.Naam}</p>
-                            <p className="font-display text-lg text-slate-300">@{user.Gebruikersnaam}</p>
+                        <div className="bg-slate-800 p-4 rounded-2xl border-b-4" style={{borderBottomColor: getRandomColor()}}>
+                            <p className="font-display font-medium text-3xl">{user.Gebruikersnaam}</p>
+                            <p className="font-display text-lg text-slate-300">{user.Naam}</p>
                             <p className="mt-2 text-slate-400 overflow-hidden">{user.Beschrijving}</p>
                         </div>
                     </Link>
