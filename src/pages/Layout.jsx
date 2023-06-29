@@ -1,24 +1,30 @@
-import {Outlet} from "react-router-dom";
-import NavBar from '../templates/NavBar';
-import SideBar from "../templates/SideBar";
+import { Outlet, useLocation } from "react-router-dom";
+import NavBar from "../templates/NavBar";
+import Footer from "../templates/Footer";
+import "../index.css";
 
 const Layout = () => {
-    return (
-<div className='flex flex-col relative bg-slate-900'>
-    <NavBar/>
-<div className='flex min-h-screen'>
-<div className='fixed h-screen'>
-  <SideBar/>
-</div>
+  const location = useLocation();
 
-<div className='container mx-auto pt-16 lg:pl-60'>
-    <div className='px-3'>
-    <Outlet/>
+  return (
+    <div className="flex flex-col relative bg-slate-900">
+      <NavBar />
+      {location.pathname !== "/landing" ? (
+        <div className="flex" style={{ minHeight: "80.9vh" }}>
+          <div className="flex-1 container py-16 mx-auto">
+            <div className="mx-3">
+              <Outlet />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="flex-1" style={{ minHeight: "80.9vh" }}>
+          <Outlet />
+        </div>
+      )}
+      <Footer />
     </div>
-    </div>
-    </div>
-    </div>
- );
+  );
 };
-
+ 
 export default Layout;

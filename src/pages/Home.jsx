@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import _ from 'lodash';
 import '../index.css';
@@ -13,12 +13,57 @@ const Home = () => {
   const [userGamesData, setUserGamesData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
-  const localServer = true;
+  const [sortBy, setSortBy] = useState('Naam');
+  const [paidGames, setPaidGames] = useState(true);
+  const [freeGames, setFreeGames] = useState(true);
+  const [localServer, setLocalServer] = useState(true);
 
   useEffect(() => {
-    fetchGames();
+    // if (games !== []){
+      fetchGames();
+    // }
+  }, []);
+
+  useEffect(() => {
+    let idGebruiker = localStorage.getItem("idGebruiker");
+    let correctGames;
+
+    //includes idGebruiker in fkGebruiker or fkGebruiker is null
+    if (idGebruiker !== null) {
+      correctGames = _.filter(games, (game) =>
+        game.fkGebruiker === idGebruiker || game.fkGebruiker === null
+      );
+    } else {
+      correctGames = _.filter(games, (game) => 
+        game.fkGebruiker === null);
+    }
+
+    if (!_.isEqual(correctGames, games)) {
+      setGames(correctGames);
+    }
+  }, [games]);
+
+  useEffect(() => {
+    if (localStorage.getItem('idGebruiker') === null) {
+      fetchGames();
+    }
+  }, [localStorage.getItem('idGebruiker')]);
+
+  useEffect(() => {
     localStorage.getItem('idGebruiker') !== null ? fetchGamesData() : setGamesData([]);
   }, []);
+
+  useEffect(() => {
+    let idGebruiker = localStorage.getItem('idGebruiker');
+  
+    if (idGebruiker) {
+      const filteredGamesData = gamesData.filter(
+        gameData => _.includes(gameData.fkGebruiker, idGebruiker)
+      );
+      setUserGamesData(filteredGamesData);
+      console.log(filteredGamesData);
+    }
+  }, [gamesData]);
 
   // Fetch games from API or local server (for development) and set games state
   const fetchGames = async () => {
@@ -157,11 +202,6 @@ const Home = () => {
   const fetchGamesData = async () => {
     let response = await axios.get('http://localhost/gamebase/gamesDataApi.php');
     setGamesData(response.data);
-
-    const filteredGamesData = _.filter(gamesData, (gameData) =>
-      _.includes(gameData.fkGebruiker, localStorage.getItem('idGebruiker'))  
-    )
-    setUserGamesData(filteredGamesData);
   };
 
 
@@ -173,47 +213,138 @@ const Home = () => {
     setSortOrder(event.target.value);
   };
 
-  // Filter games based on search term
+  const handleSortBy = (event) => {
+    setSortBy(event.target.value);
+  };
+
+  const handlePaidGames = (event) => {
+    setPaidGames(event.target.checked);
+  };
+
+  const handleFreeGames = (event) => {
+    setFreeGames(event.target.checked);
+  };
+
+  // const handleLocalServer = (event) => {
+  //   setLocalServer(event.target.checked);
+  // };
+
+  // filter unfiltered games based on search term
   const filteredGames = _.isArray(games)
   ? _.filter(games, (game) =>
-      _.includes(_.toLower(game.Naam), _.toLower(searchTerm))
+      _.includes(_.toLower(game.Naam), _.toLower(searchTerm)) ||
+      _.includes(_.toLower(game.Genre), _.toLower(searchTerm)) ||
+      _.includes(_.toLower(game.SubGenres), _.toLower(searchTerm)) ||
+      _.includes(_.toLower(game.Platforms), _.toLower(searchTerm)) ||
+      _.includes(_.toLower(game.Developer), _.toLower(searchTerm)) ||
+      _.includes(_.toLower(game.Publisher), _.toLower(searchTerm))
     )
   : [];
 
-  // Sort games based on sort order
-  const sortedGames = _.orderBy(filteredGames, ['Naam'], [sortOrder]);
+  // Sort filtered games based on sort order
+  let sortedGames = _.orderBy(filteredGames, [sortBy], [sortOrder]);
+  sortedGames = paidGames ? sortedGames : _.filter(sortedGames, (game) => game.Prijs === '0');
+  sortedGames = freeGames ? sortedGames : _.filter(sortedGames, (game) => game.Prijs !== '0');
 
   
   return (
     <div className='flex flex-col relative'>
       <div className='grid grid-cols-1 md:grid-cols-3 items-center'>
         <div className='flex justify-end m-2'>
-          <p className='hidden md:block font-semibold font-display'>Search:</p>
+          <p className='hidden md:block font-semibold font-display text-slate-200'>Search games:</p>
         </div>
-        <input className='bg-slate-800 text-white rounded-lg h-8 p-2 border border-slate-600 drop-shadow-lg' type="text" placeholder='\games\...' onChange={handleSearch} />
-        <div className='m-2'>
-        <select onChange={handleSort}>
-          <option value="asc">A-Z</option>
-          <option value="desc">Z-A</option>
-        </select>
+        <input className='bg-slate-800 text-white rounded-3xl h-8 p-3 border border-slate-600 drop-shadow-lg focus:bg-slate-700 focus:outline-none focus:border-blue-500 transition' type="text" placeholder='Game Title...' onChange={handleSearch} />
+        <div className='flex m-2'>
+          <span className='material-symbols-rounded hidden md:block text-slate-200'>search</span>
+        </div>
+      </div>
+      <div>
+        <div className='flex items-center flex-wrap'>
+          <div className='flex items-center'>
+            <p className='font-medium font-display text-sm mt-2'>Sort by </p>
+            <select onChange={handleSortBy} className='bg-slate-800 rounded-lg h-7 px-2 ml-2 border border-slate-600 drop-shadow-lg mt-2 mr-4'>
+              <option value="Naam">Title</option>
+              <option value="Beoordeling">Rating</option>
+              <option value="PublicatieDatum">Release Date</option>
+            </select>
+          </div>
+          <div className='flex items-center flex-wrap'>
+            <p className='font-medium font-display text-sm mt-2'>Order by </p>
+            <select onChange={handleSort} className='bg-slate-800 rounded-lg h-7 px-2 ml-2 border border-slate-600 drop-shadow-lg mt-2 mr-4'>
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
+          <div className='flex items-center flex-wrap'>
+            <p className='font-medium font-display text-sm mt-2'>Paid games </p>
+            <input type="checkbox" className='ml-2 mt-2 mr-4' onChange={handlePaidGames} defaultChecked='true'/>
+          </div>
+          <div className='flex items-center flex-wrap'>
+            <p className='font-medium font-display text-sm mt-2'>Free games </p>
+            <input type="checkbox" className='ml-2 mt-2 mr-4' onChange={handleFreeGames} defaultChecked='true'/>
+          </div>
+          {/* <p className='font-medium font-display ml-4 text-sm opacity-50'>Server-sided </p> */}
+          {/* <input type="checkbox" className='ml-2' onChange={handleLocalServer} defaultChecked='true'/> */}
         </div>
       </div>
       {searchTerm === '' ? 
       <div>
-      <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display'>Popular on Gamebase</p>
+      <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display mt-2'>
+        <span className="material-symbols-rounded text-3xl mr-0.5 align-middle pb-1 text-red-500">local_fire_department</span>
+        <span className='align-middle'>Popular on Gamebase</span>
+      </p>
         <PopularGrid games={games}/>
-        <p className='text-3xl font-semibold border-b-2 border-slate-600 py-2 font-display'>Gamebase Library</p>
+        <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display mt-3'>
+          <span className="material-symbols-rounded text-3xl mr-1.5 align-middle pb-1 text-red-500">collections_bookmark</span>
+          <span className='align-middle'>Gamebase Library</span>
+          </p>
       </div>
         : <div>
-        <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display'>Search results for: 
-        {filteredGames.length !== 0 ? 
-          <span className='text-slate-400 italic font-normal border-b border-green-500 ml-2'>{searchTerm}</span>
-          : <span className='text-slate-400 italic font-normal border-b border-red-500 ml-2'>{searchTerm}</span>
-        }
+        <p className='text-2xl font-semibold border-b-2 border-slate-600 py-2 font-display mt-2'>
+          <span className="material-symbols-rounded text-3xl mr-1 align-middle pb-1 text-red-500">manage_search</span>
+          <span className='align-middle'>
+            Search results for: 
+                    {filteredGames.length !== 0 ?
+            <span className='text-slate-400 font-normal border-b border-green-500 ml-2'>{searchTerm}</span>
+            : <span className='text-slate-400 font-normal border-b border-red-500 ml-2'>{searchTerm}</span>
+                    }
+          </span>
         </p>
         </div>
       }
-        <GameGrid games={sortedGames} gamesData={userGamesData}/>
+        <div className='flex justify-center'>
+          {localStorage.getItem('idGebruiker') === null ?
+          <Link to="/login">
+          <div className="mt-4 px-4 py-2 bg-slate-700 bg-opacity-50 hover:bg-opacity-80 hover:-translate-y-px transition rounded-xl shadow-sm text-slate-300">
+            <span className="material-symbols-rounded align-middle mr-1.5 text-slate-400">add_circle</span>
+            <span className='align-middle'>Log in to add games</span>
+          </div>
+        </Link>
+          :
+          <Link to="/addcustomgame">
+            <div className="mt-4 px-4 py-2 bg-slate-700 bg-opacity-50 hover:bg-opacity-80 hover:-translate-y-px transition rounded-xl shadow-sm text-slate-300">
+              <span className="material-symbols-rounded align-middle mr-1.5 text-slate-400">add_circle</span>
+              <span className='align-middle'>Add custom game</span>
+            </div>
+          </Link>
+          }
+        </div>
+        {filteredGames.length === 0 ? 
+                <div className="flex-1 container pt-4 mx-auto">
+                    <div className="mx-4 px-4 py-8 bg-slate-800 rounded-2xl border border-slate-500">
+                        <div className="flex justify-center items-center">
+                            <span className="material-symbols-rounded text-6xl lg:text-7xl pb-2 text-slate-400">search_off</span>
+                        </div>
+                        <h2 className="text-xl lg:text-2xl font-bold text-center mb-2 font-display">
+                            No games found
+                        </h2>
+                        <p className="text-md lg:text-lg text-center text-slate-400 font-display">
+                            Try searching for something else, or add the game to the database yourself!
+                        </p>
+                    </div>
+                </div>
+         : null }
+        <GameGrid games={sortedGames} userData={userGamesData}/>
     </div>
   );
 }

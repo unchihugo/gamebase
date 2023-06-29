@@ -2,6 +2,7 @@
 - XAMPP *(webserver stack)*
 - Apache *(HTTP server)*
 - MySQL *(database)*
+- Node.js *(JS runtime)*
 
 ## How to run:
 1. Run & configure XAMPP and Apache
@@ -12,6 +13,7 @@
 6. Type in Terminal:
    - ```npm install``` and wait for it to finish downloading all packages
    - ```npm start``` to run website locally
+   - ```node apis/server.js``` to run post/put API locally
 
 ## Progress images:
 ### 9/3/2023

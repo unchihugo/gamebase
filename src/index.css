@@ -9,6 +9,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #ffffff;
+  background-color: #0f172a;
 }
 
 code {
@@ -28,4 +29,46 @@ code {
     cursor: pointer;
     display: inline-block;
   }
+
+.material-symbols-rounded {
+  margin-left: -0.1em;
+  margin-top: -4px;
+  margin-bottom: -5px;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 20
+}
+
+@media (min-width: 1400px){
+  .remove-pl {
+    padding-left: 15rem !important;
+  }
+}
+@media (min-width: 1600px){
+  .remove-pl {
+    padding-left: 13rem !important;
+  }
+}
+@media (min-width: 1800px){
+  .remove-pl {
+    padding-left: 7rem !important;
+  }
+}
+@media (min-width: 1900px){
+  .remove-pl {
+    padding-left: 4rem !important;
+  }
+}
+@media (min-width: 2000px){
+  .remove-pl {
+    padding-left: 1rem !important;
+  }
+}
+@media (min-width: 2100px){
+  .remove-pl {
+    padding-left: 0 !important;
+  }
+}
 

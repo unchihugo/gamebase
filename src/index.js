@@ -1,23 +1,46 @@
 import React from 'react';
+import {useLayoutEffect} from 'react';
 import ReactDOM from "react-dom";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import './index.css';
 import Layout from './pages/Layout';
 import Home from './pages/Home.jsx';
 import LoginForm from './pages/LoginForm';
+import SignupForm from './pages/SignupForm';
+import AddCustomGame from './pages/AddCustomGame';
+import Library from './pages/Library';
+import Landing from './pages/Landing';
+import NotFound from './pages/NotFound';
+import Users from './pages/Users';
+import UserPage from './pages/UserPage';
 
+const Wrapper = ({children}) => {
+  const location = useLocation();
+  useLayoutEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, [location.pathname]);
+  return children
+} 
 
-export default function App() {
+const App = () => {
   return (
   <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="home" element={<Home />} />
-        <Route path="login" element={<LoginForm />} />
-        <Route path="*" element={<h1>404 Not Found</h1>} />
-      </Route>
-    </Routes>
+    <Wrapper>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Navigate to ="/landing"/>} />
+          <Route path="landing" element={<Landing />} />
+          <Route path="home" element={<Home />} />
+          <Route path="login" element={<LoginForm />} />
+          <Route path="signup" element={<SignupForm />} />
+          <Route path="AddCustomGame" element={<AddCustomGame />} />
+          <Route path="library" element={<Library />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/users/:userId" element={<UserPage />} />
+        </Route>
+      </Routes>
+    </Wrapper>
   </BrowserRouter>
  );
 }
