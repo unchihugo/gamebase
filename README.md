@@ -16,5 +16,5 @@
    - ```node apis/server.js``` to run post/put API locally
 
 ## Progress images:
-### 9/3/2023
+### 9/3/2023 (not up-to-date)
 ![website image](https://drive.google.com/uc?export=view&id=1ZcUmOW10Rnbq16QlV6V7498xWYj7QVVe)
