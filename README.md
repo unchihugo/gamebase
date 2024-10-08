@@ -15,6 +15,28 @@
    - ```npm start``` to run website locally
    - ```node apis/server.js``` to run post/put API locally
 
-## Progress images:
-### 9/3/2023 (not up-to-date)
-![website image](https://drive.google.com/uc?export=view&id=1ZcUmOW10Rnbq16QlV6V7498xWYj7QVVe)
+## Branding:
+| Logo | Icon |
+| --- | --- |
+| ![image](https://github.com/user-attachments/assets/7f025eac-1714-4ede-a80a-32abbca16e7a) | ![image](https://github.com/user-attachments/assets/70e70ef2-c529-4c48-9be2-13f5ed789b05) |
+
+## Preview:
+Previews are shown side-by-side to showcaase responsiveness
+#### Home
+![image](https://github.com/user-attachments/assets/4f068bac-2369-4ee0-b015-8c0f32dde39e)
+#### Game details (after clicking an item)
+![image](https://github.com/user-attachments/assets/61c079bd-2253-4a6c-903f-7c74dbd18731)
+#### Register
+![image](https://github.com/user-attachments/assets/a3334bca-87bd-47d3-8640-594ebd3d59ce)
+#### Footer
+![image](https://github.com/user-attachments/assets/7cb9b07e-5f28-4c1f-b801-713711c63b5d)
+#### Landing
+![image](https://github.com/user-attachments/assets/3e3d5fff-2611-4334-83a7-52cc80ccabfa)
+![image](https://github.com/user-attachments/assets/5af078d7-5af6-43ba-9448-7e59f199f0dc)
+
+
+
+
+
+
+
